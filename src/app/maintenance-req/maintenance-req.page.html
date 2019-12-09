@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center" >My Requests</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content>
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <div *ngIf="isLoading">
+    <ion-list style="background-color: inherit;">
+      <ion-item lines="none" class="col-inner-container margin"
+      *ngFor="let item of [1,2,3,4,5,6,7,8]">
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div *ngIf="!isLoading">
+    <ion-list style="background-color: inherit;">
+      <ion-item lines="none" class="col-inner-container margin"
+      *ngFor="let item of myRequests">
+        <ion-thumbnail slot="start">
+          <img src="../../../assets/imgs/ic_pdf_download.png">
+        </ion-thumbnail>
+        <ion-label>
+          <div class="headeing">Maintenance Request Details</div>
+          <b>{{item}}</b>  <br>
+          <!-- <b>Beneficiary Name: </b>  <br>
+          <b>Address: </b>  <br> -->
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

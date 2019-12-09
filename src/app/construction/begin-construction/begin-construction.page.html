@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center" >New Construction Project</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <div class="login-container">
+    <form [formGroup]="requestForm">
+
+        <ion-item class="ion-margin-bottom ion-margin-top" color="light">
+            <ion-label class="ion-text-center" position="stacked">Beneficiary Name</ion-label>
+            <ion-input type="text" placeholder="Beneficiary Name"  formControlName="firstname" class="icon-user"></ion-input>
+          </ion-item>
+      
+          <ion-item class="ion-margin-bottom" color="light">
+            <ion-label   position="stacked">Beneficiary Surname</ion-label>
+            <ion-input type="text" placeholder="Beneficiary Surname"  formControlName="surname" class="icon-user"></ion-input>
+          </ion-item>
+      
+          <ion-item class="ion-margin-bottom" color="light">
+            <ion-label  position="stacked">Beneficiary Mobile Number</ion-label>
+            <ion-input type="text" placeholder="Beneficiary Mobile Number" formControlName="mobile" class="icon-profile"></ion-input>
+          </ion-item>
+      
+          <ion-item class="ion-margin-bottom" color="light">
+            <ion-label  position="stacked">Beneficiary E-Mail Address</ion-label>
+            <ion-input type="text" placeholder="Beneficiary E-Mail Address" formControlName="email" class="icon-profile"></ion-input>
+          </ion-item>
+      
+          <div  class="header">Reason For Request</div>
+          <ion-item class="ion-margin">
+            <ion-textarea formControlName="reason" rows="6" placeholder="Tap here to start typing..."></ion-textarea>
+          </ion-item>
+
+
+          <ion-item class="ion-margin-bottom" color="light">
+            <ion-label  position="stacked">Pick Photos (Max 3)</ion-label>
+            <ion-button shape="round" class="login-button ion-margin-top ion-margin-bottom" (click)="getImages()">{{PhotosText}}</ion-button>
+          </ion-item>
+
+
+    </form>
+
+  </div>
+
+  <div class="button-container">
+    <ion-button shape="round" class="login-button ion-margin-top ion-margin-bottom" (click)="SubmitRequest()">Complete Checklist</ion-button>
+    <!-- <ion-button shape="round" class="login-button ion-margin-top ion-margin-bottom"
+    [routerDirection]="'forward'" [routerLink]="['/construction/construction-feedback']">Complete Checklist</ion-button> -->
+
+    <ion-button shape="round" class="login-button" color="danger"
+    [routerDirection]="'back'" [routerLink]="['/construction/project-details']">Cancel Request</ion-button>
+  </div>
+</ion-content>

@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>New Construction</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <div class="blue-header">Select a project to work on below:</div>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content>
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <div *ngIf="isLoading">
+    <ion-list style="background-color: inherit;">
+      <ion-item lines="none" class="col-inner-conatiner margin"
+      *ngFor="let item of [1,2,3,4,5,6,7,8]">
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div *ngIf="!isLoading">
+    <ion-list style="background-color: inherit;">
+      <ion-item lines="none" class="col-inner-conatiner margin"
+      *ngFor="let item of constructionProjects">
+        <ion-thumbnail slot="start">
+          <img src="../../../assets/imgs/ic_loadsheet.png">
+        </ion-thumbnail>
+        <ion-label>
+          <b>Loadsheet No: </b> Item {{item}} <br>
+          <b>Branch Name: </b> Subitem {{item}} <br>
+          <b>Employee Name: </b> SubSubitem {{item}} <br>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

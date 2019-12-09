@@ -1,0 +1,71 @@
+<ion-app>
+  <ion-split-pane contentId="main-content">
+    <ion-menu contentId="main-content" type="overlay">
+      <div class="bg-menu-container">
+        <div class="bg-menu"></div>
+      </div>
+
+      <ion-content>
+        <ion-list>
+          <ion-menu-toggle auto-hide="false" *ngFor="let page of appPages">
+            <ion-item [routerDirection]="'root'" [routerLink]="[page.url]" routerLinkActive="menu-active-item">
+              <ion-icon slot="start" [name]="page.icon"></ion-icon>
+              <ion-label>
+                {{page.title}}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle auto-hide="false" >
+            <ion-item (click)="openBrowser()">
+              <ion-icon slot="start" [name]="'pricetags'"></ion-icon>
+              <ion-label>
+                Amalooloo Shop
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+    
+          <ion-menu-toggle auto-hide="false" >
+            <ion-item [routerDirection]="'root'" [routerLink]="['/bc-scanner']" >
+              <ion-icon slot="start" [name]="'build'"></ion-icon>
+              <!-- <ion-icon  [name]="'construct'"></ion-icon> -->
+              <ion-label>
+                Request Maintenance
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle auto-hide="false" >
+            <ion-item [routerDirection]="'root'" [routerLink]="['/notifications']">
+              <ion-icon slot="start" [name]="'Notifications'"></ion-icon>
+              <ion-label>
+                Notifications
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle auto-hide="false" >
+            <ion-item (click)="presentModal()">
+              <ion-icon slot="start" [name]="'checkmark-circle-outline'"></ion-icon>
+              <ion-label>
+                Health Tips and Updates
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle auto-hide="false">
+            <ion-item [routerDirection]="'root'" [routerLink]="['/login']" routerLinkActive="menu-active-item">
+              <ion-icon slot="start" [name]="'log-out'"></ion-icon>
+              <ion-label>
+                Log out
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+
+
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

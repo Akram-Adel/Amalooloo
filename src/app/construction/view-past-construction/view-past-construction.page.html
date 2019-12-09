@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Past Constructions</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <ion-list style="background-color: inherit;">
+    <ion-item lines="none" class="col-inner-conatiner margin"
+    *ngFor="let item of pastConstruction"
+    [routerDirection]="'forward'" [routerLink]="['/construction/project-details']">
+      <ion-thumbnail slot="start">
+        <img src="../../../assets/imgs/ic_construction.png">
+      </ion-thumbnail>
+      <ion-label>
+        <b>Project Name: </b> Item {{item}} <br>
+        <b>Beneficiary Name: </b> Subitem {{item}} <br>
+        <b>Adress: </b> SubSubitem {{item}} <br>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

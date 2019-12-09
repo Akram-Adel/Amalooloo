@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>View Loaded Quantities</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <div *ngIf="isLoading">
+    <ion-list style="background-color: inherit;">
+      <ion-item lines="none" class="col-inner-conatiner margin"
+      *ngFor="let item of [1,2,3,4,5,6,7,8]">
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div *ngIf="!isLoading">
+    <ion-list style="background-color: inherit;">
+      <ion-item lines="none" class="col-inner-conatiner margin"
+      *ngFor="let item of loadedQuantities"
+      [routerDirection]="'forward'" [routerLink]="['/loadsheets/verify-quantities/', item.order_id]">
+        <ion-thumbnail slot="start">
+          <img src="../../../assets/imgs/ic_loadsheet.png">
+        </ion-thumbnail>
+        <ion-label>
+          <b>Order No: </b> {{item.order_no}} <br>
+          <b>Customer Name: </b> {{item.client_name}} <br>
+        </ion-label>
+        <ion-icon *ngIf="!item.isRigth" name="alert" slot="end" color="danger"></ion-icon>
+        <ion-icon *ngIf="item.isRigth"  name="checkmark-circle" slot="end" color="success"></ion-icon>
+      </ion-item>
+    </ion-list>
+
+    <div class="button-container bottom">
+      <ion-button shape="round" class="login-button ion-margin-top" (click)="captureQuantities()">Capture Quantities</ion-button>
+
+      <ion-button shape="round" class="login-button extra-margin-bottom" color="danger"
+      [routerDirection]="'back'" [routerLink]="['/loadsheets']">Cancel This Loadsheet</ion-button>
+    </div>
+  </div>
+</ion-content>

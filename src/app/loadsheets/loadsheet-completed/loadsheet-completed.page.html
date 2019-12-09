@@ -1,0 +1,34 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+      <ion-title>Completed Loadsheet</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content color="light">
+    <div class="login-container">
+      <div class="ion-text-center ion-margin-bottom ion-margin-top" *ngIf="isConnecting"><b>
+        Uploading Loadsheet Data
+      </b></div>
+      <div class="ion-text-center ion-margin-bottom ion-margin-top" *ngIf="!isConnecting"><b>
+        You have completed the loadsheet. <br>
+        Please make a selection below:
+      </b></div>
+    </div>
+
+    <div class="button-container extra-margin-top">
+      <ion-button shape="round" class="login-button ion-margin-bottom"
+      [routerDirection]="'root'" [routerLink]="['/loadsheets']">
+        <span *ngIf="!isConnecting">Go back to Loadsheets</span>
+        <ion-spinner name="dots" *ngIf="isConnecting"></ion-spinner>
+      </ion-button>
+
+      <ion-button shape="round" class="login-button"
+      [routerDirection]="'root'" [routerLink]="['/loadsheets/start-new-loadsheets']">
+        <span *ngIf="!isConnecting">Complete a new Loadsheet</span>
+        <ion-spinner name="dots" *ngIf="isConnecting"></ion-spinner>
+      </ion-button>
+    </div>
+  </ion-content>

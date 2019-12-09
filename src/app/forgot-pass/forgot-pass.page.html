@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Forgot Password</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="logo-header with-header">
+    <img src="../../assets/imgs/ic_app_logo.png">
+  </div>
+
+  <div class="login-container">
+    <div class="ion-text-center ion-margin-bottom">Forgot Password</div>
+
+    <ion-item class="ion-margin-bottom">
+      <ion-label position="stacked">Email ID</ion-label>
+      <ion-input type="email" placeholder="Email ID" class="icon-envelop"></ion-input>
+    </ion-item>
+  </div>
+
+  <div class="button-container extra-margin-top">
+    <ion-button shape="round" class="login-button" (click)="presentAlertConfirm()">Reset</ion-button>
+  </div>
+</ion-content>
+

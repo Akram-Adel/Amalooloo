@@ -1,0 +1,20 @@
+%Vertical-align {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+ion-grid {
+  height: 100%;
+  @extend %Vertical-align;
+
+  .gab {
+    height: 15vh;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 20px;
+    @extend %Vertical-align;
+  }
+}

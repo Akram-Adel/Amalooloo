@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Loadsheet</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <div class="login-container">
+    <ion-item class="ion-margin-bottom ion-margin-top" color="light">
+      <ion-label position="stacked">Loadsheet Number</ion-label>
+      <ion-input type="text" readonly class="icon-profile" [value]="loadsheet?.loadsheet_no"></ion-input>
+    </ion-item>
+
+    <ion-item class="ion-margin-bottom" color="light">
+      <ion-label position="stacked">Branch Name</ion-label>
+      <ion-input type="text" readonly class="icon-office" [value]="loadsheet?.branch_name"></ion-input>
+    </ion-item>
+
+    <ion-item class="ion-margin-bottom" color="light">
+      <ion-label position="stacked">Date</ion-label>
+      <ion-input type="date" readonly class="icon-calendar" [value]="loadsheet?.schedule_date"></ion-input>
+    </ion-item>
+
+    <ion-item class="ion-margin-bottom" color="light">
+      <ion-label position="stacked">Employee Name</ion-label>
+      <ion-input type="text" readonly class="icon-user" [value]="loadsheet?.first_name +' '+loadsheet?.last_name"></ion-input>
+    </ion-item>
+
+    <ion-item class="ion-margin-bottom" color="light">
+      <ion-label position="stacked">Delivery Address</ion-label>
+      <ion-input type="text" readonly class="icon-home2" [value]="loadsheet?.delivery_address"></ion-input>
+    </ion-item>
+  </div>
+
+  <div class="button-container" *ngIf="!isCompleted">
+    <ion-button shape="round" class="login-button extra-margin-top ion-margin-bottom"
+    (click)="addQuantitiesLoaded()">
+      Add Quantities Loaded
+    </ion-button>
+
+    <ion-button shape="round" class="login-button" color="danger"
+    [routerDirection]="'back'" [routerLink]="['/loadsheets']">Cancel This Loadsheet</ion-button>
+  </div>
+</ion-content>

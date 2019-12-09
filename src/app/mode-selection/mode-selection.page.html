@@ -1,0 +1,27 @@
+<ion-content color="light">
+  <ion-grid>
+
+    <ion-row>
+      <ion-col size="6" offset="3" [routerDirection]="'forward'" [routerLink]="['/login']" (click)="selectMode('customer')">
+        <div class="col-inner-conatiner padding">
+          <img src="../../assets/imgs/ic_profile_1.png" height="60px">
+          <div class="text">Continue as Customer</div>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="gab">
+      Select Mode
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="6" offset="3" [routerDirection]="'forward'" [routerLink]="['/login']" (click)="selectMode('employee')">
+        <div class="col-inner-conatiner padding">
+          <img src="../../assets/imgs/ic_no_image.png" height="60px">
+          <div class="text">Continue as Employee</div>
+        </div>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+</ion-content>

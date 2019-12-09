@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Verify Deliveries</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <div class="header">Please verify loaded quantities below:</div>
+
+  <ion-grid>
+    <ion-row class="head">
+      <ion-col size="6">Description</ion-col>
+      <ion-col>Loaded</ion-col>
+      <ion-col>Actual</ion-col>
+      <ion-col>Back Order</ion-col>
+    </ion-row>
+
+    <ion-row *ngFor="let item of loaded">
+      <ion-col size="6">Item {{item}}</ion-col>
+      <ion-col>Subitem {{item}}</ion-col>
+      <ion-col>SubSubitem {{item}}</ion-col>
+      <ion-col>0</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="button-container">
+    <ion-button shape="round" class="login-button extra-margin-top"
+    [routerDirection]="'forward'" [routerLink]="['/complete-deliveries']">Save</ion-button>
+  </div>
+</ion-content>

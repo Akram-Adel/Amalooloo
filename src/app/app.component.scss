@@ -1,0 +1,17 @@
+@import "../theme/extensions.scss";
+
+.bg-menu-container {
+  background-color: #eee;
+
+  .bg-menu {
+    height: 20vh;
+    background-image: url('../assets/imgs/ic_app_logo.png');
+    @extend %bg-img;
+    margin: 20px 30px;
+  }
+}
+
+.menu-active-item {
+  color: #3880ff;
+  ion-icon { color: #3880ff; }
+}

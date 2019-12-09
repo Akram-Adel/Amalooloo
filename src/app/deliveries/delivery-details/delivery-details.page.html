@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Past Deliveries</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <div class="login-container">
+    <ion-item class="ion-margin-bottom ion-margin-top" color="light">
+      <ion-label position="stacked">Delivery No</ion-label>
+      <ion-input type="text" readonly [value]="loadsheet?.loadsheet_no" class="icon-user"></ion-input>
+    </ion-item>
+
+    <ion-item class="ion-margin-bottom" color="light">
+      <ion-label position="stacked">Date</ion-label>
+      <ion-input type="text" readonly [value]="loadsheet?.schedule_date" class="icon-calendar"></ion-input>
+    </ion-item>
+
+    <ion-item class="ion-margin-bottom" color="light">
+      <ion-label position="stacked">Time</ion-label>
+      <ion-input type="text" readonly [value]="loadsheet?.emp_mention_time" class="icon-clock"></ion-input>
+    </ion-item>
+
+    <ion-item class="ion-margin-bottom" color="light">
+      <ion-label position="stacked">Delivery Address</ion-label>
+      <ion-input type="text" readonly [value]="loadsheet?.delivery_address" class="icon-home2"></ion-input>
+    </ion-item>
+
+    <ion-item class="ion-margin-bottom" color="light">
+      <ion-label position="stacked">Transport Company</ion-label>
+      <ion-input type="text" placeholder="Transport Company" class="icon-office"></ion-input>
+    </ion-item>
+
+    <ion-item class="ion-margin-bottom" color="light">
+      <ion-label position="stacked">Vehicle Registration Number</ion-label>
+      <ion-input type="text" placeholder="Vehicle Registration Number" class="icon-profile"></ion-input>
+    </ion-item>
+  </div>
+</ion-content>

@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Verify Quantities</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <div class="header">Please fill actual loaded quantities below:</div>
+
+  <ion-grid>
+    <ion-row class="head">
+      <ion-col size="6">Description</ion-col>
+      <ion-col>Loaded</ion-col>
+      <ion-col>Actual</ion-col>
+      <ion-col>Back Order</ion-col>
+    </ion-row>
+
+    <div *ngIf="isLoading">
+      <ion-row class="name">
+        <ion-col size="12"><ion-skeleton-text animated style="width: 100%"></ion-skeleton-text></ion-col>
+      </ion-row>
+      <ion-row class="data" *ngFor="let item of [1,2,3,4,5,6,7,8]">
+        <ion-col size="6"><ion-skeleton-text animated style="width: 100%"></ion-skeleton-text></ion-col>
+        <ion-col><ion-skeleton-text animated style="width: 100%"></ion-skeleton-text></ion-col>
+        <ion-col><ion-skeleton-text animated style="width: 100%"></ion-skeleton-text></ion-col>
+        <ion-col><ion-skeleton-text animated style="width: 100%"></ion-skeleton-text></ion-col>
+      </ion-row>
+    </div>
+
+    <div *ngIf="!isLoading">
+      <ion-row class="name">
+        <ion-col size="12">{{product?.product_name}}</ion-col>
+      </ion-row>
+
+      <form id="quantitiesForm" (ngSubmit)="save()">
+        <ion-row class="data"
+        *ngFor="let item of product?.components">
+          <ion-col size="6">{{item.component_name}}</ion-col>
+          <ion-col>{{item.quantity}}</ion-col>
+          <ion-col><ion-input type="number" class="ion-padding" (input)="actualChange(item,$event.target.value)" required></ion-input></ion-col>
+          <ion-col>{{item.math}}</ion-col>
+        </ion-row>
+      </form>
+    </div>
+  </ion-grid>
+
+  <div class="button-container">
+    <button class="login-button extra-margin-top ion-margin-bottom"
+    [type]="submit" form="quantitiesForm">SAVE</button>
+  </div>
+</ion-content>

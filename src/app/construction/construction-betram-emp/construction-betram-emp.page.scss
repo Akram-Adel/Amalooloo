@@ -1,0 +1,18 @@
+ion-grid {
+  background-color: #fff;
+  border-radius: 5px;
+
+  .text-area {
+    width: 100%;
+    margin: 10px;
+  }
+}
+
+.login-container {
+  ion-label {
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  ion-input { --padding-start: 15px; }
+}

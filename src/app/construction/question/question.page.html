@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>New Construction Project</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <div class="header">Question 1:</div>
+  <div style="margin: 15px 8px 10px;">This is a test question. This is a test question. This is a test question. This is a test question. This is a test question.</div>
+
+  <ion-radio-group>
+    <ion-item color="light" class="ion-margin-top">
+      <ion-label>Yes</ion-label>
+      <ion-radio slot="start" value="yes" checked></ion-radio>
+    </ion-item>
+
+    <ion-item color="light" class="ion-margin-bottom">
+      <ion-label>No</ion-label>
+      <ion-radio slot="start" value="no"></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+
+  <div class="header">Add comment / note</div>
+  <ion-item class="ion-margin">
+    <ion-textarea rows="6" placeholder="Tap here to start typing..."></ion-textarea>
+  </ion-item>
+
+  <div class="button-container">
+    <ion-button shape="round" class="login-button ion-margin-bottom ion-margin-top"
+    [routerDirection]="'forward'" [routerLink]="['/construction/construction-feedback']">Next Question</ion-button>
+
+    <ion-button shape="round" class="login-button" color="danger"
+    [routerDirection]="'back'" [routerLink]="['/construction/project-details']">Previous Question</ion-button>
+  </div>
+</ion-content>

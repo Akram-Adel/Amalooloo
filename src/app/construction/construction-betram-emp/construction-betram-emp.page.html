@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>New Construction Project</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <div class="header">Please enter Betram employee details below:</div>
+
+  <ion-grid class="ion-margin">
+    <div class="login-container">
+      <ion-item class="ion-margin-bottom">
+        <ion-label position="stacked">Name</ion-label>
+        <ion-input type="text" placeholder="Name" class="icon-user"></ion-input>
+      </ion-item>
+
+      <ion-item class="ion-margin-bottom">
+        <ion-label position="stacked">Surname</ion-label>
+        <ion-input type="text" placeholder="Surname" class="icon-user"></ion-input>
+      </ion-item>
+    </div>
+
+    <ion-row>
+      <div class="header">Tab below to sign electronically:</div>
+      <ion-item color="light" class="text-area">
+        <ion-textarea rows="10"></ion-textarea>
+      </ion-item>
+    </ion-row>
+
+    <ion-list>
+      <ion-item>
+        <ion-label>Accept Terms & Conditions</ion-label>
+        <ion-checkbox slot="start"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+  </ion-grid>
+
+  <div class="button-container">
+    <ion-button shape="round" class="login-button extra-margin-top ion-margin-bottom"
+    [routerDirection]="'forward'" [routerLink]="['/construction/construction-completed']">Next</ion-button>
+  </div>
+</ion-content>

@@ -1,0 +1,8 @@
+{
+  "name": "amalooloo",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}

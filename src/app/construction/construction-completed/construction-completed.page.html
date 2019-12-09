@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>New Construction Project</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <div class="login-container">
+    <div class="ion-text-center ion-margin-bottom ion-margin-top"><b>
+      You have completed the construction. <br>
+      Please make a selection below:
+    </b></div>
+  </div>
+
+  <div class="button-container extra-margin-top">
+    <ion-button shape="round" class="login-button extra ion-margin-bottom"
+    [routerDirection]="'root'" [routerLink]="['/construction']">Go back to Construction <br> Projects</ion-button>
+    <ion-button shape="round" class="login-button extra"
+    [routerDirection]="'forward'" [routerLink]="['/construction/new-construction']">Complete a new Construction <br> in this project</ion-button>
+  </div>
+</ion-content>

@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Construction</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <ion-grid>
+    <ion-row>
+      <ion-col [routerDirection]="'forward'" [routerLink]="['/construction/new-construction']">
+        <div class="col-inner-conatiner padding">
+          <img src="../../assets/imgs/ic_start_new_loadsheet.png" height="60px">
+          <div class="text">New Construction Project</div>
+        </div>
+      </ion-col>
+
+      <ion-col>
+        <div class="col-inner-conatiner padding">
+          <img src="../../assets/imgs/ic_arrow.png" height="60px">
+          <div class="text">Continue on an Existing Project</div>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col [routerDirection]="'forward'" [routerLink]="['/construction/view-past-construction']">
+        <div class="col-inner-conatiner" style="padding: 20px 13px;">
+          <img src="../../assets/imgs/ic_view_may_past_loadsheet.png" height="60px">
+          <div class="text">View My Past Construction Project</div>
+        </div>
+      </ion-col>
+
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

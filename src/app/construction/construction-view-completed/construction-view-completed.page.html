@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Completed Constructions</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <ion-list style="background-color: inherit;">
+    <ion-item lines="none" class="col-inner-conatiner margin"
+    *ngFor="let item of completedConstruction"
+    [routerDirection]="'forward'" [routerLink]="['/construction/loadsheets-detail']">
+      <ion-thumbnail slot="start">
+        <img src="../../../assets/imgs/ic_pdf_download.png">
+      </ion-thumbnail>
+      <ion-label>
+        <div class="headeing">Construction 1</div>
+        <b>Beneficiary Name: </b> Deepak Nishad <br>
+        <b>Address: </b> Test Address <br>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

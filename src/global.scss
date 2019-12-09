@@ -1,0 +1,134 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+
+@font-face {
+  font-family: 'SourceSansPro-Regular';
+  src:  url('./assets/source-sans-pro/SourceSansPro-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+@import "./theme/extensions.scss";
+@import "./assets/icomoon/style.css";
+
+// Common Classes
+.extra-margin-top    { margin-top: 30px; }
+.extra-margin-bottom { margin-bottom: 30px; }
+
+// header section with img
+.logo-header {
+  margin: 10vh 0;
+  &.with-header { margin: 5vh 0; }
+
+  img {
+    @extend %block-auto;
+    height: 20vh;
+  }
+}
+
+// Blue main header at the top
+.blue-header {
+  background-color: rgb(63,97,246);
+  padding: 10px 0;
+  text-align: center;
+  color: #fff;
+  font-size: 18px;
+}
+// Bold header txt with margins
+.header {
+  margin-top: 15px;
+  margin-bottom: 10px;
+  margin-left: 8px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+// Buttons with round ends, large width
+.login-button {
+  width: 250px;
+  height: 45px;
+  @extend %block-auto;
+  &.extra {
+    width: 300px;
+    height: 65px;
+  }
+}
+
+// User Img with camera at buttom right corner
+.camera-img {
+  @extend %block-auto;
+  height: 25vh; width: 25vh;
+  background-image: url('./assets/imgs/ic_no_image.png');
+  @extend %bg-img;
+  border: 3px solid #3880ff;
+  border-radius: 100%;
+  position: relative;
+
+  .camera-btn {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    font-size: 25px;
+    color: #fff;
+    background-color: #3880ff;
+    border: 1px solid #3880ff;
+    border-radius: 100%;
+    padding: 15px;
+  }
+}
+
+// make card with boxshabow
+.col-inner-conatiner {
+  height: 100%;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px 0px #d7d8da;
+  &.padding { padding: 20px; }
+  &.margin { margin: 10px; }
+
+  img { @extend %block-auto; }
+  .text {
+    text-align: center;
+    margin-top: 20px;
+  }
+}
+
+// make buttons in bottom middle
+.button-container.bottom {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+// modal full width and height all pages
+.modal-wrapper.sc-ion-modal-md {
+  width: 100%;
+  height: 100%;
+}

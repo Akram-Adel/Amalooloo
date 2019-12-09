@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Sign Up</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="logo-header with-header">
+    <div class="camera-img">
+      <button class="camera-btn icon-camera" (click)="takePicture()"></button>
+    </div>
+  </div>
+
+  <div class="login-container">
+    <form [formGroup]="signupForm">
+
+      <ion-item class="ion-margin-bottom">
+        <ion-label position="stacked">First Name</ion-label>
+        <ion-input type="text" placeholder="First Name" class="icon-user" formControlName="firstName"></ion-input>
+      </ion-item>
+
+      <ion-item class="ion-margin-bottom">
+        <ion-label position="stacked">Last Name</ion-label>
+        <ion-input type="text" placeholder="Last Name" class="icon-user" formControlName="lastName"></ion-input>
+      </ion-item>
+
+      <ion-item class="ion-margin-bottom">
+        <ion-label position="stacked">Email ID</ion-label>
+        <ion-input type="email" placeholder="Email ID" class="icon-envelop" formControlName="emailId"></ion-input>
+      </ion-item>
+
+      <ion-item class="ion-margin-bottom">
+        <ion-label position="stacked">ID Number</ion-label>
+        <ion-input type="number" placeholder="ID Number" class="icon-profile" formControlName="idNo"></ion-input>
+      </ion-item>
+
+      <ion-item class="ion-margin-bottom" *ngIf="!isCustomer">
+        <ion-label position="stacked">Designation / Job Title</ion-label>
+        <ion-input type="text" placeholder="Designation / Job Title" class="icon-library" formControlName="designation"></ion-input>
+      </ion-item>
+
+      <ion-item class="ion-margin-bottom">
+        <ion-label position="stacked">Contact Number</ion-label>
+        <ion-input type="number" placeholder="Contact Number" class="icon-mobile2" formControlName="contactNo"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Password</ion-label>
+        <ion-input type="password" placeholder="Password" class="icon-lock" formControlName="password"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Re-Password</ion-label>
+        <ion-input type="password" placeholder="Re-Password" class="icon-lock" formControlName="rePassword"></ion-input>
+      </ion-item>
+
+    </form>
+  </div>
+
+  <div class="button-container">
+    <ion-button shape="round" class="login-button extra-margin-top extra-margin-bottom"
+    (click)="signup(signupForm.value)" [disabled]="!signupForm.valid || isConnecting">
+      <span *ngIf="!isConnecting">Create a new account</span>
+      <ion-spinner name="dots" *ngIf="isConnecting"></ion-spinner>
+    </ion-button>
+  </div>
+</ion-content>
+

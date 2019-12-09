@@ -1,0 +1,8 @@
+{
+  "appId": "com.amalooloo.ntech",
+  "appName": "Amalooloo",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "cordova": {}
+}

@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title  class="ion-text-center">Amalooloo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngIf="employeeview" [routerDirection]="'forward'" [routerLink]="['/loadsheets']">
+        <div class="col-inner-conatiner padding">
+          <img src="../../assets/imgs/ic_loadsheet.png" height="60px">
+          <div class="text">Loadsheets</div>
+        </div>
+      </ion-col>
+
+      <ion-col *ngIf="employeeview" [routerDirection]="'forward'" [routerLink]="['/deliveries']">
+        <div class="col-inner-conatiner padding">
+          <img src="../../assets/imgs/ic_deliveries.png" height="60px">
+          <div class="text">Deliveries</div>
+        </div>
+      </ion-col>
+    <!-- User -->
+      <ion-col *ngIf="customerview" [routerDirection]="'forward'"[routerLink]="['/bc-scanner']">
+        <div class="col-inner-conatiner padding">
+          <img src="../../assets/imgs/ic_deliveries.png" height="60px">
+          <div class="text">Request Maintenance </div>
+        </div>
+      </ion-col>
+
+      <ion-col  [routerDirection]="'forward'" [routerLink]="['/notifications']">
+        <div class="col-inner-conatiner padding">
+          <img src="../../assets/imgs/ic_view_may_past_loadsheet.png" height="60px">
+          <div class="text">Notifications </div>
+        </div>
+      </ion-col>
+
+    </ion-row>
+
+    <ion-row>
+      <ion-col  *ngIf="employeeview" [routerDirection]="'forward'" [routerLink]="['/construction']">
+        <div class="col-inner-conatiner padding">
+          <img src="../../assets/imgs/ic_construction.png" height="60px">
+          <div class="text">Construction</div>
+        </div>
+      </ion-col>
+      <!-- User -->
+      <ion-col  *ngIf="customerview" (click)="openBrowser()">
+        <div class="col-inner-conatiner padding">
+          <img src="../../assets/imgs/ic_construction.png" height="60px">
+          <div class="text">Shop</div>
+        </div>
+      </ion-col>
+    <!-- User -->
+      <ion-col   [routerDirection]="'forward'" [routerLink]="['/profile']">
+        <div class="col-inner-conatiner padding">
+          <img src="../../assets/imgs/ic_profile_1.png" height="60px">
+          <div class="text">Profile</div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
