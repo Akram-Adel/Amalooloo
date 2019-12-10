@@ -14,7 +14,8 @@ export class AddQuantitiesLoadedPage implements OnInit {
 
   isLoading = true;
   loadsheetId:number;
-  loadedQuantities = []
+  loadedQuantities = [];
+  buttonText = "Proceed"
 
   constructor(
     private route:ActivatedRoute,
@@ -27,7 +28,7 @@ export class AddQuantitiesLoadedPage implements OnInit {
       this.general.getLoadsheetOrderList(this.loadsheetId).subscribe((res:any) => {
 
         res.result.forEach((el:any) => {
-          el.isRigth = false;
+          (this.general.isLoadsheetCompleted) ? el.isRigth = true : el.isRigth = false;
           this.general.allOrders.push(el);
         });
 
@@ -42,6 +43,7 @@ export class AddQuantitiesLoadedPage implements OnInit {
   loadingDone() {
     this.general.loadsheetData.loadsheet_id = this.loadsheetId;
     this.loadedQuantities = this.general.allOrders;
+    if(!this.general.isLoadsheetCompleted) this.buttonText = "Capture Quantities";
     this.isLoading = false;
   }
 

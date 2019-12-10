@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 
 import * as _ from 'lodash';
 
@@ -16,6 +16,7 @@ export class VerifyQuantitiesPage implements OnInit {
   isLoading = true;
   orderId:number;
   product:any;
+  buttonText:string;
 
   constructor(
     private route:ActivatedRoute,
@@ -23,21 +24,17 @@ export class VerifyQuantitiesPage implements OnInit {
     private general:GeneralService) { }
 
   ngOnInit() {
-    if(this.general.allOrders.length == 0) {
-      this.general.presentAlertHandler('This session has expired', () => {this.location.back();});
-    }
-
     this.orderId = +this.route.snapshot.paramMap.get('id');
     this.general.getOrderDetails(this.orderId).subscribe((res:any) => {
       this.product = res.result.products[0];
+      console.log(this.product);
 
       for (let i = 0; i < this.product.components.length; i++) {
         this.product.components[i].math = 0;
       }
 
+      (this.general.isLoadsheetCompleted) ? this.buttonText = "BACK" : this.buttonText = "SAVE"
       this.isLoading = false;
-
-      console.log(this.product);
     });
     this.general.loadsheetData.order_details.order_id = this.orderId;
   }
@@ -49,21 +46,26 @@ export class VerifyQuantitiesPage implements OnInit {
     this.product.components[index].math = this.product.components[index].quantity - number;
   }
 
-  save() {
-    let isEmpty = _.findIndex(this.product.components, ['load_quantity',0]),
+  submit() {
+    if(this.general.isLoadsheetCompleted) {
+      this.location.back();
+
+    } else {
+      let isEmpty = _.findIndex(this.product.components, ['load_quantity',0]),
       isNull = _.findIndex(this.product.components, ['load_quantity','']);
-    if(isEmpty != -1 || isNull != -1) {
-      this.general.presentAlertMsg('Please fill all the quantities');
-      return;
-    };
+      if(isEmpty != -1 || isNull != -1) {
+        this.general.presentAlertMsg('Please fill all the quantities');
+        return;
+      };
 
-    let orderCompletedIndex = _.findIndex(this.general.allOrders, ['order_id', this.orderId]);
-    this.general.allOrders[orderCompletedIndex].isRigth = true;
-    this.general.allOrders[orderCompletedIndex].components = this.product.components;
+      let orderCompletedIndex = _.findIndex(this.general.allOrders, ['order_id', this.orderId]);
+      this.general.allOrders[orderCompletedIndex].isRigth = true;
+      this.general.allOrders[orderCompletedIndex].components = this.product.components;
 
-    this.general.loadsheetData.order_details.product_details.product_id = this.product.product_id;
-    this.general.loadsheetData.order_details.product_details.components = this.product.components;
-    this.location.back();
+      this.general.loadsheetData.order_details.product_details.product_id = this.product.product_id;
+      this.general.loadsheetData.order_details.product_details.components = this.product.components;
+      this.location.back();
+    }
   }
 
 }

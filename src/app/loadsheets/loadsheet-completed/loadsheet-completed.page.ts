@@ -13,11 +13,16 @@ export class LoadsheetCompletedPage implements OnInit {
   constructor(public general:GeneralService) { }
 
   ngOnInit() {
-    this.general.submitLoadsheet().subscribe(res => {
+    if(this.general.isLoadsheetCompleted) {
       this.isConnecting = false;
 
-      console.log(res);
-    })
+    } else {
+      this.general.submitLoadsheet().subscribe(res => {
+        this.isConnecting = false;
+
+        console.log(res);
+      })
+    }
   }
 
 }

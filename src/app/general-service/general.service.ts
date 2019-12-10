@@ -19,7 +19,7 @@ export class GeneralService {
   public customerMode:boolean;
   public constructionID:Number;
 
-  public userToken:string = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjc0LCJpc3MiOiJodHRwOi8vNDEuNzYuMTA4LjQ1L2FwaS9sb2dpbiIsImlhdCI6MTU3NTcyODQ1NCwiZXhwIjoxNTc1NzY0NDU0LCJuYmYiOjE1NzU3Mjg0NTQsImp0aSI6Ikt0OFJmbzRONk5wR1dCekQifQ.mx1Rh-Ch46TByDXt9MGmZTR2KN5hL8MY2VnWH05BTNY";
+  public userToken:string = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjc0LCJpc3MiOiJodHRwOi8vNDEuNzYuMTA4LjQ1L2FwaS9sb2dpbiIsImlhdCI6MTU3NTkxNDk5MCwiZXhwIjoxNTc1OTUwOTkwLCJuYmYiOjE1NzU5MTQ5OTAsImp0aSI6Im5IbTl4amdndjNEWFh1V1oifQ.mrLDvLmG8r9gvFzqPC68ZZNifULg7teVWvX3HcqCE68";
   public userObject:any;
 
   constructor(
@@ -54,7 +54,7 @@ export class GeneralService {
   }
 
   // API Session Data
-  public allLoadsheets:any;
+  public allLoadsheets:any; public isLoadsheetCompleted:boolean;
   public allDeliveries:any;
   public allOrders = [];
 

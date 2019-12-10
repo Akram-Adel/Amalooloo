@@ -35,12 +35,15 @@
         <ion-col size="12">{{product?.product_name}}</ion-col>
       </ion-row>
 
-      <form id="quantitiesForm" (ngSubmit)="save()">
+      <form id="quantitiesForm" (ngSubmit)="submit()">
         <ion-row class="data"
         *ngFor="let item of product?.components">
           <ion-col size="6">{{item.component_name}}</ion-col>
           <ion-col>{{item.quantity}}</ion-col>
-          <ion-col><ion-input type="number" class="ion-padding" (input)="actualChange(item,$event.target.value)" required></ion-input></ion-col>
+          <ion-col><ion-input type="number" class="ion-no-padding"
+              [value]="item.load_quantity"
+              [readonly]="general.isLoadsheetCompleted"
+             (input)="actualChange(item,$event.target.value)" required></ion-input></ion-col>
           <ion-col>{{item.math}}</ion-col>
         </ion-row>
       </form>
@@ -49,6 +52,6 @@
 
   <div class="button-container">
     <button class="login-button extra-margin-top ion-margin-bottom"
-    [type]="submit" form="quantitiesForm">SAVE</button>
+    [type]="submit" form="quantitiesForm">{{buttonText}}</button>
   </div>
 </ion-content>

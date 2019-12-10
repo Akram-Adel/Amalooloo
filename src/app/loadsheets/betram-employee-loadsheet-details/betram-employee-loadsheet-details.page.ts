@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { GeneralService } from 'src/app/general-service/general.service';
 import { Router } from '@angular/router';
 
+import * as _ from 'lodash';
+
 @Component({
   selector: 'app-betram-employee-loadsheet-details',
   templateUrl: './betram-employee-loadsheet-details.page.html',
@@ -10,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class BetramEmployeeLoadsheetDetailsPage implements OnInit {
 
+  loadsheet:any;
   betramForm:FormGroup;
 
   constructor(
@@ -27,11 +30,20 @@ export class BetramEmployeeLoadsheetDetailsPage implements OnInit {
     }
 
   ngOnInit() {
+    this.loadsheet = _.filter(this.general.allLoadsheets, ['loadsheet_id', this.general.loadsheetData.loadsheet_id])[0];
+
+    if(this.general.isLoadsheetCompleted) {
+      let betramControls = this.betramForm.controls;
+
+      betramControls.name.setValue(this.loadsheet.driver_name);
+      betramControls.surname.setValue(this.loadsheet.driver_surname);
+      betramControls.terms.setValue(true);
+    }
   }
 
 
   next() {
-    if(!this.betramForm.valid) {
+    if(!this.betramForm.valid && !this.general.isLoadsheetCompleted) {
       this.general.presentAlertMsg('Please fill the apove data');
       return;
     }

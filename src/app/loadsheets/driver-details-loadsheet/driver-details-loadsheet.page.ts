@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { GeneralService } from 'src/app/general-service/general.service';
 import { Router } from '@angular/router';
 
+import * as _ from 'lodash';
+
 @Component({
   selector: 'app-driver-details-loadsheet',
   templateUrl: './driver-details-loadsheet.page.html',
@@ -10,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class DriverDetailsLoadsheetPage implements OnInit {
 
+  loadsheet:any;
   driverForm:FormGroup;
 
   constructor(
@@ -26,11 +29,20 @@ export class DriverDetailsLoadsheetPage implements OnInit {
     }
 
   ngOnInit() {
+    this.loadsheet = _.filter(this.general.allLoadsheets, ['loadsheet_id', this.general.loadsheetData.loadsheet_id])[0];
+
+    if(this.general.isLoadsheetCompleted) {
+      let driverControls = this.driverForm.controls;
+
+      driverControls.name.setValue(this.loadsheet.driver_name);
+      driverControls.surname.setValue(this.loadsheet.driver_surname);
+      driverControls.terms.setValue(true);
+    }
   }
 
 
   next() {
-    if(!this.driverForm.valid) {
+    if(!this.driverForm.valid && !this.general.isLoadsheetCompleted) {
       this.general.presentAlertMsg('Please fill the apove data');
       return;
     }

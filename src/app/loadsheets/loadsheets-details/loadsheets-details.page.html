@@ -35,13 +35,13 @@
     </ion-item>
   </div>
 
-  <div class="button-container" *ngIf="!isCompleted">
-    <ion-button shape="round" class="login-button extra-margin-top ion-margin-bottom"
-    (click)="addQuantitiesLoaded()">
-      Add Quantities Loaded
+  <div class="button-container">
+    <ion-button shape="round" class="login-button extra-margin-top"
+    [routerDirection]="'forward'" [routerLink]="['/loadsheets/add-quantities-loaded/',this.loadsheet.loadsheet_id]">
+      {{buttonText}}
     </ion-button>
 
-    <ion-button shape="round" class="login-button" color="danger"
+    <ion-button shape="round" class="login-button" color="danger" *ngIf="!general.isLoadsheetCompleted"
     [routerDirection]="'back'" [routerLink]="['/loadsheets']">Cancel This Loadsheet</ion-button>
   </div>
 </ion-content>
