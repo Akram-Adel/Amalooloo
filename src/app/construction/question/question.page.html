@@ -8,31 +8,57 @@
 </ion-header>
 
 <ion-content color="light">
-  <div class="header">Question 1:</div>
-  <div style="margin: 15px 8px 10px;">This is a test question. This is a test question. This is a test question. This is a test question. This is a test question.</div>
 
-  <ion-radio-group>
-    <ion-item color="light" class="ion-margin-top">
-      <ion-label>Yes</ion-label>
-      <ion-radio slot="start" value="yes" checked></ion-radio>
-    </ion-item>
+  <div *ngIf="isLoading">
+    <ion-list style="background-color: inherit;">
+      <ion-item lines="none" class="col-inner-conatiner margin"
+      *ngFor="let item of [1,2,3,4,5,6,7,8]">
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
 
-    <ion-item color="light" class="ion-margin-bottom">
-      <ion-label>No</ion-label>
-      <ion-radio slot="start" value="no"></ion-radio>
-    </ion-item>
-  </ion-radio-group>
 
-  <div class="header">Add comment / note</div>
-  <ion-item class="ion-margin">
-    <ion-textarea rows="6" placeholder="Tap here to start typing..."></ion-textarea>
-  </ion-item>
+  <div *ngIf="!isLoading">
+    <div class="extra-margin-bottom" *ngFor="let item of questionList">
+      <div class="header">Question {{item.id}}:</div>
+      <div style="margin: 15px 8px 10px;">{{item.question}}</div>
 
-  <div class="button-container">
-    <ion-button shape="round" class="login-button ion-margin-bottom ion-margin-top"
-    [routerDirection]="'forward'" [routerLink]="['/construction/construction-feedback']">Next Question</ion-button>
+      <ion-radio-group>
+        <ion-item color="light" class="ion-margin-top">
+          <ion-label>Yes</ion-label>
+          <ion-radio slot="start" value="yes" (click)="answer(item.id,'yes')"></ion-radio>
+        </ion-item>
 
-    <ion-button shape="round" class="login-button" color="danger"
-    [routerDirection]="'back'" [routerLink]="['/construction/project-details']">Previous Question</ion-button>
+        <ion-item color="light" class="ion-margin-bottom">
+          <ion-label>No</ion-label>
+          <ion-radio slot="start" value="no" (click)="answer(item.id,'no')"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </div>
+
+    <!-- <div class="header">Add comment / note</div>
+    <ion-item class="ion-margin">
+      <ion-textarea rows="6" placeholder="Tap here to start typing..."></ion-textarea>
+    </ion-item> -->
+
+    <div class="button-container">
+      <ion-button shape="round" class="login-button ion-margin-top"
+      (click)="next()">Next Question</ion-button>
+
+      <ion-button shape="round" class="login-button" color="danger"
+      [routerDirection]="'back'" [routerLink]="['/construction/project-details']">Cancel Request</ion-button>
+    </div>
   </div>
 </ion-content>

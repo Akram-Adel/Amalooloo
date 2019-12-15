@@ -3,11 +3,13 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Completed Constructions</ion-title>
+    <ion-title>Contractors</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content color="light">
+  <div class="blue-header">Select a contractor to work on below:</div>
+
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content>
     </ion-refresher-content>
@@ -24,12 +26,6 @@
           <h3>
             <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
           </h3>
-          <p>
-            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
-          </p>
-          <p>
-            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
-          </p>
         </ion-label>
       </ion-item>
     </ion-list>
@@ -38,15 +34,13 @@
   <div *ngIf="!isLoading">
     <ion-list style="background-color: inherit;">
       <ion-item lines="none" class="col-inner-conatiner margin"
-      *ngFor="let item of completedConstruction">
+      [routerDirection]="'forward'" [routerLink]="['/construction/project-details', projectId]"
+      *ngFor="let item of contractorList">
         <ion-thumbnail slot="start">
-          <img src="../../../assets/imgs/ic_pdf_download.png">
+          <img src="../../../assets/imgs/ic_profile_2.png">
         </ion-thumbnail>
         <ion-label>
-          <div class="headeing">{{item.dateTxt}}</div>
-          <b>Construction: </b> {{item.const_no}} <br>
-          <b>Beneficiary Name: </b> {{item.mable}} {{item.beneficiary_surname}} <br>
-          <b>Address: </b> {{item.const_address}} <br>
+          <b>Contractor Name: </b> {{item.contractor_name}} <br>
         </ion-label>
       </ion-item>
     </ion-list>

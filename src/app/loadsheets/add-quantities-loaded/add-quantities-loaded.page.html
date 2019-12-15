@@ -51,7 +51,7 @@
       <ion-button shape="round" class="login-button ion-margin-top" (click)="captureQuantities()">{{buttonText}}</ion-button>
 
       <ion-button shape="round" class="login-button extra-margin-bottom" color="danger"
-      *ngIf="!general.isLoadsheetCompleted"
+      *ngIf="!completedStatus"
       [routerDirection]="'back'" [routerLink]="['/loadsheets']">Cancel This Loadsheet</ion-button>
     </div>
   </div>

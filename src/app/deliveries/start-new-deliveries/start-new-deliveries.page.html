@@ -40,6 +40,7 @@
   <div *ngIf="!isLoading">
     <ion-list style="background-color: inherit;">
       <ion-item lines="none" class="col-inner-conatiner margin"
+      [routerDirection]="'forward'" [routerLink]="['/deliveries/delivery-details', item.delivery_no]"
       *ngFor="let item of deliveryProjects">
         <ion-thumbnail slot="start">
           <img src="../../../assets/imgs/ic_loadsheet.png">

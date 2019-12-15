@@ -6,12 +6,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { IonicSignaturePadModule, IonicsignaturepadComponent } from 'ionicsignaturepad';
 
-import { ConstructionContractorDetailsPage } from './construction-contractor-details.page';
+import { DeliveryContractorDetailsPage } from './delivery-contractor-details.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: ConstructionContractorDetailsPage
+    component: DeliveryContractorDetailsPage
   }
 ];
 
@@ -25,6 +25,6 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   exports: [IonicsignaturepadComponent],
-  declarations: [ConstructionContractorDetailsPage]
+  declarations: [DeliveryContractorDetailsPage]
 })
-export class ConstructionContractorDetailsPageModule {}
+export class DeliveryContractorDetailsPageModule {}

@@ -16,28 +16,28 @@
           <ion-item class="ion-margin-bottom">
             <ion-label position="stacked">Name</ion-label>
             <ion-input type="text" placeholder="Name" class="icon-user"
-              formControlName="name" [readonly]="general.isLoadsheetCompleted"></ion-input>
+              formControlName="name" [readonly]="completedStatus"></ion-input>
           </ion-item>
 
           <ion-item class="ion-margin-bottom">
             <ion-label position="stacked">Surname</ion-label>
             <ion-input type="text" placeholder="Surname" class="icon-user"
-            formControlName="surname" [readonly]="general.isLoadsheetCompleted"></ion-input>
+            formControlName="surname" [readonly]="completedStatus"></ion-input>
           </ion-item>
         </div>
 
         <ion-row style="overflow: hidden; display: flex; flex-direction: column;">
           <div class="header">Tab below to sign electronically:</div>
           <ion-signaturepad style="width: 100%;" formControlName="signature"
-            *ngIf="!general.isLoadsheetCompleted"></ion-signaturepad>
-          <ion-textarea rows="6" style="background-color: #f4f5f8;" readonly *ngIf="general.isLoadsheetCompleted"></ion-textarea>
+            *ngIf="!completedStatus"></ion-signaturepad>
+          <ion-textarea rows="6" style="background-color: #f4f5f8;" readonly *ngIf="completedStatus"></ion-textarea>
         </ion-row>
 
 
         <ion-list>
           <ion-item>
             <ion-label>Accept Terms & Conditions</ion-label>
-            <ion-checkbox slot="start" formControlName="terms" [disabled]="general.isLoadsheetCompleted"></ion-checkbox>
+            <ion-checkbox slot="start" formControlName="terms" [disabled]="completedStatus"></ion-checkbox>
           </ion-item>
         </ion-list>
       </form>

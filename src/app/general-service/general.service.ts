@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { HTTP } from '@ionic-native/http/ngx';
 import { Subject, Observable } from 'rxjs';
 
 @Injectable({
@@ -19,12 +18,11 @@ export class GeneralService {
   public customerMode:boolean;
   public constructionID:Number;
 
-  public userToken:string = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjc0LCJpc3MiOiJodHRwOi8vNDEuNzYuMTA4LjQ1L2FwaS9sb2dpbiIsImlhdCI6MTU3NTkxNDk5MCwiZXhwIjoxNTc1OTUwOTkwLCJuYmYiOjE1NzU5MTQ5OTAsImp0aSI6Im5IbTl4amdndjNEWFh1V1oifQ.mrLDvLmG8r9gvFzqPC68ZZNifULg7teVWvX3HcqCE68";
+  public userToken:string = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjc4LCJpc3MiOiJodHRwOi8vNDEuNzYuMTA4LjQ1L2FwaS9sb2dpbiIsImlhdCI6MTU3NjQ0NDI3NCwiZXhwIjoxNTc2NDgwMjc0LCJuYmYiOjE1NzY0NDQyNzQsImp0aSI6ImdodDV6MnBIN0VlT3FDd0IifQ.SbB251tflIZn7tGh4CGpSgEl3rasMf1twOVPonDOKDk";
   public userObject:any;
 
   constructor(
     private alertController: AlertController,
-    // private http: HTTP) { }
     private http: HttpClient) { }
 
 
@@ -55,7 +53,8 @@ export class GeneralService {
 
   // API Session Data
   public allLoadsheets:any; public isLoadsheetCompleted:boolean;
-  public allDeliveries:any;
+  public allDeliveries:any; public isDeliveryCompleted:boolean; public detailedDelivery:any;
+  public isNewConstruction:boolean = true;
   public allOrders = [];
 
   // API CLASS FUNCTIONS
@@ -124,27 +123,64 @@ export class GeneralService {
       .set("Authorization", "Bearer "+this.userToken),
     data = { token: this.userToken };
 
-    return this.http.post(this.API_BASE_URL+'/get-delivery-detail',data,{headers});
+    return this.http.post(this.API_BASE_URL+'/get-delivery-list-mob',data,{headers});
   }
-  getConstructionList() {
+  getDeliveryDetail(id:number) {
     const headers = new HttpHeaders()
       .set("Authorization", "Bearer "+this.userToken),
-    data = { token: this.userToken };
+    data = {
+      token: this.userToken,
+      delivery_id: id
+    };
+
+    return this.http.post(this.API_BASE_URL+'/get-delivery-detail',data,{headers});
+  }
+  getConstructionList(status:string) {
+    const headers = new HttpHeaders()
+      .set("Authorization", "Bearer "+this.userToken),
+    data = {
+      token: this.userToken,
+      project_status: status
+    };
 
     return this.http.post(this.API_BASE_URL+'/get-project-list',data,{headers});
+  }
+  getContractorList(id:number) {
+    const headers = new HttpHeaders()
+      .set("Authorization", "Bearer "+this.userToken),
+    data = {
+      token: this.userToken,
+      project_id: id
+    };
+
+    return this.http.post(this.API_BASE_URL+'/contractor-list',data,{headers});
+  }
+  getQuestionList() {
+    const headers = new HttpHeaders()
+      .set("Authorization", "Bearer "+this.userToken)
+
+    return this.http.post(this.API_BASE_URL+'/get-question-list',{},{headers});
+  }
+  getCompletedConstructionList(id:number) {
+    const headers = new HttpHeaders()
+      .set("Authorization", "Bearer "+this.userToken),
+    data = {
+      token: this.userToken,
+      project_id: id
+    };
+
+    return this.http.post(this.API_BASE_URL+'/get-construction-list',data,{headers});
   }
   getUploadedPdf() {
     const headers = new HttpHeaders()
       .set("Authorization", "Bearer "+this.userToken);
 
-    // return this.http.get(this.API_BASE_URL+'/get-uploaded-pdf',{},{headers});
     return this.http.get(this.API_BASE_URL+'/get-uploaded-pdf',{headers});
   }
   getMyMaintenanceReq() {
     const headers = new HttpHeaders()
       .set("Authorization", "Bearer "+this.userToken);
 
-    // return this.http.get(this.API_BASE_URL+'/get-my-maintenance-requests',{},{headers});
     return this.http.get(this.API_BASE_URL+'/get-my-maintenance-requests',{headers});
   }
   requestMaintenance(id,gps,image1,image2,image3,firstname,surname,mobile,email) {
@@ -164,14 +200,12 @@ export class GeneralService {
         email:email,
       }
 
-    // return this.http.get(this.API_BASE_URL+'/request-maintenance',{},{headers});
     return this.http.get(this.API_BASE_URL+'/request-maintenance',{headers});
   }
   getQrCode(id:number) {
     const headers = new HttpHeaders()
       .set("Authorization", "Bearer "+this.userToken);
 
-    // return this.http.get(this.API_BASE_URL+'/get-qrcode?construction_id='+id,{},{headers});
     return this.http.get(this.API_BASE_URL+'/get-qrcode?construction_id='+id,{headers});
   }
   getLoadsheetOrderList(id:number) {
@@ -191,6 +225,10 @@ export class GeneralService {
 
   public loadsheetData = {
     loadsheet_id: null,
+    delivery_id: null,
+    project_id: null,
+
+
     order_details: {
       order_id: null,
       product_details: {
@@ -198,23 +236,50 @@ export class GeneralService {
         components: [],
       }
     },
+
+
     verify_loaded: {
-      image_1: null,
-      image_2: null,
-      image_3: null,
+      image_1: null, image_2: null, image_3: null,
       note: null
     },
+    verify_delivered: {
+      image_1: null, image_2: null, image_3: null,
+      delivery_note: null
+    },
+    verify_construction: {
+      image_1: null, image_2: null, image_3: null,
+      const_note: null
+    },
+
+
     driver_details: {
-      name: null,
-      surname: null,
-      sign: null
+      driver_name: null, driver_surname: null,
+      driver_sign: null
     },
     betram_emp_details: {
-      name: null,
-      surname: null,
-      time: null,
-      sign: null
+      emp_name: null, emp_surname: null,
+      emp_mention_time: null,
+      emp_sign: null
     },
+    contractor_details: {
+      cont_name: null, cont_surname: null,
+      cont_sign: null,
+    },
+    beneficiary_details: {
+      beneficiary_name: null, beneficiary_surname: null,
+      beneficiary_sign: null,
+    },
+
+    beneficiary_id_no: null,
+    beneficiary_stand_no: null,
+    beneficiary_detail: null,
+    // question_details: [],
+    // contractor_id: null,
+    // const_address: null,
+    // const_latitude: null,
+    // const_longitude: null,
+
+    vehicle_reg_no: null,
     timeStamp: null
   }
   submitLoadsheet() {
@@ -227,6 +292,28 @@ export class GeneralService {
     data.timeStamp = timeStamp;
 
     return this.http.post(this.API_BASE_URL+'/submit-loadsheet',data,{headers});
+  }
+  submitDelivery() {
+    let date = new Date()
+    let timeStamp = date.getFullYear() +'-'+ (date.getMonth()+1) +'-'+ date.getDate() +' '+ date.getHours() +':'+ date.getMinutes() +':'+ date.getSeconds();
+
+    const headers = new HttpHeaders()
+      .set("Authorization", "Bearer "+this.userToken),
+    data = this.loadsheetData;
+    data.timeStamp = timeStamp;
+
+    return this.http.post(this.API_BASE_URL+'/submit-delivery',data,{headers});
+  }
+  submitConstruction() {
+    let date = new Date()
+    let timeStamp = date.getFullYear() +'-'+ (date.getMonth()+1) +'-'+ date.getDate() +' '+ date.getHours() +':'+ date.getMinutes() +':'+ date.getSeconds();
+
+    const headers = new HttpHeaders()
+      .set("Authorization", "Bearer "+this.userToken),
+    data = this.loadsheetData;
+    data.timeStamp = timeStamp;
+
+    return this.http.post(this.API_BASE_URL+'/submit-construction',data,{headers});
   }
 
 }

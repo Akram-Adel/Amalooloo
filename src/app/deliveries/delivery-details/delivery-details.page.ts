@@ -13,7 +13,8 @@ import { GeneralService } from 'src/app/general-service/general.service';
 export class DeliveryDetailsPage implements OnInit {
 
   sheetNo:string;
-  loadsheet:any
+  loadsheet:any;
+  buttonText = 'View Delivered Quantities';
 
   constructor(
     private route:ActivatedRoute,
@@ -21,13 +22,21 @@ export class DeliveryDetailsPage implements OnInit {
 
   ngOnInit() {
     this.sheetNo = this.route.snapshot.paramMap.get('no');
-    this.general.getDeliveryList().subscribe(res => this.loadDelivery(res));
+    this.general.detailedDelivery = null;
+    this.loadDelivery()
   }
 
 
-  loadDelivery(res:any) {
-    console.log(res);
-    this.loadsheet = _.filter(res.result, ['loadsheet_no', this.sheetNo])[0];
+  loadDelivery() {
+    this.loadsheet = _.filter(this.general.allDeliveries, ['delivery_no', this.sheetNo])[0];
+    this.general.getDeliveryDetail(this.loadsheet.loadsheet_id).subscribe((res:any) => this.general.detailedDelivery = res.result[0])
+    if(this.loadsheet.loadsheet_status != "completed") {
+      this.general.isDeliveryCompleted = false;
+      this.buttonText = 'Add Delivered Quantities'
+
+    } else {this.general.isDeliveryCompleted = true}
+
+    console.log(this.loadsheet);
   }
 
 }

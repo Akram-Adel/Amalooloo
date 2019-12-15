@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { GeneralService } from 'src/app/general-service/general.service';
 
 @Component({
   selector: 'app-project-details',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectDetailsPage implements OnInit {
 
-  constructor() { }
+  projectId:number;
+
+  constructor(
+    private route:ActivatedRoute,
+    private general:GeneralService) { }
 
   ngOnInit() {
+    this.projectId = +this.route.snapshot.paramMap.get('id');
+    this.general.loadsheetData.project_id = this.projectId;
   }
 
 }

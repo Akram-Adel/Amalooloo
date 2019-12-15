@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>New Construction Project</ion-title>
+    <ion-title>Capture Quantities</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -15,24 +15,28 @@
       <div class="login-container">
         <ion-item class="ion-margin-bottom">
           <ion-label position="stacked">Name</ion-label>
-          <ion-input type="text" placeholder="Name" class="icon-user" formControlName="name"></ion-input>
+          <ion-input type="text" placeholder="Name" class="icon-user"
+          formControlName="name" [readonly]="completedStatus"></ion-input>
         </ion-item>
 
         <ion-item class="ion-margin-bottom">
           <ion-label position="stacked">Surname</ion-label>
-          <ion-input type="text" placeholder="Surname" class="icon-user" formControlName="surname"></ion-input>
+          <ion-input type="text" placeholder="Surname" class="icon-user"
+          formControlName="surname" [readonly]="completedStatus"></ion-input>
         </ion-item>
       </div>
 
       <ion-row style="overflow: hidden; display: flex; flex-direction: column;">
         <div class="header">Tab below to sign electronically:</div>
-        <ion-signaturepad style="width: 100%;" formControlName="signature"></ion-signaturepad>
+        <ion-signaturepad style="width: 100%;" formControlName="signature"
+          *ngIf="!completedStatus"></ion-signaturepad>
+        <ion-textarea rows="6" style="background-color: #f4f5f8;" readonly *ngIf="completedStatus"></ion-textarea>
       </ion-row>
 
       <ion-list>
         <ion-item>
           <ion-label>Accept Terms & Conditions</ion-label>
-          <ion-checkbox slot="start" formControlName="terms"></ion-checkbox>
+          <ion-checkbox slot="start" formControlName="terms" [disabled]="completedStatus"></ion-checkbox>
         </ion-item>
       </ion-list>
     </form>
@@ -40,6 +44,6 @@
 
   <div class="button-container">
     <ion-button shape="round" class="login-button extra-margin-top ion-margin-bottom"
-    (click)="next()">Next</ion-button>
+    (click)="next()">{{buttonText}}</ion-button>
   </div>
 </ion-content>

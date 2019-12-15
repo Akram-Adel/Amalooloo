@@ -13,6 +13,7 @@ import * as _ from 'lodash';
 export class LoadsheetsFeedbackPage implements OnInit {
 
   loadsheet:any;
+  completedStatus:boolean;
 
   imageResponse: any;
   options: any;
@@ -27,12 +28,21 @@ export class LoadsheetsFeedbackPage implements OnInit {
     private general:GeneralService) { }
 
   ngOnInit() {
-    this.loadsheet = _.filter(this.general.allLoadsheets, ['loadsheet_id', this.general.loadsheetData.loadsheet_id])[0];
-    if(this.general.isLoadsheetCompleted) this.note = this.loadsheet.note;
+    if(this.general.allLoadsheets  && this.general.allLoadsheets != null) {
+      this.loadsheet = _.filter(this.general.allLoadsheets, ['loadsheet_id', this.general.loadsheetData.loadsheet_id])[0];
+      this.completedStatus = this.general.isLoadsheetCompleted;
+
+    } else if(this.general.allDeliveries && this.general.allDeliveries != null) {
+      this.loadsheet = this.general.detailedDelivery;
+      this.completedStatus = this.general.isDeliveryCompleted;
+    }
+
+    if(this.completedStatus) this.note = this.loadsheet.note;
+    console.log(this.loadsheet);
   }
 
   getImages() {
-    if(!this.general.isLoadsheetCompleted) {
+    if(!this.completedStatus) {
       this.options = {
         maximumImagesCount: 3,
         width: 400,
@@ -61,10 +71,19 @@ export class LoadsheetsFeedbackPage implements OnInit {
       this.general.presentAlertMsg('Please enter a note')
 
     } else {
-      this.general.loadsheetData.verify_loaded.image_1 = this.Photo1;
-      this.general.loadsheetData.verify_loaded.image_2 = this.Photo2;
-      this.general.loadsheetData.verify_loaded.image_3 = this.Photo3;
-      this.general.loadsheetData.verify_loaded.note = this.note;
+      if(this.general.allLoadsheets  && this.general.allLoadsheets != null) {
+        this.general.loadsheetData.verify_loaded.image_1 = this.Photo1;
+        this.general.loadsheetData.verify_loaded.image_2 = this.Photo2;
+        this.general.loadsheetData.verify_loaded.image_3 = this.Photo3;
+        this.general.loadsheetData.verify_loaded.note = this.note;
+
+      } else {
+        this.general.loadsheetData.vehicle_reg_no = this.loadsheet.vehicle_reg_no;
+        this.general.loadsheetData.verify_delivered.image_1 = this.Photo1;
+        this.general.loadsheetData.verify_delivered.image_2 = this.Photo2;
+        this.general.loadsheetData.verify_delivered.image_3 = this.Photo3;
+        this.general.loadsheetData.verify_delivered.delivery_note = this.note;
+      }
       this.router.navigate(['loadsheets/driver-details-loadsheet']);
     }
   }

@@ -13,7 +13,9 @@ import * as _ from 'lodash';
 export class BetramEmployeeLoadsheetDetailsPage implements OnInit {
 
   loadsheet:any;
+  completedStatus:boolean;
   betramForm:FormGroup;
+  buttonText = "Next"
 
   constructor(
     private fb:FormBuilder,
@@ -30,29 +32,45 @@ export class BetramEmployeeLoadsheetDetailsPage implements OnInit {
     }
 
   ngOnInit() {
-    this.loadsheet = _.filter(this.general.allLoadsheets, ['loadsheet_id', this.general.loadsheetData.loadsheet_id])[0];
+    if(this.general.allLoadsheets  && this.general.allLoadsheets != null) {
+      this.loadsheet = _.filter(this.general.allLoadsheets, ['loadsheet_id', this.general.loadsheetData.loadsheet_id])[0];
+      this.completedStatus = this.general.isLoadsheetCompleted;
 
-    if(this.general.isLoadsheetCompleted) {
+    } else if(this.general.allDeliveries && this.general.allDeliveries != null) {
+      this.loadsheet = this.general.detailedDelivery;
+      this.completedStatus = this.general.isDeliveryCompleted;
+    }
+
+    if(this.completedStatus) {
+      if(this.general.allLoadsheets  && this.general.allLoadsheets != null) this.buttonText = "Done";
       let betramControls = this.betramForm.controls;
 
-      betramControls.name.setValue(this.loadsheet.driver_name);
-      betramControls.surname.setValue(this.loadsheet.driver_surname);
+      betramControls.name.setValue(this.loadsheet.emp_name);
+      betramControls.surname.setValue(this.loadsheet.emp_surname);
       betramControls.terms.setValue(true);
     }
   }
 
 
   next() {
-    if(!this.betramForm.valid && !this.general.isLoadsheetCompleted) {
+    if(!this.betramForm.valid && !this.completedStatus) {
       this.general.presentAlertMsg('Please fill the apove data');
       return;
     }
 
-    this.general.loadsheetData.betram_emp_details.name = this.betramForm.value.name;
-    this.general.loadsheetData.betram_emp_details.surname = this.betramForm.value.surname;
-    this.general.loadsheetData.betram_emp_details.time = this.betramForm.value.time;
-    this.general.loadsheetData.betram_emp_details.sign = this.betramForm.value.signature;
-    this.router.navigate(['loadsheets/loadsheet-completed']);
+    this.general.loadsheetData.betram_emp_details.emp_name = this.betramForm.value.name;
+    this.general.loadsheetData.betram_emp_details.emp_surname = this.betramForm.value.surname;
+    this.general.loadsheetData.betram_emp_details.emp_mention_time = this.betramForm.value.time;
+    this.general.loadsheetData.betram_emp_details.emp_sign = this.betramForm.value.signature;
+
+    if(this.general.allLoadsheets  && this.general.allLoadsheets != null && this.completedStatus == false) {
+      this.router.navigate(['loadsheets/loadsheet-completed']);
+    } else if (this.general.allLoadsheets  && this.general.allLoadsheets != null && this.completedStatus) {
+      this.router.navigate(['loadsheets']);
+
+    } else if (this.general.allDeliveries && this.general.allDeliveries != null) {
+      this.router.navigate(['deliveries/delivery-contractor-details'])
+    }
   }
 
 }

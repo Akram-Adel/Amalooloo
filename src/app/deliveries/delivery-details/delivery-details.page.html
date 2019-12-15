@@ -11,17 +11,17 @@
   <div class="login-container">
     <ion-item class="ion-margin-bottom ion-margin-top" color="light">
       <ion-label position="stacked">Delivery No</ion-label>
-      <ion-input type="text" readonly [value]="loadsheet?.loadsheet_no" class="icon-user"></ion-input>
+      <ion-input type="text" readonly [value]="loadsheet?.delivery_no" class="icon-user"></ion-input>
     </ion-item>
 
     <ion-item class="ion-margin-bottom" color="light">
       <ion-label position="stacked">Date</ion-label>
-      <ion-input type="text" readonly [value]="loadsheet?.schedule_date" class="icon-calendar"></ion-input>
+      <ion-input type="text" readonly [value]="loadsheet?.delivery_date.slice(0,10)" class="icon-calendar"></ion-input>
     </ion-item>
 
     <ion-item class="ion-margin-bottom" color="light">
       <ion-label position="stacked">Time</ion-label>
-      <ion-input type="text" readonly [value]="loadsheet?.emp_mention_time" class="icon-clock"></ion-input>
+      <ion-input type="text" readonly [value]="loadsheet?.delivery_date.slice(11)" class="icon-clock"></ion-input>
     </ion-item>
 
     <ion-item class="ion-margin-bottom" color="light">
@@ -31,12 +31,22 @@
 
     <ion-item class="ion-margin-bottom" color="light">
       <ion-label position="stacked">Transport Company</ion-label>
-      <ion-input type="text" placeholder="Transport Company" class="icon-office"></ion-input>
+      <ion-input type="text" readonly [value]="loadsheet?.transport_company" class="icon-office"></ion-input>
     </ion-item>
 
     <ion-item class="ion-margin-bottom" color="light">
       <ion-label position="stacked">Vehicle Registration Number</ion-label>
-      <ion-input type="text" placeholder="Vehicle Registration Number" class="icon-profile"></ion-input>
+      <ion-input type="text" readonly [value]="loadsheet?.vehicle_reg_no"  class="icon-profile"></ion-input>
     </ion-item>
+  </div>
+
+  <div class="button-container">
+    <ion-button shape="round" class="login-button extra-margin-top"
+    [routerDirection]="'forward'" [routerLink]="['/loadsheets/add-quantities-loaded/',this.loadsheet.loadsheet_id]">
+      {{buttonText}}
+    </ion-button>
+
+    <ion-button shape="round" class="login-button" color="danger" *ngIf="!general.isDeliveryCompleted"
+    [routerDirection]="'back'" [routerLink]="['/loadsheets']">Cancel This Loadsheet</ion-button>
   </div>
 </ion-content>

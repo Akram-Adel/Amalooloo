@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { GeneralService } from 'src/app/general-service/general.service';
 
 @Component({
-  selector: 'app-construction-completed',
-  templateUrl: './construction-completed.page.html',
-  styleUrls: ['./construction-completed.page.scss'],
+  selector: 'app-delivery-completed',
+  templateUrl: './delivery-completed.page.html',
+  styleUrls: ['./delivery-completed.page.scss'],
 })
-export class ConstructionCompletedPage implements OnInit {
+export class DeliveryCompletedPage implements OnInit {
 
   isConnecting = true;
 
@@ -17,7 +17,7 @@ export class ConstructionCompletedPage implements OnInit {
       this.isConnecting = false;
 
     } else {
-      this.general.submitConstruction().subscribe(res => {
+      this.general.submitDelivery().subscribe(res => {
         this.isConnecting = false;
 
         console.log(res);

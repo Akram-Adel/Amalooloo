@@ -10,14 +10,14 @@
 <ion-content color="light">
   <ion-grid>
     <ion-row>
-      <ion-col [routerDirection]="'forward'" [routerLink]="['/construction/new-construction']">
+      <ion-col [routerDirection]="'forward'" [routerLink]="['/construction/new-construction', 'initiated']">
         <div class="col-inner-conatiner padding">
           <img src="../../assets/imgs/ic_start_new_loadsheet.png" height="60px">
           <div class="text">New Construction Project</div>
         </div>
       </ion-col>
 
-      <ion-col>
+      <ion-col [routerDirection]="'forward'" [routerLink]="['/construction/new-construction', 'running']">
         <div class="col-inner-conatiner padding">
           <img src="../../assets/imgs/ic_arrow.png" height="60px">
           <div class="text">Continue on an Existing Project</div>

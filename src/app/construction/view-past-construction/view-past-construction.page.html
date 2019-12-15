@@ -8,18 +8,45 @@
 </ion-header>
 
 <ion-content color="light">
-  <ion-list style="background-color: inherit;">
-    <ion-item lines="none" class="col-inner-conatiner margin"
-    *ngFor="let item of pastConstruction"
-    [routerDirection]="'forward'" [routerLink]="['/construction/project-details']">
-      <ion-thumbnail slot="start">
-        <img src="../../../assets/imgs/ic_construction.png">
-      </ion-thumbnail>
-      <ion-label>
-        <b>Project Name: </b> Item {{item}} <br>
-        <b>Beneficiary Name: </b> Subitem {{item}} <br>
-        <b>Adress: </b> SubSubitem {{item}} <br>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content>
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <div *ngIf="isLoading">
+    <ion-list style="background-color: inherit;">
+      <ion-item lines="none" class="col-inner-conatiner margin"
+      *ngFor="let item of [1,2,3,4,5,6,7,8]">
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div *ngIf="!isLoading">
+    <ion-list style="background-color: inherit;">
+      <ion-item lines="none" class="col-inner-conatiner margin"
+      *ngFor="let item of pastConstruction">
+        <ion-thumbnail slot="start">
+          <img src="../../../assets/imgs/ic_construction.png">
+        </ion-thumbnail>
+        <ion-label>
+          <b>Project Name: </b> {{item.project_name}} <br>
+          <b>Adress: </b> {{item.project_location}} <br>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>

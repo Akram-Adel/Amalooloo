@@ -3,21 +3,22 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Past Constructions</ion-title>
+    <ion-title>Construction Project</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content color="light">
   <ion-grid>
     <ion-row>
-      <ion-col [routerDirection]="'forward'" [routerLink]="['/construction/begin-construction']">
+      <ion-col size="6" [routerDirection]="'forward'" [routerLink]="['/construction/begin-construction']">
         <div class="col-inner-conatiner padding">
           <img src="../../../assets/imgs/ic_start_new_loadsheet.png" height="60px">
           <div class="text">Begin a new Construction</div>
         </div>
       </ion-col>
 
-      <ion-col [routerDirection]="'forward'" [routerLink]="['/construction/construction-view-completed']">
+      <ion-col size="6" *ngIf="!general.isNewConstruction"
+      [routerDirection]="'forward'" [routerLink]="['/construction/construction-view-completed', projectId]">
         <div class="col-inner-conatiner padding">
           <img src="../../../assets/imgs/ic_view_may_past_loadsheet.png" height="60px">
           <div class="text">View Constructions you've completed in this project</div>

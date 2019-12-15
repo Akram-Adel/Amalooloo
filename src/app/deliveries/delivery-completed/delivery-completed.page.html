@@ -3,31 +3,31 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>New Construction Project</ion-title>
+    <ion-title>Completed Delivery</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content color="light">
   <div class="login-container">
     <div class="ion-text-center ion-margin-bottom ion-margin-top" *ngIf="isConnecting"><b>
-      Uploading Construction Data
+      Uploading Delivery Data
     </b></div>
     <div class="ion-text-center ion-margin-bottom ion-margin-top" *ngIf="!isConnecting"><b>
-      You have completed the construction. <br>
+      You have completed the delivery. <br>
       Please make a selection below:
     </b></div>
   </div>
 
   <div class="button-container extra-margin-top">
-    <ion-button shape="round" class="login-button extra ion-margin-bottom"
-    [routerDirection]="'root'" [routerLink]="['/construction']">
-      <span *ngIf="!isConnecting">Go back to Construction <br> Projects</span>
+    <ion-button shape="round" class="login-button ion-margin-bottom"
+    [routerDirection]="'root'" [routerLink]="['/deliveries']">
+      <span *ngIf="!isConnecting">Go back to Deliveries</span>
       <ion-spinner name="dots" *ngIf="isConnecting"></ion-spinner>
     </ion-button>
 
-    <ion-button shape="round" class="login-button extra"
-    [routerDirection]="'forward'" [routerLink]="['/construction/new-construction']">
-      <span *ngIf="!isConnecting">Complete a new Construction <br> in this project</span>
+    <ion-button shape="round" class="login-button"
+    [routerDirection]="'root'" [routerLink]="['/deliveries/start-new-deliveries']">
+      <span *ngIf="!isConnecting">Complete a new Delivery</span>
       <ion-spinner name="dots" *ngIf="isConnecting"></ion-spinner>
     </ion-button>
   </div>

@@ -29,9 +29,6 @@
           <p>
             <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
           </p>
-          <p>
-            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
-          </p>
         </ion-label>
       </ion-item>
     </ion-list>
@@ -40,14 +37,14 @@
   <div *ngIf="!isLoading">
     <ion-list style="background-color: inherit;">
       <ion-item lines="none" class="col-inner-conatiner margin"
+      [routerDirection]="'forward'" [routerLink]="['/construction/contractor-list', item.id]"
       *ngFor="let item of constructionProjects">
         <ion-thumbnail slot="start">
-          <img src="../../../assets/imgs/ic_loadsheet.png">
+          <img src="../../../assets/imgs/ic_construction.png">
         </ion-thumbnail>
         <ion-label>
-          <b>Loadsheet No: </b> Item {{item}} <br>
-          <b>Branch Name: </b> Subitem {{item}} <br>
-          <b>Employee Name: </b> SubSubitem {{item}} <br>
+          <b>Project Name: </b> {{item.project_name}} <br>
+          <b>Adress: </b> {{item.project_location}} <br>
         </ion-label>
       </ion-item>
     </ion-list>

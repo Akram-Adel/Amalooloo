@@ -23,7 +23,7 @@ export class StartNewDeliveriesPage implements OnInit {
     this.isLoading = true;
     this.deliveryProjects = [];
 
-    this.general.getLoadsheetList().subscribe((res:any) => {
+    this.general.getDeliveryList().subscribe((res:any) => {
       this.loadDeliveries(res);
       event.target.complete();
     });

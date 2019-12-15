@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { GeneralService } from 'src/app/general-service/general.service';
 
 @Component({
@@ -9,19 +10,24 @@ import { GeneralService } from 'src/app/general-service/general.service';
 export class NewConstructionPage implements OnInit {
 
   isLoading = true;
+  status:string;
   constructionProjects = []
 
-  constructor(private general:GeneralService) { }
+  constructor(
+    private route:ActivatedRoute,
+    private general:GeneralService) { }
 
   ngOnInit() {
-    this.general.getConstructionList().subscribe((res:any) => this.loadConstructions(res));
+    this.status = this.route.snapshot.paramMap.get('status');
+    (this.status == 'initiated') ? this.general.isNewConstruction = true : this.general.isNewConstruction = false;
+    this.general.getConstructionList(this.status).subscribe((res:any) => this.loadConstructions(res));
   }
 
   doRefresh(event:any) {
     this.isLoading = true;
     this.constructionProjects = [];
 
-    this.general.getConstructionList().subscribe((res:any) => {
+    this.general.getConstructionList(this.status).subscribe((res:any) => {
       this.loadConstructions(res);
       event.target.complete();
     });

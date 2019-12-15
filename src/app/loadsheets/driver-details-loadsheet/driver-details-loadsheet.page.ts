@@ -13,6 +13,7 @@ import * as _ from 'lodash';
 export class DriverDetailsLoadsheetPage implements OnInit {
 
   loadsheet:any;
+  completedStatus:boolean;
   driverForm:FormGroup;
 
   constructor(
@@ -29,9 +30,16 @@ export class DriverDetailsLoadsheetPage implements OnInit {
     }
 
   ngOnInit() {
-    this.loadsheet = _.filter(this.general.allLoadsheets, ['loadsheet_id', this.general.loadsheetData.loadsheet_id])[0];
+    if(this.general.allLoadsheets  && this.general.allLoadsheets != null) {
+      this.loadsheet = _.filter(this.general.allLoadsheets, ['loadsheet_id', this.general.loadsheetData.loadsheet_id])[0];
+      this.completedStatus = this.general.isLoadsheetCompleted;
 
-    if(this.general.isLoadsheetCompleted) {
+    } else if(this.general.allDeliveries && this.general.allDeliveries != null) {
+      this.loadsheet = this.general.detailedDelivery;
+      this.completedStatus = this.general.isDeliveryCompleted;
+    }
+
+    if(this.completedStatus) {
       let driverControls = this.driverForm.controls;
 
       driverControls.name.setValue(this.loadsheet.driver_name);
@@ -42,14 +50,14 @@ export class DriverDetailsLoadsheetPage implements OnInit {
 
 
   next() {
-    if(!this.driverForm.valid && !this.general.isLoadsheetCompleted) {
+    if(!this.driverForm.valid && !this.completedStatus) {
       this.general.presentAlertMsg('Please fill the apove data');
       return;
     }
 
-    this.general.loadsheetData.driver_details.name = this.driverForm.value.name;
-    this.general.loadsheetData.driver_details.surname = this.driverForm.value.surname;
-    this.general.loadsheetData.driver_details.sign = this.driverForm.value.signature;
+    this.general.loadsheetData.driver_details.driver_name = this.driverForm.value.name;
+    this.general.loadsheetData.driver_details.driver_surname = this.driverForm.value.surname;
+    this.general.loadsheetData.driver_details.driver_sign = this.driverForm.value.signature;
     this.router.navigate(['loadsheets/betram-employee-loadsheet-details']);
   }
 

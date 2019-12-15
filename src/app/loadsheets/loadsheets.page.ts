@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GeneralService } from '../general-service/general.service';
 
 @Component({
   selector: 'app-loadsheets',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoadsheetsPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private general:GeneralService) { }
 
   ngOnInit() {
+    this.general.allDeliveries = null;
+    this.general.isDeliveryCompleted = null;
   }
 
 }

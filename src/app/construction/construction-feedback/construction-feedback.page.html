@@ -13,7 +13,7 @@
   <ion-grid class="ion-margin">
     <ion-row class="header"> Add Photo </ion-row>
 
-    <ion-row class="ion-margin-bottom">
+    <ion-row class="ion-margin-bottom" (click)="getImages()">
       <ion-col>
         <img src="../../../assets/imgs/ic_camera.png">
       </ion-col>
@@ -27,13 +27,13 @@
 
     <ion-row>
       <ion-item color="light">
-        <ion-textarea rows="6" placeholder="Tap here to start typing..."></ion-textarea>
+        <ion-textarea rows="6" placeholder="Tap here to start typing..." [(ngModel)]="note"></ion-textarea>
       </ion-item>
     </ion-row>
   </ion-grid>
 
   <div class="button-container">
     <ion-button shape="round" class="login-button extra-margin-top ion-margin-bottom"
-    (click)="presentAlertConfirm()">Next</ion-button>
+    (click)="next()">Next</ion-button>
   </div>
 </ion-content>

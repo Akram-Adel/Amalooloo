@@ -39,14 +39,15 @@
     <ion-list style="background-color: inherit;">
       <ion-item lines="none" class="col-inner-conatiner margin"
       *ngFor="let item of pastDeliveries"
-      [routerDirection]="'forward'" [routerLink]="['/deliveries/delivery-details', item.loadsheet_no]">
+      [routerDirection]="'forward'" [routerLink]="['/deliveries/delivery-details', item.delivery_no]">
         <ion-thumbnail slot="start">
           <img src="../../assets/imgs/ic_map.png">
         </ion-thumbnail>
         <ion-label>
-          <b>Delivery No: </b> {{item.loadsheet_no}} <br>
-          <b>Vehicle Reg. No: </b> {{item.loadsheet_no}} <br>
+          <b>Delivery No: </b> {{item.delivery_no}} <br>
+          <b>Vehicle Reg. No: </b> {{item.vehicle_reg_no}} <br>
           <b>Delivery Address: </b> {{item.delivery_address}} <br>
+          <b>Client Name: </b> {{item.client_name}} <br>
         </ion-label>
       </ion-item>
     </ion-list>

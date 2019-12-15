@@ -14,6 +14,7 @@ import { GeneralService } from 'src/app/general-service/general.service';
 export class VerifyQuantitiesPage implements OnInit {
 
   isLoading = true;
+  completedStatus:boolean;
   orderId:number;
   product:any;
   buttonText:string;
@@ -24,6 +25,13 @@ export class VerifyQuantitiesPage implements OnInit {
     private general:GeneralService) { }
 
   ngOnInit() {
+    if(this.general.allLoadsheets  && this.general.allLoadsheets != null) {
+      this.completedStatus = this.general.isLoadsheetCompleted;
+
+    } else if(this.general.allDeliveries && this.general.allDeliveries != null) {
+      this.completedStatus = this.general.isDeliveryCompleted;
+    }
+
     this.orderId = +this.route.snapshot.paramMap.get('id');
     this.general.getOrderDetails(this.orderId).subscribe((res:any) => {
       this.product = res.result.products[0];
@@ -33,7 +41,7 @@ export class VerifyQuantitiesPage implements OnInit {
         this.product.components[i].math = 0;
       }
 
-      (this.general.isLoadsheetCompleted) ? this.buttonText = "BACK" : this.buttonText = "SAVE"
+      (this.completedStatus) ? this.buttonText = "BACK" : this.buttonText = "SAVE"
       this.isLoading = false;
     });
     this.general.loadsheetData.order_details.order_id = this.orderId;
@@ -42,12 +50,19 @@ export class VerifyQuantitiesPage implements OnInit {
   actualChange(item:any, number:number) {
     let index = _.findIndex(this.product.components, item);
     if(this.product.components[index].quantity < number) this.general.presentAlertMsg('Actual quantity must be less than loaded quantify')
-    this.product.components[index].load_quantity = number;
+
+    if(this.general.allLoadsheets  && this.general.allLoadsheets != null) {
+      this.product.components[index].load_quantity = number;
+
+    } else {
+      this.product.components[index].delivered_quantity = number;
+    }
+
     this.product.components[index].math = this.product.components[index].quantity - number;
   }
 
   submit() {
-    if(this.general.isLoadsheetCompleted) {
+    if(this.completedStatus) {
       this.location.back();
 
     } else {

@@ -3,12 +3,18 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { GeneralService } from 'src/app/general-service/general.service';
 import { Router } from '@angular/router';
 
+import * as _ from 'lodash';
+
 @Component({
-  selector: 'app-construction-contractor-details',
-  templateUrl: './construction-contractor-details.page.html',
-  styleUrls: ['./construction-contractor-details.page.scss'],
+  selector: 'app-delivery-contractor-details',
+  templateUrl: './delivery-contractor-details.page.html',
+  styleUrls: ['./delivery-contractor-details.page.scss'],
 })
-export class ConstructionContractorDetailsPage implements OnInit {
+export class DeliveryContractorDetailsPage implements OnInit {
+
+  loadsheet:any;
+  completedStatus:boolean;
+  buttonText = 'Next';
 
   contractorForm:FormGroup;
 
@@ -26,11 +32,22 @@ export class ConstructionContractorDetailsPage implements OnInit {
     }
 
   ngOnInit() {
+    this.loadsheet = this.general.detailedDelivery;
+    this.completedStatus = this.general.isDeliveryCompleted;
+
+    if(this.completedStatus) {
+      this.buttonText = "Done";
+      let driverControls = this.contractorForm.controls;
+
+      driverControls.name.setValue(this.loadsheet.driver_name);
+      driverControls.surname.setValue(this.loadsheet.driver_surname);
+      driverControls.terms.setValue(true);
+    }
   }
 
 
   next() {
-    if(!this.contractorForm.valid) {
+    if(!this.contractorForm.valid && !this.completedStatus) {
       this.general.presentAlertMsg('Please fill the apove data');
       return;
     }
@@ -38,7 +55,14 @@ export class ConstructionContractorDetailsPage implements OnInit {
     this.general.loadsheetData.contractor_details.cont_name = this.contractorForm.value.name;
     this.general.loadsheetData.contractor_details.cont_surname = this.contractorForm.value.surname;
     this.general.loadsheetData.contractor_details.cont_sign = this.contractorForm.value.signature;
-    this.router.navigate(['construction/construction-betram-emp']);
+
+    if(this.completedStatus == false) {
+      this.router.navigate(['deliveries/delivery-completed']);
+
+    } else {
+      this.router.navigate(['deliveries']);
+
+    }
   }
 
 }

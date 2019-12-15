@@ -13,6 +13,7 @@ import { GeneralService } from 'src/app/general-service/general.service';
 export class AddQuantitiesLoadedPage implements OnInit {
 
   isLoading = true;
+  completedStatus:boolean;
   loadsheetId:number;
   loadedQuantities = [];
   buttonText = "Proceed"
@@ -23,17 +24,24 @@ export class AddQuantitiesLoadedPage implements OnInit {
     private general:GeneralService) { }
 
   ngOnInit() {
+    if(this.general.allLoadsheets  && this.general.allLoadsheets != null) {
+      this.completedStatus = this.general.isLoadsheetCompleted;
+
+    } else if(this.general.allDeliveries && this.general.allDeliveries != null) {
+      this.completedStatus = this.general.isDeliveryCompleted;
+    }
+
+
     if(this.general.allOrders.length == 0) {
       this.loadsheetId = +this.route.snapshot.paramMap.get('id');
       this.general.getLoadsheetOrderList(this.loadsheetId).subscribe((res:any) => {
 
         res.result.forEach((el:any) => {
-          (this.general.isLoadsheetCompleted) ? el.isRigth = true : el.isRigth = false;
+          (this.completedStatus) ? el.isRigth = true : el.isRigth = false;
           this.general.allOrders.push(el);
         });
 
         this.loadingDone();
-
         console.log(this.general.allOrders);
       });
     } else { this.loadingDone() }
@@ -41,9 +49,16 @@ export class AddQuantitiesLoadedPage implements OnInit {
 
 
   loadingDone() {
-    this.general.loadsheetData.loadsheet_id = this.loadsheetId;
+    if(this.general.allLoadsheets  && this.general.allLoadsheets != null) {
+      this.general.loadsheetData.loadsheet_id = this.loadsheetId;
+
+    } else {
+      this.general.loadsheetData.delivery_id = this.loadsheetId;
+    }
     this.loadedQuantities = this.general.allOrders;
-    if(!this.general.isLoadsheetCompleted) this.buttonText = "Capture Quantities";
+
+    if(!this.completedStatus) this.buttonText = "Capture Quantities";
+
     this.isLoading = false;
   }
 

@@ -1,1 +1,5 @@
 ion-col { --ion-grid-column-padding: 15px; }
+.col-inner-conatiner.padding {
+  padding-left: unset;
+  padding-right: unset;
+}
