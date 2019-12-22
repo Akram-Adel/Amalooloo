@@ -82,7 +82,7 @@ export class LoadsheetsFeedbackPage implements OnInit {
         this.general.loadsheetData.verify_delivered.image_1 = this.Photo1;
         this.general.loadsheetData.verify_delivered.image_2 = this.Photo2;
         this.general.loadsheetData.verify_delivered.image_3 = this.Photo3;
-        this.general.loadsheetData.verify_delivered.delivery_note = this.note;
+        this.general.loadsheetData.verify_delivered.note = this.note;
       }
       this.router.navigate(['loadsheets/driver-details-loadsheet']);
     }

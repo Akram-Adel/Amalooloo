@@ -14,6 +14,7 @@ export class QuestionPage implements OnInit {
 
   isLoading = true;
   questionList:any;
+  note:string;
 
   constructor(
     private router: Router,
@@ -45,6 +46,7 @@ export class QuestionPage implements OnInit {
       return;
     }
 
+    this.general.loadsheetData.question_details[0].note = this.note;
     this.router.navigate(['construction/construction-feedback']);
   }
 

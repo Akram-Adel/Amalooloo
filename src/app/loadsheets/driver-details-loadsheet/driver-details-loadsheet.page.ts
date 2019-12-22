@@ -55,9 +55,9 @@ export class DriverDetailsLoadsheetPage implements OnInit {
       return;
     }
 
-    this.general.loadsheetData.driver_details.driver_name = this.driverForm.value.name;
-    this.general.loadsheetData.driver_details.driver_surname = this.driverForm.value.surname;
-    this.general.loadsheetData.driver_details.driver_sign = this.driverForm.value.signature;
+    this.general.loadsheetData.driver_details.name = this.driverForm.value.name;
+    this.general.loadsheetData.driver_details.surname = this.driverForm.value.surname;
+    this.general.loadsheetData.driver_details.sign = this.driverForm.value.signature;
     this.router.navigate(['loadsheets/betram-employee-loadsheet-details']);
   }
 

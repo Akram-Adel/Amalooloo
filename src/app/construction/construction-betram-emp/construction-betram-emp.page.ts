@@ -35,9 +35,9 @@ export class ConstructionBetramEmpPage implements OnInit {
       return;
     }
 
-    this.general.loadsheetData.betram_emp_details.emp_name = this.betramForm.value.name;
-    this.general.loadsheetData.betram_emp_details.emp_surname = this.betramForm.value.surname;
-    this.general.loadsheetData.betram_emp_details.emp_sign = this.betramForm.value.signature;
+    this.general.loadsheetData.betram_emp_details.name = this.betramForm.value.name;
+    this.general.loadsheetData.betram_emp_details.surname = this.betramForm.value.surname;
+    this.general.loadsheetData.betram_emp_details.sign = this.betramForm.value.signature;
     this.router.navigate(['construction/construction-completed']);
   }
 

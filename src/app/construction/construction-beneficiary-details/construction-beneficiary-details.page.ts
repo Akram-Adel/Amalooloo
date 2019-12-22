@@ -35,9 +35,9 @@ export class ConstructionBeneficiaryDetailsPage implements OnInit {
       return;
     }
 
-    this.general.loadsheetData.beneficiary_details.beneficiary_name = this.beneficiaryForm.value.name;
-    this.general.loadsheetData.beneficiary_details.beneficiary_surname = this.beneficiaryForm.value.surname;
-    this.general.loadsheetData.beneficiary_details.beneficiary_sign = this.beneficiaryForm.value.signature;
+    this.general.loadsheetData.beneficiary_details.name = this.beneficiaryForm.value.name;
+    this.general.loadsheetData.beneficiary_details.surname = this.beneficiaryForm.value.surname;
+    this.general.loadsheetData.beneficiary_details.sign = this.beneficiaryForm.value.signature;
     this.router.navigate(['construction/construction-contractor-details']);
   }
 

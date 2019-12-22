@@ -78,7 +78,7 @@ export class VerifyQuantitiesPage implements OnInit {
       this.general.allOrders[orderCompletedIndex].components = this.product.components;
 
       this.general.loadsheetData.order_details.product_details.product_id = this.product.product_id;
-      this.general.loadsheetData.order_details.product_details.components = this.product.components;
+      this.general.loadsheetData.order_details.product_details.component_details = this.product.components;
       this.location.back();
     }
   }

@@ -31,6 +31,7 @@ export class BeginConstructionPage implements OnInit {
       this.requestForm = this.fb.group({
         firstname: [null, Validators.required],
         surname: [null, Validators.required],
+        address: [null, Validators.required],
         idNo: [null, Validators.required],
         standNo: [null, Validators.required],
         description: [null, Validators.required],
@@ -54,9 +55,12 @@ export class BeginConstructionPage implements OnInit {
       return;
     }
 
-    this.general.loadsheetData.beneficiary_id_no = this.requestForm.value.idNo;
+    this.general.loadsheetData.construction_address = this.requestForm.value.address;
+    this.general.loadsheetData.beneficiary_id = this.requestForm.value.idNo;
     this.general.loadsheetData.beneficiary_stand_no = this.requestForm.value.standNo;
-    this.general.loadsheetData.beneficiary_detail = this.requestForm.value.description;
+    this.general.loadsheetData.beneficiary_description = this.requestForm.value.description;
+    this.general.loadsheetData.const_latitude = this.GPS.coords.latitude;
+    this.general.loadsheetData.const_longitude = this.GPS.coords.longitude;
     this.router.navigate(['construction/question'])
 
   }

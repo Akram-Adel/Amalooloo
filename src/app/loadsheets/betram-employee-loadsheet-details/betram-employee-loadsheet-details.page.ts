@@ -58,10 +58,10 @@ export class BetramEmployeeLoadsheetDetailsPage implements OnInit {
       return;
     }
 
-    this.general.loadsheetData.betram_emp_details.emp_name = this.betramForm.value.name;
-    this.general.loadsheetData.betram_emp_details.emp_surname = this.betramForm.value.surname;
+    this.general.loadsheetData.betram_emp_details.name = this.betramForm.value.name;
+    this.general.loadsheetData.betram_emp_details.surname = this.betramForm.value.surname;
     this.general.loadsheetData.betram_emp_details.emp_mention_time = this.betramForm.value.time;
-    this.general.loadsheetData.betram_emp_details.emp_sign = this.betramForm.value.signature;
+    this.general.loadsheetData.betram_emp_details.sign = this.betramForm.value.signature;
 
     if(this.general.allLoadsheets  && this.general.allLoadsheets != null && this.completedStatus == false) {
       this.router.navigate(['loadsheets/loadsheet-completed']);

@@ -34,7 +34,7 @@
   <div *ngIf="!isLoading">
     <ion-list style="background-color: inherit;">
       <ion-item lines="none" class="col-inner-conatiner margin"
-      [routerDirection]="'forward'" [routerLink]="['/construction/project-details', projectId]"
+      (click)="selectContractor(item)"
       *ngFor="let item of contractorList">
         <ion-thumbnail slot="start">
           <img src="../../../assets/imgs/ic_profile_2.png">

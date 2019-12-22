@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { GeneralService } from 'src/app/general-service/general.service';
 
 @Component({
@@ -15,6 +16,7 @@ export class ContractorListPage implements OnInit {
 
   constructor(
     private route:ActivatedRoute,
+    private router: Router,
     private general:GeneralService) { }
 
   ngOnInit() {
@@ -37,6 +39,13 @@ export class ContractorListPage implements OnInit {
     this.contractorList = results.result;
     this.isLoading = false;
     if(results.status != 200) this.general.presentAlertMsg(results.message);
+  }
+
+
+  selectContractor(item:any) {
+    this.general.loadsheetData.contractor_id = item.id;
+
+    this.router.navigate(['/construction/project-details', item.project_id]);
   }
 
 }

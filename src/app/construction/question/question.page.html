@@ -31,8 +31,8 @@
 
 
   <div *ngIf="!isLoading">
-    <div class="extra-margin-bottom" *ngFor="let item of questionList">
-      <div class="header">Question {{item.id}}:</div>
+    <div class="extra-margin-bottom" *ngFor="let item of questionList; let i = index">
+      <div class="header">Question {{i+1}}:</div>
       <div style="margin: 15px 8px 10px;">{{item.question}}</div>
 
       <ion-radio-group>
@@ -48,10 +48,10 @@
       </ion-radio-group>
     </div>
 
-    <!-- <div class="header">Add comment / note</div>
+    <div class="header">Add comment / note</div>
     <ion-item class="ion-margin">
-      <ion-textarea rows="6" placeholder="Tap here to start typing..."></ion-textarea>
-    </ion-item> -->
+      <ion-textarea rows="6" placeholder="Tap here to start typing..." [(ngModel)]="note"></ion-textarea>
+    </ion-item>
 
     <div class="button-container">
       <ion-button shape="round" class="login-button ion-margin-top"

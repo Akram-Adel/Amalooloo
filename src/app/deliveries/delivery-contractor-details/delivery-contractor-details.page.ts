@@ -52,9 +52,9 @@ export class DeliveryContractorDetailsPage implements OnInit {
       return;
     }
 
-    this.general.loadsheetData.contractor_details.cont_name = this.contractorForm.value.name;
-    this.general.loadsheetData.contractor_details.cont_surname = this.contractorForm.value.surname;
-    this.general.loadsheetData.contractor_details.cont_sign = this.contractorForm.value.signature;
+    this.general.loadsheetData.contractor_details.name = this.contractorForm.value.name;
+    this.general.loadsheetData.contractor_details.surname = this.contractorForm.value.surname;
+    this.general.loadsheetData.contractor_details.sign = this.contractorForm.value.signature;
 
     if(this.completedStatus == false) {
       this.router.navigate(['deliveries/delivery-completed']);

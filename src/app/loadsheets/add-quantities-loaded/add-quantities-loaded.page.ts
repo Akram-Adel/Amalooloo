@@ -54,6 +54,7 @@ export class AddQuantitiesLoadedPage implements OnInit {
 
     } else {
       this.general.loadsheetData.delivery_id = this.loadsheetId;
+      this.general.loadsheetData.loadsheet_id = this.general.detailedDelivery.loadsheet_id;
     }
     this.loadedQuantities = this.general.allOrders;
 
