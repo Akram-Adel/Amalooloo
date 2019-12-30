@@ -25,12 +25,15 @@ export class DashboardPage implements OnInit {
   ngOnInit() {
 
     // this.registerPushNotification();
-    setTimeout(() => {
-      this.presentModal();
-    }, 1000);
+
+    //Now gets called manually in the menu
+    // setTimeout(() => {
+    //   this.presentModal();
+    // }, 1000);
 
     (this.service.customerMode) ? this.customerview = true : this.employeeview = true;
-    console.log(this.customerview, this.employeeview);
+    console.log('CustomerView:',this.customerview);
+    console.log('EmployeeView:',this.employeeview);
 
   }
 

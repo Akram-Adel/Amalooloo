@@ -23,10 +23,18 @@
           <div class="text">Deliveries</div>
         </div>
       </ion-col>
+
+      <ion-col *ngIf="customerview" (click)="presentModal()">
+        <div class="col-inner-conatiner padding">
+          <img src="../../assets/imgs/ic_deliveries.png" height="60px">
+          <div class="text">Health Tips</div>
+        </div>
+      </ion-col>
+
     <!-- User -->
       <ion-col *ngIf="customerview" [routerDirection]="'forward'"[routerLink]="['/bc-scanner']">
         <div class="col-inner-conatiner padding">
-          <img src="../../assets/imgs/ic_deliveries.png" height="60px">
+          <img src="../../assets/imgs/Amalooloo-App-Maintenance-Icon-20191209@4x.png" height="60px">
           <div class="text">Request Maintenance </div>
         </div>
       </ion-col>
@@ -37,7 +45,6 @@
           <div class="text">Notifications </div>
         </div>
       </ion-col>
-
     </ion-row>
 
     <ion-row>
@@ -47,14 +54,16 @@
           <div class="text">Construction</div>
         </div>
       </ion-col>
+
       <!-- User -->
       <ion-col  *ngIf="customerview" (click)="openBrowser()">
         <div class="col-inner-conatiner padding">
-          <img src="../../assets/imgs/ic_construction.png" height="60px">
+          <img src="../../assets/imgs/Amalooloo-App-Shopping-Icon-20191209@4x.png" height="60px">
           <div class="text">Shop</div>
         </div>
       </ion-col>
-    <!-- User -->
+
+      <!-- User -->
       <ion-col   [routerDirection]="'forward'" [routerLink]="['/profile']">
         <div class="col-inner-conatiner padding">
           <img src="../../assets/imgs/ic_profile_1.png" height="60px">
