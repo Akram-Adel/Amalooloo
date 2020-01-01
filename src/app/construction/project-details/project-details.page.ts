@@ -20,4 +20,8 @@ export class ProjectDetailsPage implements OnInit {
     this.general.loadsheetData.project_id = this.projectId;
   }
 
+  newConstruction() {
+    this.general.constructionNumber = null;
+  }
+
 }

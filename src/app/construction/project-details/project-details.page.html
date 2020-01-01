@@ -10,7 +10,8 @@
 <ion-content color="light">
   <ion-grid>
     <ion-row>
-      <ion-col size="6" [routerDirection]="'forward'" [routerLink]="['/construction/begin-construction']">
+      <ion-col size="6" [routerDirection]="'forward'" [routerLink]="['/construction/begin-construction']"
+      (click)="newConstruction()">
         <div class="col-inner-conatiner padding">
           <img src="../../../assets/imgs/ic_start_new_loadsheet.png" height="60px">
           <div class="text">Begin a new Construction</div>

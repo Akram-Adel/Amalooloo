@@ -10,6 +10,12 @@
 <ion-content color="light">
   <div class="login-container">
     <form [formGroup]="requestForm">
+        <ion-item class="ion-margin-bottom ion-margin-top" color="light"
+        *ngIf="general.constructionNumber && general.constructionNumber != null">
+          <ion-label position="stacked">Construction Number</ion-label>
+          <ion-input type="text" readonly [value]="general.constructionNumber" class="icon-cog"></ion-input>
+        </ion-item>
+
         <ion-item class="ion-margin-bottom ion-margin-top" color="light">
           <ion-label position="stacked">Beneficiary Name</ion-label>
           <ion-input type="text" placeholder="Beneficiary Name" formControlName="firstname" class="icon-user"></ion-input>

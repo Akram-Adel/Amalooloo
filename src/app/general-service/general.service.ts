@@ -16,9 +16,10 @@ export class GeneralService {
   customerMode$:Observable<boolean> = this.mode.asObservable();
 
   public customerMode:boolean;
-  public constructionID:Number;
+  public constructionID:number;
+  public constructionNumber:number;
 
-  public userToken:string = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjc4LCJpc3MiOiJodHRwOi8vNDEuNzYuMTA4LjQ1L2FwaS9sb2dpbiIsImlhdCI6MTU3NzA0NzE1OSwiZXhwIjoxNTc3MDgzMTU5LCJuYmYiOjE1NzcwNDcxNTksImp0aSI6Im8zRnZVQVhRNUZGWVJpOVkifQ.eCC8O0_j7iVVGctAuLIJ7DBsw0VAkCAU5HdxgzhGSn4";
+  public userToken:string = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjg4LCJpc3MiOiJodHRwOi8vNDEuNzYuMTA4LjQ1L2FwaS9sb2dpbiIsImlhdCI6MTU3NzgxNzEzNywiZXhwIjoxNTc3ODUzMTM3LCJuYmYiOjE1Nzc4MTcxMzcsImp0aSI6InpoTlhKcHJ6RERrdHQ5YmwifQ.HzxlqgJt7z1bNdgfqidqwbwNlNSrljqhjdf1bd1ezbM";
   public userObject:any;
 
   constructor(
@@ -179,6 +180,38 @@ export class GeneralService {
       .set("Authorization", "Bearer "+this.userToken);
 
     return this.http.get(this.API_BASE_URL+'/get-uploaded-pdf',{headers});
+  }
+  getAllMaintenance() {
+    const headers = new HttpHeaders()
+      .set("Authorization", "Bearer "+this.userToken),
+    data = {
+      user_id: this.userObject.id,
+      token: this.userToken
+    };
+
+    return this.http.post(this.API_BASE_URL+'/get-all-maintenance-web',data,{headers});
+  }
+  getMaintenanceProjectList(id:number) {
+    const headers = new HttpHeaders()
+      .set("Authorization", "Bearer "+this.userToken),
+    data = {
+      user_id: this.userObject.id,
+      maintenance_id: id,
+      token: this.userToken
+    };
+
+    return this.http.post(this.API_BASE_URL+'/get-maintenance-project-list',data,{headers});
+  }
+  getMaintenanceConstructionList(id:number) {
+    const headers = new HttpHeaders()
+      .set("Authorization", "Bearer "+this.userToken),
+    data = {
+      user_id: this.userObject.id,
+      project_id: id,
+      token: this.userToken
+    };
+
+    return this.http.post(this.API_BASE_URL+'/get-maintenance-construction-list',data,{headers});
   }
   getMyMaintenanceReq() {
     const headers = new HttpHeaders()

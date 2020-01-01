@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Maintenance</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <ion-grid>
+    <ion-row>
+      <ion-col [routerDirection]="'forward'" [routerLink]="['/bc-scanner']">
+        <div class="col-inner-conatiner padding">
+          <img src="../../assets/imgs/Amalooloo-App-Maintenance-Icon-20191209@4x.png" height="60px">
+          <div class="text">Via QR-Code</div>
+        </div>
+      </ion-col>
+
+      <ion-col [routerDirection]="'forward'" [routerLink]="['/maintenance-activity']">
+        <div class="col-inner-conatiner padding">
+          <img src="../../assets/imgs/Amalooloo-App-Maintenance-Icon-20191209@4x.png" height="60px">
+          <div class="text">Via GPS</div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

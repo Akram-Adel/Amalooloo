@@ -39,7 +39,7 @@
         </div>
       </ion-col>
 
-      <ion-col  [routerDirection]="'forward'" [routerLink]="['/notifications']">
+      <ion-col [routerDirection]="'forward'" [routerLink]="['/notifications']">
         <div class="col-inner-conatiner padding">
           <img src="../../assets/imgs/ic_view_may_past_loadsheet.png" height="60px">
           <div class="text">Notifications </div>
@@ -48,10 +48,17 @@
     </ion-row>
 
     <ion-row>
-      <ion-col  *ngIf="employeeview" [routerDirection]="'forward'" [routerLink]="['/construction']">
+      <ion-col *ngIf="employeeview" [routerDirection]="'forward'" [routerLink]="['/construction']">
         <div class="col-inner-conatiner padding">
           <img src="../../assets/imgs/ic_construction.png" height="60px">
           <div class="text">Construction</div>
+        </div>
+      </ion-col>
+
+      <ion-col *ngIf="employeeview" [routerDirection]="'forward'" [routerLink]="['/maintenance']">
+        <div class="col-inner-conatiner padding">
+          <img src="../../assets/imgs/Amalooloo-App-Maintenance-Icon-20191209@4x.png" height="60px">
+          <div class="text">Maintenance</div>
         </div>
       </ion-col>
 
@@ -63,8 +70,7 @@
         </div>
       </ion-col>
 
-      <!-- User -->
-      <ion-col   [routerDirection]="'forward'" [routerLink]="['/profile']">
+      <ion-col [routerDirection]="'forward'" [routerLink]="['/profile']">
         <div class="col-inner-conatiner padding">
           <img src="../../assets/imgs/ic_profile_1.png" height="60px">
           <div class="text">Profile</div>

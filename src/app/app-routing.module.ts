@@ -12,7 +12,6 @@ const routes: Routes = [
   { path: 'profile',         loadChildren: './profile/profile.module#ProfilePageModule' },
   { path: 'tips',            loadChildren: './tips/tips.module#TipsPageModule' },
   { path: 'maintenance-req', loadChildren: './maintenance-req/maintenance-req.module#MaintenanceReqPageModule' },
-  { path: 'bc-scanner',      loadChildren: './bc-scanner/bc-scanner.module#BcScannerPageModule' },
   { path: 'shop',            loadChildren: './shop/shop.module#ShopPageModule' },
   { path: 'notifications',   loadChildren: './notifications/notifications.module#NotificationsPageModule' },
 
@@ -50,6 +49,14 @@ const routes: Routes = [
         { path: 'construction/construction-betram-emp',          loadChildren: './construction/construction-betram-emp/construction-betram-emp.module#ConstructionBetramEmpPageModule' },
         { path: 'construction/construction-completed',           loadChildren: './construction/construction-completed/construction-completed.module#ConstructionCompletedPageModule' },
     { path: 'construction/view-past-construction',             loadChildren: './construction/view-past-construction/view-past-construction.module#ViewPastConstructionPageModule' },
+
+  { path: 'maintenance', loadChildren: './maintenance/maintenance.module#MaintenancePageModule' },
+    { path: 'bc-scanner',           loadChildren: './bc-scanner/bc-scanner.module#BcScannerPageModule' },
+    { path: 'maintenance-activity', loadChildren: './maintenance-activity/maintenance-activity.module#MaintenanceActivityPageModule' },
+      { path: 'maintenance-project-list/:id', loadChildren: './maintenance-project-list/maintenance-project-list.module#MaintenanceProjectListPageModule' },
+      { path: 'maps-marker/:id',              loadChildren: './maps-marker/maps-marker.module#MapsMarkerPageModule' },
+
+
 
 ];
 
