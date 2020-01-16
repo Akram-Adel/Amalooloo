@@ -14,13 +14,7 @@ import { GeneralService } from '../../general-service/general.service';
 })
 export class BeginConstructionPage implements OnInit {
 
-  imageResponse: any;
-  options: any;
   requestForm:FormGroup;
-  PhotosText = "Select";
-  Photo1:any;
-  Photo2:any;
-  Photo3:any;
   GPS:any;
 
   constructor(
@@ -41,11 +35,24 @@ export class BeginConstructionPage implements OnInit {
 
   ngOnInit() {
     this.getCurrentPosition();
+    this.fillFormData();
   }
 
   async getCurrentPosition() {
     this.GPS = await Geolocation.getCurrentPosition();
-    console.log(this.GPS);
+    console.log("Current Position", this.GPS);
+  }
+
+  fillFormData() {
+    let requestControls = this.requestForm.controls,
+      sheetData = this.general.loadsheetData;
+
+    if(sheetData.beneficiary_details.name) requestControls.firstname.setValue(sheetData.beneficiary_details.name);
+    if(sheetData.beneficiary_details.surname) requestControls.surname.setValue(sheetData.beneficiary_details.surname);
+    if(sheetData.construction_address) requestControls.address.setValue(sheetData.construction_address);
+    if(sheetData.beneficiary_id) requestControls.idNo.setValue(sheetData.beneficiary_id);
+    if(sheetData.beneficiary_stand_no) requestControls.standNo.setValue(sheetData.beneficiary_stand_no);
+    if(sheetData.beneficiary_description) requestControls.description.setValue(sheetData.beneficiary_description);
   }
 
 

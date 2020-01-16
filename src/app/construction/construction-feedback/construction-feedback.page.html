@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>New Construction Project</ion-title>
+    <ion-title>New {{general.constructionStatus}} Project</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,14 +13,14 @@
   <ion-grid class="ion-margin">
     <ion-row class="header"> Add Photo </ion-row>
 
-    <ion-row class="ion-margin-bottom" (click)="getImages()">
-      <ion-col>
+    <ion-row class="ion-margin-bottom">
+      <ion-col (click)="takePicture(1)">
         <img src="../../../assets/imgs/ic_camera.png">
       </ion-col>
-      <ion-col>
+      <ion-col (click)="takePicture(2)">
         <img src="../../../assets/imgs/ic_camera.png">
       </ion-col>
-      <ion-col>
+      <ion-col (click)="takePicture(3)">
         <img src="../../../assets/imgs/ic_camera.png">
       </ion-col>
     </ion-row>

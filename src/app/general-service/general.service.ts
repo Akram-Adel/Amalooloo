@@ -18,8 +18,9 @@ export class GeneralService {
   public customerMode:boolean;
   public constructionID:number;
   public constructionNumber:number;
+  public constructionStatus = "Construction";
 
-  public userToken:string = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjg4LCJpc3MiOiJodHRwOi8vNDEuNzYuMTA4LjQ1L2FwaS9sb2dpbiIsImlhdCI6MTU3NzgxNzEzNywiZXhwIjoxNTc3ODUzMTM3LCJuYmYiOjE1Nzc4MTcxMzcsImp0aSI6InpoTlhKcHJ6RERrdHQ5YmwifQ.HzxlqgJt7z1bNdgfqidqwbwNlNSrljqhjdf1bd1ezbM";
+  public userToken:string = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjg4LCJpc3MiOiJodHRwOi8vNDEuNzYuMTA4LjQ1L2FwaS9sb2dpbiIsImlhdCI6MTU3OTIwNDkxMSwiZXhwIjoxNTc5MjQwOTExLCJuYmYiOjE1NzkyMDQ5MTEsImp0aSI6ImdMaGFvZUlNdENXZmNnUmQifQ.zy_C1rNSvCENj517wWS47zJU5GynhhKWDpws0pykbhM";
   public userObject:any;
 
   constructor(
@@ -156,11 +157,11 @@ export class GeneralService {
 
     return this.http.post(this.API_BASE_URL+'/contractor-list',data,{headers});
   }
-  getQuestionList() {
+  getQuestionList(type:number) {
     const headers = new HttpHeaders()
       .set("Authorization", "Bearer "+this.userToken),
     data = {
-      type: 2
+      type: type
     };
 
     return this.http.post(this.API_BASE_URL+'/get-question-list',data,{headers});
@@ -310,6 +311,8 @@ export class GeneralService {
     beneficiary_stand_no: null,
     beneficiary_description: null,
     question_details: [{
+      question_id: null,
+      answer: null,
       note: null
     }],
     contractor_id: null,

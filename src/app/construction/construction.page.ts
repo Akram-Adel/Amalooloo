@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GeneralService } from '../general-service/general.service';
 
 @Component({
   selector: 'app-construction',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConstructionPage implements OnInit {
 
-  constructor() { }
+  constructor(private general:GeneralService) { }
 
   ngOnInit() {
+  }
+
+  ionViewDidEnter() {
+    this.general.constructionStatus = "Construction";
   }
 
 }

@@ -6,6 +6,8 @@ const { Geolocation } = Plugins;
 import { GeneralService } from 'src/app/general-service/general.service';
 import { GoogleMapsService } from '../google-maps.service';
 
+import * as _ from 'lodash';
+
 declare var google:any;
 
 @Component({
@@ -18,6 +20,7 @@ export class MapsMarkerPage implements OnInit {
 
   projectId:number;
   maintenanceConstructions = [];
+  completeConstructionList = [];
 
   mapInitialized: boolean;
   GPS:any;
@@ -33,6 +36,7 @@ export class MapsMarkerPage implements OnInit {
   ngOnInit() {
     this.projectId = +this.route.snapshot.paramMap.get('id');
     this.general.getMaintenanceConstructionList(this.projectId).subscribe((res:any) => this.loadMaintenanceConstructions(res));
+    this.general.getCompletedConstructionList(this.projectId).subscribe((res:any) => this.completeConstructionList = res.result.result);
   }
 
 
@@ -77,7 +81,7 @@ export class MapsMarkerPage implements OnInit {
         });
 
         marker.addListener('click', function() {
-          $this.markerClick(construction.construction_id, construction.construction_number);
+          $this.markerClick(construction.construction_id);
         })
         this.constructionMarkers.push(marker);
       }
@@ -95,10 +99,18 @@ export class MapsMarkerPage implements OnInit {
     }
   }
 
-  markerClick(constructionId:number, constructionNumber:number) {
+  markerClick(constructionId:number) {
     this.router.navigate(['/construction/begin-construction']);
+    let construction = _.filter(this.completeConstructionList, ['id', constructionId])[0];
     this.general.constructionID = constructionId;
-    this.general.constructionNumber = constructionNumber;
+    this.general.constructionNumber = construction.const_no;
+    this.general.loadsheetData.beneficiary_details.name = construction.beneficiary_name;
+    this.general.loadsheetData.beneficiary_details.surname = construction.beneficiary_surname;
+    this.general.loadsheetData.construction_address = construction.const_address;
+    this.general.loadsheetData.beneficiary_id = construction.beneficiary_id_no;
+    this.general.loadsheetData.beneficiary_stand_no = construction.beneficiary_stand_no;
+
+    console.log("Construction Detail", construction);
   }
 
 }

@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>New Construction Project</ion-title>
+    <ion-title>New {{general.constructionStatus}} Project</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -46,16 +46,18 @@
           <ion-radio slot="start" value="no" (click)="answer(item.id,'no')"></ion-radio>
         </ion-item>
       </ion-radio-group>
-    </div>
 
-    <div class="header">Add comment / note</div>
-    <ion-item class="ion-margin">
-      <ion-textarea rows="6" placeholder="Tap here to start typing..." [(ngModel)]="note"></ion-textarea>
-    </ion-item>
+      <div *ngIf="item.value == 'no'">
+        <div class="header">Add comment / note</div>
+        <ion-item class="ion-margin">
+          <ion-textarea rows="6" placeholder="Tap here to start typing..." (change)="noteChanged(item.id, $event.target.value)"></ion-textarea>
+        </ion-item>
+      </div>
+    </div>
 
     <div class="button-container">
       <ion-button shape="round" class="login-button ion-margin-top"
-      (click)="next()">Next Question</ion-button>
+      (click)="next()">Complete</ion-button>
 
       <ion-button shape="round" class="login-button" color="danger"
       [routerDirection]="'back'" [routerLink]="['/construction/project-details']">Cancel Request</ion-button>

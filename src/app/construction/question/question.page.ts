@@ -14,18 +14,21 @@ export class QuestionPage implements OnInit {
 
   isLoading = true;
   questionList:any;
-  note:string;
 
   constructor(
     private router: Router,
     private general:GeneralService) { }
 
   ngOnInit() {
-    this.general.getQuestionList().subscribe((res:any) => {
+    let type:number;
+    (this.general.constructionStatus == 'Construction') ? type = 2 : type = 1;
+    this.general.getQuestionList(type).subscribe((res:any) => {
       this.questionList = res.result
 
       for (let i = 0; i < this.questionList.length; i++) {
         this.questionList[i].value = null;
+        this.questionList[i].note = null;
+        this.questionList[i].question_id = this.questionList[i].id;
       }
 
       this.isLoading = false;
@@ -37,6 +40,10 @@ export class QuestionPage implements OnInit {
     let index = _.findIndex(this.questionList, ['id', id]);
     this.questionList[index].value = value;
   }
+  noteChanged(id:number, note:string) {
+    let index = _.findIndex(this.questionList, ['id', id]);
+    this.questionList[index].note = note;
+  }
 
   next() {
     let index = _.findIndex(this.questionList, ['value', null]);
@@ -46,7 +53,7 @@ export class QuestionPage implements OnInit {
       return;
     }
 
-    this.general.loadsheetData.question_details[0].note = this.note;
+    this.general.loadsheetData.question_details = this.questionList;
     this.router.navigate(['construction/construction-feedback']);
   }
 

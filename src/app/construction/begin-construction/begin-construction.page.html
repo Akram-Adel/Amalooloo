@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>New Construction Project</ion-title>
+    <ion-title>New {{general.constructionStatus}} Project</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -33,7 +33,7 @@
 
         <ion-item class="ion-margin-bottom" color="light">
           <ion-label position="stacked">Beneficiary ID-Number</ion-label>
-          <ion-input type="number" placeholder="Beneficiary ID-Number" formControlName="idNo" class="icon-profile"></ion-input>
+          <ion-input type="text" pattern="\d*" maxlength="13" placeholder="Beneficiary ID-Number" formControlName="idNo" class="icon-profile"></ion-input>
         </ion-item>
 
         <ion-item class="ion-margin-bottom" color="light">

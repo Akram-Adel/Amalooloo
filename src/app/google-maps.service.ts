@@ -7,7 +7,7 @@ declare var google:any;
 })
 export class GoogleMapsService {
 
-  googleApiKey:string = 'AIzaSyDc3R4w6OueO7P-25YJ2-Ndw2xW7BL01uE';
+  googleApiKey:string = 'AIzaSyDpzFm0JwSmVUbSHVJxsngbxRcm9vreGcI';
 
   mapElement: any;
   map: any;
