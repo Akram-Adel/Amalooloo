@@ -19,6 +19,8 @@ import { GeneralService } from './general-service/general.service';
 })
 export class AppComponent implements OnInit {
   private customerMode = false;
+  customerview:boolean;
+  employeeview:boolean;
 
   public appPages = [
     { title: 'Dashboard',       url: '/dashboard',      icon: 'home' },
@@ -43,10 +45,12 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.general.changeMode(this.customerMode);
     this.general.customerMode$.subscribe(res => {
       this.customerMode = res; this.general.customerMode = res;
       (this.customerMode) ? this.appPages.push({ title:'My Requests', url:'/maintenance-req', icon: 'hammer' }) : this.appPages.pop();
+      (this.general.customerMode) ? this.customerview = true : this.employeeview = true;
     });
   }
 

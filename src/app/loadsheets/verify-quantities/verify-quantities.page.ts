@@ -22,7 +22,7 @@ export class VerifyQuantitiesPage implements OnInit {
   constructor(
     private route:ActivatedRoute,
     private location: Location,
-    private general:GeneralService) { }
+    public general:GeneralService) { }
 
   ngOnInit() {
     if(this.general.allLoadsheets  && this.general.allLoadsheets != null) {

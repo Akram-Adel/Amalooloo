@@ -5,6 +5,8 @@ import { GeneralService } from "../general-service/general.service";
 import { Plugins, PushNotification, PushNotificationToken, PushNotificationActionPerformed } from '@capacitor/core';
 const { PushNotifications,Browser } = Plugins;
 import { Storage } from '@ionic/storage';
+import { FCM } from "capacitor-fcm";
+const fcm = new FCM();
 
 @Component({
   selector: 'app-dashboard',
@@ -42,13 +44,22 @@ export class DashboardPage implements OnInit {
     // Register with Apple / Google to receive push via APNS/FCM
     PushNotifications.register();
 
+    fcm
+    .getToken()
+    .then(r => {
+      
+      console.log(`console.log('Push registration success, token:  ${r.token}`);
+    
+    })
+    .catch(err => console.log(err));
+
     // On success, we should be able to receive notifications
-    PushNotifications.addListener('registration',
-      (token: PushNotificationToken) => {
-        console.log('Push registration success, token: ' + token.value);
-        //Add in update here TODO
-      }
-    );
+    // PushNotifications.addListener('registration',
+    //   (token: PushNotificationToken) => {
+    //     console.log('Push registration success, token: ' + token.value);
+    //     //Add in update here TODO
+    //   }
+    // );
 
     // Some issue with our setup and push will not work
     PushNotifications.addListener('registrationError',

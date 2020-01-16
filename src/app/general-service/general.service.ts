@@ -192,6 +192,21 @@ export class GeneralService {
 
     return this.http.post(this.API_BASE_URL+'/get-all-maintenance-web',data,{headers});
   }
+  getAllNotifications() {
+    const headers = new HttpHeaders()
+      .set("Authorization", "Bearer "+this.userToken);
+ 
+
+    return this.http.get(this.API_BASE_URL+`/get-user-notifications/${ this.userObject.id}`,{headers});
+  }
+  setAllNotificationsRead() {
+    const headers = new HttpHeaders()
+      .set("Authorization", "Bearer "+this.userToken);
+ 
+
+    return this.http.get(this.API_BASE_URL+`/set-notification-read/${ this.userObject.id}`,{headers});
+  }
+
   getMaintenanceProjectList(id:number) {
     const headers = new HttpHeaders()
       .set("Authorization", "Bearer "+this.userToken),

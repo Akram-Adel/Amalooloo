@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'mode-selection', pathMatch: 'full' },
+  { path: '', redirectTo: 'animatedsplash', pathMatch: 'full' },
   { path: 'mode-selection',  loadChildren: './mode-selection/mode-selection.module#ModeSelectionPageModule' },
   { path: 'login',           loadChildren: './login/login.module#LoginPageModule' },
   { path: 'forgot-pass',     loadChildren: './forgot-pass/forgot-pass.module#ForgotPassPageModule' },
@@ -55,6 +55,8 @@ const routes: Routes = [
     { path: 'maintenance-activity', loadChildren: './maintenance-activity/maintenance-activity.module#MaintenanceActivityPageModule' },
       { path: 'maintenance-project-list/:id', loadChildren: './maintenance-project-list/maintenance-project-list.module#MaintenanceProjectListPageModule' },
       { path: 'maps-marker/:id',              loadChildren: './maps-marker/maps-marker.module#MapsMarkerPageModule' },
+  { path: 'animatedsplash', loadChildren: './animatedsplash/animatedsplash.module#AnimatedsplashPageModule' },
+
 
 
 

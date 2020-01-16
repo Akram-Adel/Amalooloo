@@ -20,7 +20,7 @@ export class BeginConstructionPage implements OnInit {
   constructor(
     private fb:FormBuilder,
     private router: Router,
-    private general:GeneralService) {
+    public general:GeneralService) {
 
       this.requestForm = this.fb.group({
         firstname: [null, Validators.required],
@@ -58,7 +58,7 @@ export class BeginConstructionPage implements OnInit {
 
   async SubmitRequest(){
     if(!this.requestForm.valid) {
-      this.general.presentAlertMsg('Please fill the apove data');
+      this.general.presentAlertMsg('Please fill the above data');
       return;
     }
 

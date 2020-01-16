@@ -17,7 +17,7 @@
           </ion-menu-toggle>
 
           <ion-menu-toggle auto-hide="false" >
-            <ion-item (click)="openBrowser()">
+            <ion-item  *ngIf="customerview" (click)="openBrowser()">
               <ion-icon slot="start" [name]="'pricetags'"></ion-icon>
               <ion-label>
                 Amalooloo Shop
@@ -26,7 +26,17 @@
           </ion-menu-toggle>
     
           <ion-menu-toggle auto-hide="false" >
-            <ion-item [routerDirection]="'root'" [routerLink]="['/bc-scanner']" >
+            <ion-item *ngIf="employeeview" [routerDirection]="'forward'" [routerLink]="['/maintenance']" >
+              <ion-icon slot="start" [name]="'build'"></ion-icon>
+              <!-- <ion-icon  [name]="'construct'"></ion-icon> -->
+              <ion-label>
+                Maintenance
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          
+          <ion-menu-toggle auto-hide="false" >
+            <ion-item  *ngIf="customerview" [routerDirection]="'forward'" [routerLink]="['/bc-scanner']" >
               <ion-icon slot="start" [name]="'build'"></ion-icon>
               <!-- <ion-icon  [name]="'construct'"></ion-icon> -->
               <ion-label>
@@ -36,7 +46,7 @@
           </ion-menu-toggle>
 
           <ion-menu-toggle auto-hide="false" >
-            <ion-item [routerDirection]="'root'" [routerLink]="['/notifications']">
+            <ion-item [routerDirection]="'forward'" [routerLink]="['/notifications']">
               <ion-icon slot="start" [name]="'Notifications'"></ion-icon>
               <ion-label>
                 Notifications
@@ -45,7 +55,7 @@
           </ion-menu-toggle>
 
           <ion-menu-toggle auto-hide="false" >
-            <ion-item (click)="presentModal()">
+            <ion-item *ngIf="customerview" (click)="presentModal()">
               <ion-icon slot="start" [name]="'checkmark-circle-outline'"></ion-icon>
               <ion-label>
                 Health Tips and Updates

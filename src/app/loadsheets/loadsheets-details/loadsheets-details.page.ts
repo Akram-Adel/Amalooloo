@@ -18,7 +18,7 @@ export class LoadsheetsDetailsPage implements OnInit {
 
   constructor(
     private route:ActivatedRoute,
-    private general:GeneralService) {
+    public general:GeneralService) {
     }
 
   ngOnInit() {

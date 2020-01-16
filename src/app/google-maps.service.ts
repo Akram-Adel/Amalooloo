@@ -49,10 +49,10 @@ export class GoogleMapsService {
   initMap(): Promise<any> {
     this.mapInitialised = true;
     return new Promise((resolve) => {
-      let latLng = new google.maps.LatLng(41.8719, 12.5674);
+      let latLng = new google.maps.LatLng(-29.542329, 24.342110);
       let mapOptions = {
         center: latLng,
-        zoom: 9,
+        zoom: 7,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       }
       this.map = new google.maps.Map(this.mapElement, mapOptions);

@@ -13,7 +13,7 @@ export class ProjectDetailsPage implements OnInit {
 
   constructor(
     private route:ActivatedRoute,
-    private general:GeneralService) { }
+    public general:GeneralService) { }
 
   ngOnInit() {
     this.projectId = +this.route.snapshot.paramMap.get('id');
