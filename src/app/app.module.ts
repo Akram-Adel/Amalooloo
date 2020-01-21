@@ -18,7 +18,8 @@ import { IonicSignaturePadModule,IonicsignaturepadProvider } from 'ionicsignatur
 import { Platform } from '@ionic/angular';
 import { GeneralService } from './general-service/general.service';
 import { LottieModule } from 'ngx-lottie';
-import player from 'lottie-web';
+import { TipsPageModule } from "../app/tips/tips.module";
+
 
 export function playerFactory() {
   return import('lottie-web');
@@ -33,6 +34,7 @@ export function playerFactory() {
     IonicStorageModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
+    TipsPageModule,
     IonicSignaturePadModule,
     [LottieModule.forRoot({ player: playerFactory })]
   ],

@@ -25,7 +25,7 @@ export class LoadsheetsFeedbackPage implements OnInit {
   constructor(
     private imagePicker: ImagePicker,
     private router:Router,
-    private general:GeneralService) { }
+    public general:GeneralService) { }
 
   ngOnInit() {
     if(this.general.allLoadsheets  && this.general.allLoadsheets != null) {

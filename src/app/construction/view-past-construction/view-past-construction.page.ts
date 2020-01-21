@@ -12,7 +12,7 @@ export class ViewPastConstructionPage implements OnInit {
   pastConstruction = []
 
   constructor(
-    private general:GeneralService) { }
+    public general:GeneralService) { }
 
   ngOnInit() {
     this.general.getConstructionList('completed').subscribe((res:any) => this.loadConstructions(res));

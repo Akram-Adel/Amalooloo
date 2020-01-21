@@ -24,7 +24,7 @@ export class ConstructionFeedbackPage implements OnInit {
   constructor(
     private router:Router,
     private sanitizer: DomSanitizer,
-    private general:GeneralService) { }
+    public general:GeneralService) { }
 
   ngOnInit() {
   }

@@ -31,7 +31,7 @@ export class MapsMarkerPage implements OnInit {
     private route:ActivatedRoute,
     private router: Router,
     private maps:GoogleMapsService,
-    private general:GeneralService) { }
+    public general:GeneralService) { }
 
   ngOnInit() {
     this.projectId = +this.route.snapshot.paramMap.get('id');

@@ -24,7 +24,6 @@ export class AppComponent implements OnInit {
 
   public appPages = [
     { title: 'Dashboard',       url: '/dashboard',      icon: 'home' },
-    { title: 'Settings',        url: '/settings',       icon: 'settings' }
   ];
 
   constructor(
@@ -32,7 +31,7 @@ export class AppComponent implements OnInit {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private modalController:ModalController,
-    private general:GeneralService) {
+    public general:GeneralService) {
 
     this.initializeApp();
   }

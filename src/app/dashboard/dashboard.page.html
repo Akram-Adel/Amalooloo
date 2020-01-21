@@ -41,6 +41,7 @@
 
       <ion-col [routerDirection]="'forward'" [routerLink]="['/notifications']">
         <div class="col-inner-conatiner padding">
+          <ion-badge style="position: absolute">{{notificationcount}}</ion-badge>
           <img src="../../assets/imgs/ic_view_may_past_loadsheet.png" height="60px">
           <div class="text">Notifications </div>
         </div>
@@ -55,7 +56,7 @@
         </div>
       </ion-col>
 
-      <ion-col *ngIf="employeeview" [routerDirection]="'forward'" [routerLink]="['/maintenance']">
+      <ion-col *ngIf="employeeview" [routerDirection]="'forward'" [routerLink]="['/maintenance-select']">
         <div class="col-inner-conatiner padding">
           <img src="../../assets/imgs/Amalooloo-App-Maintenance-Icon-20191209@4x.png" height="60px">
           <div class="text">Maintenance</div>

@@ -9,7 +9,7 @@ import { GeneralService } from '../general-service/general.service';
 export class LoadsheetsPage implements OnInit {
 
   constructor(
-    private general:GeneralService) { }
+    public general:GeneralService) { }
 
   ngOnInit() {
     this.general.allDeliveries = null;

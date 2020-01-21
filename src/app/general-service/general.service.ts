@@ -19,6 +19,7 @@ export class GeneralService {
   public constructionID:number;
   public constructionNumber:number;
   public constructionStatus = "Construction";
+  public notifications = [];
 
   public userToken:string = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjg4LCJpc3MiOiJodHRwOi8vNDEuNzYuMTA4LjQ1L2FwaS9sb2dpbiIsImlhdCI6MTU3OTIwNDkxMSwiZXhwIjoxNTc5MjQwOTExLCJuYmYiOjE1NzkyMDQ5MTEsImp0aSI6ImdMaGFvZUlNdENXZmNnUmQifQ.zy_C1rNSvCENj517wWS47zJU5GynhhKWDpws0pykbhM";
   public userObject:any;
@@ -32,7 +33,7 @@ export class GeneralService {
   async presentAlertMsg(msg:string) {
     const alert = await this.alertController.create({
       header: 'Error',
-      message: msg,
+      message: "Nothing Has Been Assigned To You - Please Contact Administrator",
       buttons: ['OK']
     });
 
@@ -192,6 +193,8 @@ export class GeneralService {
 
     return this.http.post(this.API_BASE_URL+'/get-all-maintenance-web',data,{headers});
   }
+
+
   getAllNotifications() {
     const headers = new HttpHeaders()
       .set("Authorization", "Bearer "+this.userToken);

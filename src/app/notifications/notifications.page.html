@@ -41,13 +41,8 @@
     <ion-list style="background-color: inherit;">
       <ion-item lines="none" class="col-inner-conatiner margin"
       *ngFor="let item of notifications">
-        <ion-thumbnail slot="start">
-          <img src="../../../assets/imgs/ic_loadsheet.png">
-        </ion-thumbnail>
-        <ion-label>
-          <b>Title: </b> {{item.title}} <br>
-          <b>Status: </b> {{item.subtitle}} <br>
-          <b>Comment: </b> {{item.body}} <br>
+        <ion-label >
+          <b>Title: </b> {{item.message}} <br>
         </ion-label>
       </ion-item>
     </ion-list>

@@ -15,7 +15,7 @@ export class MaintenanceProjectListPage implements OnInit {
 
   constructor(
     private route:ActivatedRoute,
-    private general:GeneralService) { }
+    public general:GeneralService) { }
 
   ngOnInit() {
     this.maintenanceId = +this.route.snapshot.paramMap.get('id');

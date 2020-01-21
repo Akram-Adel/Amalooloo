@@ -15,7 +15,7 @@ export class ConstructionBeneficiaryDetailsPage implements OnInit {
   constructor(
     private fb:FormBuilder,
     private router:Router,
-    private general:GeneralService) {
+    public general:GeneralService) {
 
       this.beneficiaryForm = this.fb.group({
         name: [null, Validators.required],

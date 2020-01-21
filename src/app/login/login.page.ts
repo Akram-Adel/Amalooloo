@@ -22,7 +22,7 @@ export class LoginPage implements OnInit {
     private fb:FormBuilder,
     private router: Router,
     private alertController: AlertController,
-    private general:GeneralService) {
+    public general:GeneralService) {
 
       this.loginForm = this.fb.group({
         // email: ['DumezweniMagugu@amalooloo.co.za', [Validators.required, Validators.pattern(this.general.emailPattern)]],

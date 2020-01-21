@@ -23,7 +23,7 @@ export class ProfilePage implements OnInit {
     private alertController: AlertController,
     private sanitizer: DomSanitizer,
     private router: Router,
-    private general:GeneralService) {
+    public general:GeneralService) {
 
     this.profileForm = this.fb.group({
       firstName: [null, Validators.required],

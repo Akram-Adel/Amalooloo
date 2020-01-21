@@ -3,7 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { TipsPage } from '../tips/tips.page';
 import { GeneralService } from "../general-service/general.service";
 import { Plugins, PushNotification, PushNotificationToken, PushNotificationActionPerformed } from '@capacitor/core';
-const { PushNotifications,Browser } = Plugins;
+const { PushNotifications,Browser,LocalNotifications } = Plugins;
 import { Storage } from '@ionic/storage';
 import { FCM } from "capacitor-fcm";
 const fcm = new FCM();
@@ -17,7 +17,8 @@ export class DashboardPage implements OnInit {
 
   customerview:boolean;
   employeeview:boolean;
-
+  notificationcount:number = 0;
+  notifications = [];
 
   constructor(
     private modalController:ModalController,
@@ -26,12 +27,14 @@ export class DashboardPage implements OnInit {
 
   ngOnInit() {
 
+    
     // this.registerPushNotification();
 
     //Now gets called manually in the menu
     // setTimeout(() => {
     //   this.presentModal();
     // }, 1000);
+    this.preloadnotifications();
 
     (this.service.customerMode) ? this.customerview = true : this.employeeview = true;
     console.log('CustomerView:',this.customerview);
@@ -72,12 +75,20 @@ export class DashboardPage implements OnInit {
     PushNotifications.addListener('pushNotificationReceived',
       (notification: PushNotification) => {
 
-        this.storage.get('notifications').then((val) => {
-          let temparr = JSON.parse(val);
-          temparr.push(notification);
-
-          this.storage.set('notifications', JSON.stringify(temparr));
-        });
+        // LocalNotifications.schedule({
+        //   notifications: [
+        //     {
+        //       title: "Title",
+        //       body: "Body",
+        //       id: 1,
+        //       schedule: { at: new Date(Date.now() + 1000 * 5) },
+        //       sound: null,
+        //       attachments: null,
+        //       actionTypeId: "",
+        //       extra: null
+        //     }
+        //   ]
+        // });
 
 
 
@@ -101,6 +112,48 @@ export class DashboardPage implements OnInit {
       component: TipsPage
     });
     return await modal.present();
+  }
+
+  async preloadnotifications (){
+
+    console.log(this.service.userObject);
+    
+
+    this.service.getAllNotifications().subscribe((res:any) =>this.notifications = res.result );
+
+    this.service.notifications = this.notifications;
+
+    this.notifications.forEach(element => {
+     this.notificationcount ++;
+
+     if(element.read_at != null){
+
+
+      LocalNotifications.schedule({
+        notifications: [
+          {
+            title: "New Notification",
+            body: element.message,
+            id: Math.floor(Math.random() * 99999),
+            schedule: { at: new Date(Date.now() + 2000 * 5) },
+            sound: null,
+            attachments: null,
+            actionTypeId: "",
+            extra: null
+          }
+        ]
+      });
+
+     }
+     
+
+    });
+ 
+    
+
+
+
+
   }
 
   async openBrowser() {

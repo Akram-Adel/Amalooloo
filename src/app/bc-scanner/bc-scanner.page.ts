@@ -19,7 +19,7 @@ export class BcScannerPage implements OnInit {
     private alertController: AlertController,
     private router: Router,
     private barcodeScanner: BarcodeScanner,
-    private general:GeneralService) { }
+    public general:GeneralService) { }
 
   ngOnInit() {
     this.BCScanner().then(()=>{

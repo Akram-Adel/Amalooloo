@@ -21,7 +21,7 @@ export class AddQuantitiesLoadedPage implements OnInit {
   constructor(
     private route:ActivatedRoute,
     private router:Router,
-    private general:GeneralService) { }
+    public general:GeneralService) { }
 
   ngOnInit() {
     if(this.general.allLoadsheets  && this.general.allLoadsheets != null) {

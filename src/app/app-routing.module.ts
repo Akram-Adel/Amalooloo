@@ -55,7 +55,8 @@ const routes: Routes = [
     { path: 'maintenance-activity', loadChildren: './maintenance-activity/maintenance-activity.module#MaintenanceActivityPageModule' },
       { path: 'maintenance-project-list/:id', loadChildren: './maintenance-project-list/maintenance-project-list.module#MaintenanceProjectListPageModule' },
       { path: 'maps-marker/:id',              loadChildren: './maps-marker/maps-marker.module#MapsMarkerPageModule' },
-  { path: 'animatedsplash', loadChildren: './animatedsplash/animatedsplash.module#AnimatedsplashPageModule' },
+  { path: 'animatedsplash', loadChildren: './animatedsplash/animatedsplash.module#AnimatedsplashPageModule' },  { path: 'maintenance-select', loadChildren: './maintenance-select/maintenance-select.module#MaintenanceSelectPageModule' },
+
 
 
 

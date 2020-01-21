@@ -11,7 +11,7 @@ export class TipsPage implements OnInit {
 
   constructor(
     private modalController:ModalController,
-    private general:GeneralService) { }
+    public general:GeneralService) { }
 
   ngOnInit() {
     this.general.getUploadedPdf().subscribe(res => console.log(res));

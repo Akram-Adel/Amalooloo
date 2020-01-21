@@ -15,7 +15,7 @@ export class ConstructionBetramEmpPage implements OnInit {
   constructor(
     private fb:FormBuilder,
     private router:Router,
-    private general:GeneralService) {
+    public general:GeneralService) {
 
       this.betramForm = this.fb.group({
         name: [null, Validators.required],

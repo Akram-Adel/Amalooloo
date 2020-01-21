@@ -16,14 +16,18 @@ export class NotificationsPage implements OnInit {
 
 
   ngOnInit() {
+    this.isLoading = true;
+    this.general.getAllNotifications().subscribe((res:any) =>this.notifications = res.result );
 
-    this.storage.get('notifications').then((val) => {
-      let temparr = JSON.parse(val);
+    this.general.notifications = this.notifications;
+    this.isLoading = false;
+    if(this.notifications.length < 0){
 
-      this.loadnotifications(temparr)
-   
-    });
 
+      this.general.presentAlertMsg("No Notifications Found");
+
+     
+    }
 
   }
 
@@ -31,21 +35,35 @@ export class NotificationsPage implements OnInit {
   doRefresh(event:any) {
     this.isLoading = true;
     this.notifications = [];
+    this.general.getAllNotifications().subscribe((res:any) =>this.notifications = res.result );
 
-    this.storage.get('notifications').then((val) => {
-      let temparr = JSON.parse(val);
+    this.general.notifications = this.notifications;
+    this.isLoading = false;
+    if(this.notifications.length < 0){
 
-      this.loadnotifications(temparr)
-      event.target.complete();
-    });
+
+      this.general.presentAlertMsg("No Notifications Found");
+
+     
+    }
+
     
    
   }
+  ionViewDidLeave(){
 
-  loadnotifications(results:any) {
-   
-    this.notifications = results;
-    this.isLoading = false;
-    if(results.status != 200) this.general.presentAlertMsg(results.message);
+this.markread();
+
+
+
   }
+  /**
+   * markread
+   */
+   markread() {
+    this.general.setAllNotificationsRead().subscribe((res:any) =>console.log(res) );
+
+    
+  }
+
 }

@@ -24,7 +24,7 @@ export class SignupPage implements OnInit {
     private alertController: AlertController,
     private sanitizer: DomSanitizer,
     private router: Router,
-    private general:GeneralService) {
+    public general:GeneralService) {
 
     this.signupForm = this.fb.group({
       firstName: [null, Validators.required],

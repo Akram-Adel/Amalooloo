@@ -17,7 +17,7 @@ export class QuestionPage implements OnInit {
 
   constructor(
     private router: Router,
-    private general:GeneralService) { }
+    public general:GeneralService) { }
 
   ngOnInit() {
     let type:number;

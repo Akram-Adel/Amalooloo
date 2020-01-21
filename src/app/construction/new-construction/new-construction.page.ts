@@ -15,7 +15,7 @@ export class NewConstructionPage implements OnInit {
 
   constructor(
     private route:ActivatedRoute,
-    private general:GeneralService) { }
+    public general:GeneralService) { }
 
   ngOnInit() {
     this.status = this.route.snapshot.paramMap.get('status');
