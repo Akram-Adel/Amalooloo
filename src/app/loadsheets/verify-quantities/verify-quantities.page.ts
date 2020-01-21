@@ -44,7 +44,7 @@ export class VerifyQuantitiesPage implements OnInit {
       (this.completedStatus) ? this.buttonText = "BACK" : this.buttonText = "SAVE"
       this.isLoading = false;
     });
-    this.general.loadsheetData.order_details.order_id = this.orderId;
+    this.general.loadsheetData.order_details[0].order_id = this.orderId;
   }
 
   actualChange(item:any, number:number) {
@@ -77,8 +77,8 @@ export class VerifyQuantitiesPage implements OnInit {
       this.general.allOrders[orderCompletedIndex].isRigth = true;
       this.general.allOrders[orderCompletedIndex].components = this.product.components;
 
-      this.general.loadsheetData.order_details.product_details.product_id = this.product.product_id;
-      this.general.loadsheetData.order_details.product_details.component_details = this.product.components;
+      this.general.loadsheetData.order_details[0].product_details[0].product_id = this.product.product_id;
+      this.general.loadsheetData.order_details[0].product_details[0].components = this.product.components;
       this.location.back();
     }
   }

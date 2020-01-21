@@ -21,7 +21,7 @@ export class GeneralService {
   public constructionStatus = "Construction";
   public notifications = [];
 
-  public userToken:string = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjg4LCJpc3MiOiJodHRwOi8vNDEuNzYuMTA4LjQ1L2FwaS9sb2dpbiIsImlhdCI6MTU3OTIwNDkxMSwiZXhwIjoxNTc5MjQwOTExLCJuYmYiOjE1NzkyMDQ5MTEsImp0aSI6ImdMaGFvZUlNdENXZmNnUmQifQ.zy_C1rNSvCENj517wWS47zJU5GynhhKWDpws0pykbhM";
+  public userToken:string = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjc0LCJpc3MiOiJodHRwOi8vNDEuNzYuMTA4LjQ1L2FwaS9sb2dpbiIsImlhdCI6MTU3OTYzODQ4NiwiZXhwIjoxNTc5Njc0NDg2LCJuYmYiOjE1Nzk2Mzg0ODYsImp0aSI6IkN5dG5UdXZMaVdOVEtnd2EifQ.lD0jYxNf4Xt6WjB0kj5vWmCQYElxRD6jtAA87a2myso";
   public userObject:any;
 
   constructor(
@@ -33,7 +33,7 @@ export class GeneralService {
   async presentAlertMsg(msg:string) {
     const alert = await this.alertController.create({
       header: 'Error',
-      message: "Nothing Has Been Assigned To You - Please Contact Administrator",
+      message: msg,
       buttons: ['OK']
     });
 
@@ -112,6 +112,22 @@ export class GeneralService {
       };
 
     return this.http.post(this.API_BASE_URL+'/update-user-info',data,{headers});
+  }
+
+
+  getAllNotifications() {
+    const headers = new HttpHeaders()
+      .set("Authorization", "Bearer "+this.userToken);
+
+
+    return this.http.get(this.API_BASE_URL+`/get-user-notifications/${ this.userObject.id}`,{headers});
+  }
+  setAllNotificationsRead() {
+    const headers = new HttpHeaders()
+      .set("Authorization", "Bearer "+this.userToken);
+
+
+    return this.http.get(this.API_BASE_URL+`/set-notification-read/${ this.userObject.id}`,{headers});
   }
 
   getLoadsheetList() {
@@ -193,23 +209,6 @@ export class GeneralService {
 
     return this.http.post(this.API_BASE_URL+'/get-all-maintenance-web',data,{headers});
   }
-
-
-  getAllNotifications() {
-    const headers = new HttpHeaders()
-      .set("Authorization", "Bearer "+this.userToken);
- 
-
-    return this.http.get(this.API_BASE_URL+`/get-user-notifications/${ this.userObject.id}`,{headers});
-  }
-  setAllNotificationsRead() {
-    const headers = new HttpHeaders()
-      .set("Authorization", "Bearer "+this.userToken);
- 
-
-    return this.http.get(this.API_BASE_URL+`/set-notification-read/${ this.userObject.id}`,{headers});
-  }
-
   getMaintenanceProjectList(id:number) {
     const headers = new HttpHeaders()
       .set("Authorization", "Bearer "+this.userToken),
@@ -284,25 +283,25 @@ export class GeneralService {
     project_id: null,
 
 
-    order_details: {
+    order_details: [{
       order_id: null,
-      product_details: {
+      product_details: [{
         product_id: null,
-        component_details: [],
-      }
-    },
+        components: [],
+      }]
+    }],
 
 
     verify_loaded: {
-      image_1: null, image_2: null, image_3: null,
+      image_1: "null", image_2: "null", image_3: "null",
       note: null
     },
     verify_delivered: {
-      image_1: null, image_2: null, image_3: null,
+      image_1: "null", image_2: "null", image_3: "null",
       note: null
     },
     verify_construction: {
-      image_1: null, image_2: null, image_3: null,
+      image_1: "null", image_2: "null", image_3: "null",
       const_note: null
     },
 
@@ -313,7 +312,7 @@ export class GeneralService {
     },
     betram_emp_details: {
       name: null, surname: null,
-      emp_mention_time: null,
+      time: null,
       sign: null
     },
     contractor_details: {

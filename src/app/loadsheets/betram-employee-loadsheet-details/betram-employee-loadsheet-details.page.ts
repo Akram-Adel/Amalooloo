@@ -60,7 +60,7 @@ export class BetramEmployeeLoadsheetDetailsPage implements OnInit {
 
     this.general.loadsheetData.betram_emp_details.name = this.betramForm.value.name;
     this.general.loadsheetData.betram_emp_details.surname = this.betramForm.value.surname;
-    this.general.loadsheetData.betram_emp_details.emp_mention_time = this.betramForm.value.time;
+    this.general.loadsheetData.betram_emp_details.time = this.betramForm.value.time;
     this.general.loadsheetData.betram_emp_details.sign = this.betramForm.value.signature;
 
     if(this.general.allLoadsheets  && this.general.allLoadsheets != null && this.completedStatus == false) {

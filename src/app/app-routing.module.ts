@@ -3,6 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: '', redirectTo: 'animatedsplash', pathMatch: 'full' },
+  { path: 'animatedsplash', loadChildren: './animatedsplash/animatedsplash.module#AnimatedsplashPageModule' },
   { path: 'mode-selection',  loadChildren: './mode-selection/mode-selection.module#ModeSelectionPageModule' },
   { path: 'login',           loadChildren: './login/login.module#LoginPageModule' },
   { path: 'forgot-pass',     loadChildren: './forgot-pass/forgot-pass.module#ForgotPassPageModule' },
@@ -50,12 +51,12 @@ const routes: Routes = [
         { path: 'construction/construction-completed',           loadChildren: './construction/construction-completed/construction-completed.module#ConstructionCompletedPageModule' },
     { path: 'construction/view-past-construction',             loadChildren: './construction/view-past-construction/view-past-construction.module#ViewPastConstructionPageModule' },
 
-  { path: 'maintenance', loadChildren: './maintenance/maintenance.module#MaintenancePageModule' },
+  { path: 'maintenance-select', loadChildren: './maintenance-select/maintenance-select.module#MaintenanceSelectPageModule' },
+  { path: 'maintenance',            loadChildren: './maintenance/maintenance.module#MaintenancePageModule' },
     { path: 'bc-scanner',           loadChildren: './bc-scanner/bc-scanner.module#BcScannerPageModule' },
     { path: 'maintenance-activity', loadChildren: './maintenance-activity/maintenance-activity.module#MaintenanceActivityPageModule' },
       { path: 'maintenance-project-list/:id', loadChildren: './maintenance-project-list/maintenance-project-list.module#MaintenanceProjectListPageModule' },
       { path: 'maps-marker/:id',              loadChildren: './maps-marker/maps-marker.module#MapsMarkerPageModule' },
-  { path: 'animatedsplash', loadChildren: './animatedsplash/animatedsplash.module#AnimatedsplashPageModule' },  { path: 'maintenance-select', loadChildren: './maintenance-select/maintenance-select.module#MaintenanceSelectPageModule' },
 
 
 
