@@ -16,9 +16,9 @@ export class ConstructionFeedbackPage implements OnInit {
 
   imageResponse: any;
   options: any;
-  Photo1:SafeResourceUrl;
-  Photo2:SafeResourceUrl;
-  Photo3:SafeResourceUrl;
+  Photo1:any;
+  Photo2:any;
+  Photo3:any;
   note:string = '';
 
   constructor(
@@ -63,10 +63,10 @@ export class ConstructionFeedbackPage implements OnInit {
       return;
     }
 
-    this.general.loadsheetData.verify_construction.image_1 = this.Photo1;
-    this.general.loadsheetData.verify_construction.image_2 = this.Photo2;
-    this.general.loadsheetData.verify_construction.image_3 = this.Photo3;
-    this.general.loadsheetData.verify_construction.const_note = this.note;
+    this.Photo1 ? this.general.loadsheetData.verify_construction.image_1 = this.Photo1 : 'null';
+    this.Photo2 ? this.general.loadsheetData.verify_construction.image_2 = this.Photo2 : 'null';
+    this.Photo3 ? this.general.loadsheetData.verify_construction.image_3 = this.Photo3 : 'null';
+    this.general.loadsheetData.verify_construction.note = this.note;
     this.router.navigate(['construction/construction-beneficiary-details']);
   }
 

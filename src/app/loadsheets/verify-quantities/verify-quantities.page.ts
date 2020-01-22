@@ -78,7 +78,12 @@ export class VerifyQuantitiesPage implements OnInit {
       this.general.allOrders[orderCompletedIndex].components = this.product.components;
 
       this.general.loadsheetData.order_details[0].product_details[0].product_id = this.product.product_id;
-      this.general.loadsheetData.order_details[0].product_details[0].components = this.product.components;
+      if(this.general.allLoadsheets  && this.general.allLoadsheets != null) {
+        this.general.loadsheetData.order_details[0].product_details[0].components = this.product.components;
+
+      } else if(this.general.allDeliveries && this.general.allDeliveries != null) {
+        this.general.loadsheetData.order_details[0].product_details[0].component_details = this.product.components;
+      }
       this.location.back();
     }
   }

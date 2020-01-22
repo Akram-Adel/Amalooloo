@@ -63,11 +63,11 @@ export class BeginConstructionPage implements OnInit {
     }
 
     this.general.loadsheetData.construction_address = this.requestForm.value.address;
-    this.general.loadsheetData.beneficiary_id = this.requestForm.value.idNo;
-    this.general.loadsheetData.beneficiary_stand_no = this.requestForm.value.standNo;
+    this.general.loadsheetData.beneficiary_id = +this.requestForm.value.idNo;
+    this.general.loadsheetData.beneficiary_stand_no = this.requestForm.value.standNo.toString();
     this.general.loadsheetData.beneficiary_description = this.requestForm.value.description;
-    this.general.loadsheetData.const_latitude = this.GPS.coords.latitude;
-    this.general.loadsheetData.const_longitude = this.GPS.coords.longitude;
+    this.general.loadsheetData.const_latitude = this.GPS.coords.latitude.toString();
+    this.general.loadsheetData.const_longitude = this.GPS.coords.longitude.toString();
     this.router.navigate(['construction/question'])
 
   }

@@ -31,7 +31,9 @@ export class StartNewDeliveriesPage implements OnInit {
 
   loadDeliveries(results:any) {
     console.log(results);
-    this.deliveryProjects = _.filter(results.result, ['loadsheet_status', "initiated"]);;
+    this.general.allDeliveries = results.result;
+
+    this.deliveryProjects = _.filter(this.general.allDeliveries, ['delivery_status', "initiated"]);;
     this.isLoading = false;
     if(results.status != 200) this.general.presentAlertMsg(results.message);
   }

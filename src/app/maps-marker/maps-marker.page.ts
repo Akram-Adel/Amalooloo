@@ -35,6 +35,7 @@ export class MapsMarkerPage implements OnInit {
 
   ngOnInit() {
     this.projectId = +this.route.snapshot.paramMap.get('id');
+    this.general.loadsheetData.project_id = this.projectId;
     this.general.getMaintenanceConstructionList(this.projectId).subscribe((res:any) => this.loadMaintenanceConstructions(res));
     this.general.getCompletedConstructionList(this.projectId).subscribe((res:any) => this.completeConstructionList = res.result.result);
   }
@@ -104,6 +105,7 @@ export class MapsMarkerPage implements OnInit {
     let construction = _.filter(this.completeConstructionList, ['id', constructionId])[0];
     this.general.constructionID = constructionId;
     this.general.constructionNumber = construction.const_no;
+    this.general.loadsheetData.construction_id = constructionId;
     this.general.loadsheetData.beneficiary_details.name = construction.beneficiary_name;
     this.general.loadsheetData.beneficiary_details.surname = construction.beneficiary_surname;
     this.general.loadsheetData.construction_address = construction.const_address;

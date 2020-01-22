@@ -21,7 +21,7 @@ export class GeneralService {
   public constructionStatus = "Construction";
   public notifications = [];
 
-  public userToken:string = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjc0LCJpc3MiOiJodHRwOi8vNDEuNzYuMTA4LjQ1L2FwaS9sb2dpbiIsImlhdCI6MTU3OTYzODQ4NiwiZXhwIjoxNTc5Njc0NDg2LCJuYmYiOjE1Nzk2Mzg0ODYsImp0aSI6IkN5dG5UdXZMaVdOVEtnd2EifQ.lD0jYxNf4Xt6WjB0kj5vWmCQYElxRD6jtAA87a2myso";
+  public userToken:string = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjg4LCJpc3MiOiJodHRwOi8vNDEuNzYuMTA4LjQ1L2FwaS9sb2dpbiIsImlhdCI6MTU3OTcyMzQyNCwiZXhwIjoxNTc5NzU5NDI0LCJuYmYiOjE1Nzk3MjM0MjQsImp0aSI6IjBWMlNETHVSd3BGZmVFQzAifQ.bKFp5GVVvH0RcJKf8sO6hBfcefAE1QdLbp1EMvR_DqA";
   public userObject:any;
 
   constructor(
@@ -281,6 +281,9 @@ export class GeneralService {
     loadsheet_id: null,
     delivery_id: null,
     project_id: null,
+    construction_id: null,
+    maintenance_id: null,
+    user_id: null,
 
 
     order_details: [{
@@ -288,6 +291,7 @@ export class GeneralService {
       product_details: [{
         product_id: null,
         components: [],
+        component_details: [],
       }]
     }],
 
@@ -302,7 +306,7 @@ export class GeneralService {
     },
     verify_construction: {
       image_1: "null", image_2: "null", image_3: "null",
-      const_note: null
+      note: null
     },
 
 
@@ -372,6 +376,17 @@ export class GeneralService {
     data.timestamp = timeStamp;
 
     return this.http.post(this.API_BASE_URL+'/submit-construction',data,{headers});
+  }
+  submitMaintenance() {
+    let date = new Date()
+    let timeStamp = date.getFullYear() +'-'+ (date.getMonth()+1) +'-'+ date.getDate() +' '+ date.getHours() +':'+ date.getMinutes() +':'+ date.getSeconds();
+
+    const headers = new HttpHeaders()
+      .set("Authorization", "Bearer "+this.userToken),
+    data = this.loadsheetData;
+    data.timestamp = timeStamp;
+
+    return this.http.post(this.API_BASE_URL+'/submit-maintenance',data,{headers});
   }
 
 }

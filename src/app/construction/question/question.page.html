@@ -47,7 +47,7 @@
         </ion-item>
       </ion-radio-group>
 
-      <div *ngIf="item.value == 'no'">
+      <div *ngIf="item.answer == 'no'">
         <div class="header">Add comment / note</div>
         <ion-item class="ion-margin">
           <ion-textarea rows="6" placeholder="Tap here to start typing..." (change)="noteChanged(item.id, $event.target.value)"></ion-textarea>

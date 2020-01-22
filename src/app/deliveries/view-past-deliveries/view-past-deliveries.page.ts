@@ -33,7 +33,7 @@ export class ViewPastDeliveriesPage implements OnInit {
     console.log(results);
     this.general.allDeliveries = results.result;
 
-    this.pastDeliveries = _.filter(results.result, ['loadsheet_status', "completed"]);
+    this.pastDeliveries = _.filter(results.result, ['delivery_status', "completed"]);
     this.isLoading = false;
     if(results.status != 200) this.general.presentAlertMsg(results.message);
   }

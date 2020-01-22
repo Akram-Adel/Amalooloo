@@ -34,6 +34,7 @@ export class MaintenanceProjectListPage implements OnInit {
 
   loadMaintenanceProjects(results:any) {
     this.isLoading = false;
+    this.general.loadsheetData.maintenance_id = this.maintenanceId;
     this.maintenanceProjects = results.result;
 
     console.log('Maintenance Projects Result', results);

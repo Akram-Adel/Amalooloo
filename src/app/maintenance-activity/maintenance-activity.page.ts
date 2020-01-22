@@ -29,6 +29,7 @@ export class MaintenanceActivityPage implements OnInit {
 
   loadMaintenance(results:any) {
     this.isLoading = false;
+    this.general.loadsheetData.user_id = this.general.userObject.id;
     this.maintenanceProjects = results.result;
 
     console.log('Maintenance Result', results);

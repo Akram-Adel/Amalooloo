@@ -14,6 +14,7 @@ export class QuestionPage implements OnInit {
 
   isLoading = true;
   questionList:any;
+  questionList_toSend:any = [];
 
   constructor(
     private router: Router,
@@ -26,9 +27,13 @@ export class QuestionPage implements OnInit {
       this.questionList = res.result
 
       for (let i = 0; i < this.questionList.length; i++) {
-        this.questionList[i].value = null;
-        this.questionList[i].note = null;
-        this.questionList[i].question_id = this.questionList[i].id;
+        this.questionList_toSend.push({answer: null, note: 'null', question_id: null});
+      }
+      for (let i = 0; i < this.questionList.length; i++) {
+        this.questionList[i].answer = null;
+        this.questionList_toSend[i].answer = null;
+        this.questionList_toSend[i].note = 'null';
+        this.questionList_toSend[i].question_id = this.questionList[i].id.toString();
       }
 
       this.isLoading = false;
@@ -38,22 +43,23 @@ export class QuestionPage implements OnInit {
 
   answer(id:number, value:string) {
     let index = _.findIndex(this.questionList, ['id', id]);
-    this.questionList[index].value = value;
+    this.questionList[index].answer = value;
+    this.questionList_toSend[index].answer = value;
   }
   noteChanged(id:number, note:string) {
     let index = _.findIndex(this.questionList, ['id', id]);
-    this.questionList[index].note = note;
+    this.questionList_toSend[index].note = note;
   }
 
   next() {
-    let index = _.findIndex(this.questionList, ['value', null]);
+    let index = _.findIndex(this.questionList, ['answer', null]);
 
     if(index != -1) {
       this.general.presentAlertMsg('Please answer all the questions');
       return;
     }
 
-    this.general.loadsheetData.question_details = this.questionList;
+    this.general.loadsheetData.question_details = this.questionList_toSend;
     this.router.navigate(['construction/construction-feedback']);
   }
 

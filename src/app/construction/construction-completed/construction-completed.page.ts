@@ -17,11 +17,20 @@ export class ConstructionCompletedPage implements OnInit {
       this.isConnecting = false;
 
     } else {
-      this.general.submitConstruction().subscribe(res => {
-        this.isConnecting = false;
+      if (this.general.constructionStatus == 'Construction') {
+        this.general.submitConstruction().subscribe(res => {
+          this.isConnecting = false;
 
-        console.log(res);
-      })
+          console.log(res);
+        });
+
+      } else {
+        this.general.submitMaintenance().subscribe(res => {
+          this.isConnecting = false;
+
+          console.log(res);
+        });
+      };
     }
   }
 
