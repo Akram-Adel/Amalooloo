@@ -20,6 +20,7 @@ export class ConstructionCompletedPage implements OnInit {
       if (this.general.constructionStatus == 'Construction') {
         this.general.submitConstruction().subscribe(res => {
           this.isConnecting = false;
+          this.general.loadsheetData_CleanUp();
 
           console.log(res);
         });
@@ -27,6 +28,7 @@ export class ConstructionCompletedPage implements OnInit {
       } else {
         this.general.submitMaintenance().subscribe(res => {
           this.isConnecting = false;
+          this.general.loadsheetData_CleanUp();
 
           console.log(res);
         });

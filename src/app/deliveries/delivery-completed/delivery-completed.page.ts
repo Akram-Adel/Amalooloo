@@ -19,6 +19,7 @@ export class DeliveryCompletedPage implements OnInit {
     } else {
       this.general.submitDelivery().subscribe(res => {
         this.isConnecting = false;
+        this.general.loadsheetData_CleanUp();
 
         console.log(res);
       })
