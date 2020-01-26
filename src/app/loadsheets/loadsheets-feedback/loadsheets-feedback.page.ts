@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { Router } from '@angular/router';
 import { GeneralService } from 'src/app/general-service/general.service';
+import { Plugins, CameraResultType } from '@capacitor/core';
 
+const { Camera } = Plugins;
 import * as _ from 'lodash';
 
 @Component({
@@ -28,6 +30,9 @@ export class LoadsheetsFeedbackPage implements OnInit {
     public general:GeneralService) { }
 
   ngOnInit() {
+    this.Photo1 = null;
+    this.Photo2 = null;
+    this.Photo3 = null;
     if(this.general.allLoadsheets  && this.general.allLoadsheets != null) {
       this.loadsheet = _.filter(this.general.allLoadsheets, ['loadsheet_id', this.general.loadsheetData.loadsheet_id])[0];
       this.completedStatus = this.general.isLoadsheetCompleted;
@@ -41,15 +46,22 @@ export class LoadsheetsFeedbackPage implements OnInit {
     console.log(this.loadsheet);
   }
 
-  getImages() {
+  async getImages() {
     if(!this.completedStatus) {
-      this.options = {
-        maximumImagesCount: 3,
-        width: 400,
-        height: 600,
+      // this.options = {
+      //   maximumImagesCount: 3,
+      //   width: 400,
+      //   height: 600,
+      //   quality: 40,
+      //   outputType: 1
+      // };
+
+
+      const image = await Camera.getPhoto({
         quality: 40,
-        outputType: 1
-      };
+        allowEditing: true,
+        resultType: CameraResultType.Base64
+      });
 
       this.imageResponse = [];
       this.imagePicker.getPictures(this.options).then((results) => {
@@ -63,6 +75,56 @@ export class LoadsheetsFeedbackPage implements OnInit {
       this.Photo1 = this.imageResponse[0];
       this.Photo2 = this.imageResponse[1];
       this.Photo3 = this.imageResponse[2];
+    }
+  }
+  async getImage1() {
+    if(!this.completedStatus) {
+  
+
+      const image = await Camera.getPhoto({
+        quality: 40,
+        allowEditing: true,
+        saveToGallery:true,
+        resultType: CameraResultType.Base64
+      });
+
+
+      this.Photo1 = image.base64String;
+ 
+    }
+  }
+  async getImage2() {
+    if(!this.completedStatus) {
+
+      const image = await Camera.getPhoto({
+        quality: 40,
+        allowEditing: true,
+        saveToGallery:true,
+        resultType: CameraResultType.Base64
+      });
+
+
+      this.Photo2 = image.base64String;
+ 
+
+    }
+  }
+  async getImage3() {
+    if(!this.completedStatus) {
+ 
+
+      const image = await Camera.getPhoto({
+        quality: 40,
+        allowEditing: true,
+        saveToGallery:true,
+        resultType: CameraResultType.Base64
+      });
+
+
+      this.Photo3 = image.base64String;
+ 
+
+
     }
   }
 

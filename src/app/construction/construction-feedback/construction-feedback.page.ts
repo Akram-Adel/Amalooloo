@@ -30,13 +30,18 @@ export class ConstructionFeedbackPage implements OnInit {
   }
 
   async takePicture(number:number) {
+
+    // let photo = this.sanitizer.bypassSecurityTrustResourceUrl(image && (image.dataUrl));
+
     const image = await Camera.getPhoto({
-      quality: 100,
+      quality: 40,
       allowEditing: true,
-      resultType: CameraResultType.DataUrl,
-      source: CameraSource.Camera
+      saveToGallery:true,
+      resultType: CameraResultType.Base64
     });
-    let photo = this.sanitizer.bypassSecurityTrustResourceUrl(image && (image.dataUrl));
+
+
+  let photo = image.base64String;
 
     switch (number) {
       case 1:
