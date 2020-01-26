@@ -13,18 +13,15 @@
     <ion-grid class="ion-margin">
       <ion-row class="header"> Add Photo </ion-row>
 
-      <ion-row class="ion-margin-bottom" >
-        <ion-col>
-          <img  (click)="getImage1()"  *ngIf="Photo1 == null " src="../../../assets/imgs/ic_camera.png">
-          <img *ngIf="Photo1 != null " src="Photo1">
+      <ion-row class="ion-margin-bottom vertical-center">
+        <ion-col (click)="takePicture(1)">
+          <img [src]="Photo1 ? Photo1_src : '../../../assets/imgs/ic_camera.png'">
         </ion-col>
-        <ion-col>
-          <img (click)="getImage2()"  *ngIf="Photo2 == null " src="../../../assets/imgs/ic_camera.png">
-          <img  *ngIf="Photo2 != null " src="Photo2">
+        <ion-col (click)="takePicture(2)">
+          <img [src]="Photo2 ? Photo2_src : '../../../assets/imgs/ic_camera.png'">
         </ion-col>
-        <ion-col>
-          <img  (click)="getImage3()" *ngIf="Photo3 == null " src="../../../assets/imgs/ic_camera.png">
-          <img *ngIf="Photo3 != null " src="Photo3">
+        <ion-col (click)="takePicture(3)">
+          <img [src]="Photo3 ? Photo3_src : '../../../assets/imgs/ic_camera.png'">
         </ion-col>
       </ion-row>
 

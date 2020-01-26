@@ -9,6 +9,7 @@ import { Subject, Observable } from 'rxjs';
 export class GeneralService {
 
   API_BASE_URL = 'http://41.76.108.45/api'
+  Image_BASE_URL = 'http://41.76.108.45/images'
 
   emailPattern:RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -21,7 +22,7 @@ export class GeneralService {
   public constructionStatus = "Construction";
   public notifications = [];
 
-  public userToken:string = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjg4LCJpc3MiOiJodHRwOi8vNDEuNzYuMTA4LjQ1L2FwaS9sb2dpbiIsImlhdCI6MTU3OTcyMzQyNCwiZXhwIjoxNTc5NzU5NDI0LCJuYmYiOjE1Nzk3MjM0MjQsImp0aSI6IjBWMlNETHVSd3BGZmVFQzAifQ.bKFp5GVVvH0RcJKf8sO6hBfcefAE1QdLbp1EMvR_DqA";
+  public userToken:string = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjg4LCJpc3MiOiJodHRwOi8vNDEuNzYuMTA4LjQ1L2FwaS9sb2dpbiIsImlhdCI6MTU4MDA2MTE4MiwiZXhwIjoxNTgwMDk3MTgyLCJuYmYiOjE1ODAwNjExODIsImp0aSI6IlpXclBqRzhGbU1rVXBwb0wifQ.lava4vRcmR1-3FqrLxaJF88CpUMmL1W2Yn_XNE0Azoc";
   public userObject:any;
 
   constructor(
@@ -387,6 +388,75 @@ export class GeneralService {
     data.timestamp = timeStamp;
 
     return this.http.post(this.API_BASE_URL+'/submit-maintenance',data,{headers});
+  }
+  loadsheetData_CleanUp() {
+    this.loadsheetData = {
+      loadsheet_id: null,
+      delivery_id: null,
+      project_id: null,
+      construction_id: null,
+      maintenance_id: null,
+      user_id: null,
+
+
+      order_details: [{
+        order_id: null,
+        product_details: [{
+          product_id: null,
+          components: [],
+          component_details: [],
+        }]
+      }],
+
+
+      verify_loaded: {
+        image_1: "null", image_2: "null", image_3: "null",
+        note: null
+      },
+      verify_delivered: {
+        image_1: "null", image_2: "null", image_3: "null",
+        note: null
+      },
+      verify_construction: {
+        image_1: "null", image_2: "null", image_3: "null",
+        note: null
+      },
+
+
+      driver_details: {
+        name: null, surname: null,
+        sign: null
+      },
+      betram_emp_details: {
+        name: null, surname: null,
+        time: null,
+        sign: null
+      },
+      contractor_details: {
+        name: null, surname: null,
+        sign: null,
+      },
+      beneficiary_details: {
+        name: null, surname: null,
+        sign: null,
+      },
+
+      beneficiary_id: null,
+      beneficiary_stand_no: null,
+      beneficiary_description: null,
+      question_details: [{
+        question_id: null,
+        answer: null,
+        note: null
+      }],
+      contractor_id: null,
+      construction_address: null,
+      const_latitude: null,
+      const_longitude: null,
+
+      vehicle_reg_no: null,
+      timestamp: null
+    }
   }
 
 }

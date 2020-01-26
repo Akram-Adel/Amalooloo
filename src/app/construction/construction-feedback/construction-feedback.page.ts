@@ -15,10 +15,10 @@ import * as _ from 'lodash';
 export class ConstructionFeedbackPage implements OnInit {
 
   imageResponse: any;
-  options: any;
-  Photo1:any;
-  Photo2:any;
-  Photo3:any;
+  photo:SafeResourceUrl;
+  Photo1:any; Photo1_src:any;
+  Photo2:any; Photo2_src:any;
+  Photo3:any; Photo3_src:any;
   note:string = '';
 
   constructor(
@@ -30,34 +30,35 @@ export class ConstructionFeedbackPage implements OnInit {
   }
 
   async takePicture(number:number) {
-
-    // let photo = this.sanitizer.bypassSecurityTrustResourceUrl(image && (image.dataUrl));
-
     const image = await Camera.getPhoto({
       quality: 40,
       allowEditing: true,
-      saveToGallery:true,
-      resultType: CameraResultType.Base64
+      saveToGallery: true,
+      resultType: CameraResultType.Base64,
+      source: CameraSource.Camera
     });
-
-
-  let photo = image.base64String;
+    this.photo = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpeg;base64,' + image.base64String);
+    console.log('image-Base64 ',image.base64String);
 
     switch (number) {
       case 1:
-        this.Photo1 = photo;
+        this.Photo1 = image.base64String;
+        this.Photo1_src = this.photo;
         break;
 
       case 2:
-        this.Photo2 = photo;
+        this.Photo2 = image.base64String;
+        this.Photo2_src = this.photo;
         break;
 
       case 3:
-        this.Photo3 = photo;
+        this.Photo3 = image.base64String;
+        this.Photo3_src = this.photo;
         break;
 
       default:
-        this.Photo1 = photo;
+        this.Photo1 = image.base64String;
+        this.Photo1_src = this.photo;
         break;
     }
   }
