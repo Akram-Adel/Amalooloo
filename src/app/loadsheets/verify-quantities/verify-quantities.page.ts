@@ -66,8 +66,12 @@ export class VerifyQuantitiesPage implements OnInit {
       this.location.back();
 
     } else {
-      let isEmpty = _.findIndex(this.product.components, ['load_quantity',0]),
-      isNull = _.findIndex(this.product.components, ['load_quantity','']);
+      let text:string;
+      if(this.general.allLoadsheets  && this.general.allLoadsheets != null) text = 'load_quantity';
+      if(this.general.allDeliveries && this.general.allDeliveries != null) text = 'delivered_quantity';
+
+      let isEmpty = _.findIndex(this.product.components, [text,0]),
+      isNull = _.findIndex(this.product.components, [text,'']);
       if(isEmpty != -1 || isNull != -1) {
         this.general.presentAlertMsg('Please fill all the quantities');
         return;
