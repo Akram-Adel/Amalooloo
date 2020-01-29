@@ -17,8 +17,11 @@ export class LoadsheetCompletedPage implements OnInit {
       this.isConnecting = false;
 
     } else {
-      this.general.submitLoadsheet().subscribe(res => {
+      this.general.submitLoadsheet().subscribe((res:any) => {
         this.isConnecting = false;
+        if(res.status != '200') {
+          this.general.presentAlertMsg(res.message);
+        }
         this.general.loadsheetData_CleanUp();
 
         console.log(res);

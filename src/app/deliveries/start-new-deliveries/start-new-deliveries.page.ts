@@ -36,6 +36,7 @@ export class StartNewDeliveriesPage implements OnInit {
     this.deliveryProjects = _.filter(this.general.allDeliveries, ['delivery_status', "initiated"]);;
     this.isLoading = false;
     if(results.status != 200) this.general.presentAlertMsg(results.message);
+    if(this.deliveryProjects.length == 0) this.general.presentAlertMsg('No Data Found');
   }
 
 }

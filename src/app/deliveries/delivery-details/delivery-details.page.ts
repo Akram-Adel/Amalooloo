@@ -32,6 +32,7 @@ export class DeliveryDetailsPage implements OnInit {
     this.general.getDeliveryDetail(this.loadsheet.id).subscribe((res:any) => this.general.detailedDelivery = res.result[0])
     if(this.loadsheet.delivery_status != "completed") {
       this.general.isDeliveryCompleted = false;
+      this.general.loadsheetData.delivery_id = this.loadsheet.id;
       this.buttonText = 'Add Delivered Quantities'
 
     } else {this.general.isDeliveryCompleted = true}

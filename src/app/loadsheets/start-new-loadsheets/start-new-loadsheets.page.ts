@@ -36,6 +36,7 @@ export class StartNewLoadsheetsPage implements OnInit {
     this.loadsheetsProjects = _.filter(this.general.allLoadsheets, ['loadsheet_status', "initiated"]);
     this.isLoading = false;
     if(results.status != 200) this.general.presentAlertMsg(results.message);
+    if(this.loadsheetsProjects.length == 0) this.general.presentAlertMsg('No Data Found');
   }
 
 }

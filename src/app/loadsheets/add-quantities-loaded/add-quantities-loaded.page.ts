@@ -49,13 +49,7 @@ export class AddQuantitiesLoadedPage implements OnInit {
 
 
   loadingDone() {
-    if(this.general.allLoadsheets  && this.general.allLoadsheets != null) {
-      this.general.loadsheetData.loadsheet_id = this.loadsheetId;
-
-    } else {
-      this.general.loadsheetData.delivery_id = this.loadsheetId;
-      this.general.loadsheetData.loadsheet_id = this.general.detailedDelivery.loadsheet_id;
-    }
+    this.general.loadsheetData.loadsheet_id = this.loadsheetId;
     this.loadedQuantities = this.general.allOrders;
 
     if(!this.completedStatus) this.buttonText = "Capture Quantities";

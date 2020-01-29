@@ -30,6 +30,7 @@ export class LoginPage implements OnInit {
         // email: ['mminelek1992@gmail.com', [Validators.required, Validators.pattern(this.general.emailPattern)]],
         // email: ['hppmoloto@gmail.com', [Validators.required, Validators.pattern(this.general.emailPattern)]],
         // email: ['chontamo@gmail.com', [Validators.required, Validators.pattern(this.general.emailPattern)]],
+        // email: ['makgothola@gmail.com', [Validators.required, Validators.pattern(this.general.emailPattern)]],
         // password: ['123qwe', Validators.required],
 
         email: [null, [Validators.required, Validators.pattern(this.general.emailPattern)]],

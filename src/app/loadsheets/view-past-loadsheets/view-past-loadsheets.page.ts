@@ -36,6 +36,7 @@ export class ViewPastLoadsheetsPage implements OnInit {
     this.pastLoadsheets = _.filter(results.result, ['loadsheet_status', "completed"]);
     this.isLoading = false;
     if(results.status != 200) this.general.presentAlertMsg(results.message);
+    if(this.pastLoadsheets.length == 0) this.general.presentAlertMsg('No Data Found');
   }
 
 }

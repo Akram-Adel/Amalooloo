@@ -36,6 +36,7 @@ export class ViewPastDeliveriesPage implements OnInit {
     this.pastDeliveries = _.filter(results.result, ['delivery_status', "completed"]);
     this.isLoading = false;
     if(results.status != 200) this.general.presentAlertMsg(results.message);
+    if(this.pastDeliveries.length == 0) this.general.presentAlertMsg('No Data Found');
   }
 
 }
