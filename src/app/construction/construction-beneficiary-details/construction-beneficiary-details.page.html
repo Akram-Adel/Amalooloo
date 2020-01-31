@@ -8,19 +8,19 @@
 </ion-header>
 
 <ion-content color="light">
-  <div class="header">Please enter beneficiary details below:</div>
+  <div class="header">{{formUI.header}}</div>
 
   <ion-grid class="ion-margin">
     <form [formGroup]="beneficiaryForm">
       <div class="login-container">
         <ion-item class="ion-margin-bottom">
-          <ion-label position="stacked">Name</ion-label>
-          <ion-input type="text" placeholder="Name" class="icon-user" formControlName="name"></ion-input>
+          <ion-label position="stacked">{{ formUI.name }}</ion-label>
+          <ion-input type="text" [placeholder]="formUI.name" class="icon-user" formControlName="name"></ion-input>
         </ion-item>
 
         <ion-item class="ion-margin-bottom">
-          <ion-label position="stacked">Surname</ion-label>
-          <ion-input type="text" placeholder="Surname" class="icon-user" formControlName="surname"></ion-input>
+          <ion-label position="stacked">{{ formUI.surname }}</ion-label>
+          <ion-input type="text" [placeholder]="formUI.surname" class="icon-user" formControlName="surname"></ion-input>
         </ion-item>
       </div>
 

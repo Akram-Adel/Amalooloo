@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content color="light">
-  <div class="header">Please enter Betram employee details below:</div>
+  <div class="header">{{ formUI }}</div>
 
   <ion-grid class="ion-margin">
     <form [formGroup]="betramForm">
@@ -40,6 +40,6 @@
 
   <div class="button-container">
     <ion-button shape="round" class="login-button extra-margin-top ion-margin-bottom"
-    (click)="next()">Next</ion-button>
+    (click)="next()">Submit</ion-button>
   </div>
 </ion-content>

@@ -17,28 +17,28 @@
         </ion-item>
 
         <ion-item class="ion-margin-bottom ion-margin-top" color="light">
-          <ion-label position="stacked">Beneficiary Name</ion-label>
-          <ion-input type="text" placeholder="Beneficiary Name" formControlName="firstname" class="icon-user"></ion-input>
+          <ion-label position="stacked">{{ formUI.name }}</ion-label>
+          <ion-input type="text" [placeholder]="formUI.name" formControlName="firstname" class="icon-user"></ion-input>
         </ion-item>
 
         <ion-item class="ion-margin-bottom" color="light">
-          <ion-label position="stacked">Beneficiary Surname</ion-label>
-          <ion-input type="text" placeholder="Beneficiary Surname" formControlName="surname" class="icon-user"></ion-input>
+          <ion-label position="stacked">{{ formUI.surname }}</ion-label>
+          <ion-input type="text" [placeholder]="formUI.surname" formControlName="surname" class="icon-user"></ion-input>
         </ion-item>
 
         <ion-item class="ion-margin-bottom" color="light">
           <ion-label position="stacked">Address</ion-label>
-          <ion-input type="text" placeholder="Construction Address" formControlName="address" class="icon-home2"></ion-input>
+          <ion-input type="text" [placeholder]="Address" formControlName="address" class="icon-home2"></ion-input>
         </ion-item>
 
         <ion-item class="ion-margin-bottom" color="light">
-          <ion-label position="stacked">Beneficiary ID-Number</ion-label>
-          <ion-input type="text" pattern="\d*" maxlength="13" placeholder="Beneficiary ID-Number" formControlName="idNo" class="icon-profile"></ion-input>
+          <ion-label position="stacked">{{ formUI.id_number }}</ion-label>
+          <ion-input type="text" pattern="\d*" maxlength="13" [placeholder]="formUI.id_number" formControlName="idNo" class="icon-profile"></ion-input>
         </ion-item>
 
         <ion-item class="ion-margin-bottom" color="light">
-          <ion-label  position="stacked">Beneficiary Stand No</ion-label>
-          <ion-input type="number" placeholder="Beneficiary Stand No" formControlName="standNo" class="icon-profile"></ion-input>
+          <ion-label  position="stacked">{{ formUI.stand_number }}</ion-label>
+          <ion-input type="text" [placeholder]="formUI.stand_number" formControlName="standNo" class="icon-profile"></ion-input>
         </ion-item>
 
         <div  class="header">Description</div>

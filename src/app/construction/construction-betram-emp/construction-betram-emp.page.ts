@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class ConstructionBetramEmpPage implements OnInit {
 
   betramForm:FormGroup;
+  formUI:string;
 
   constructor(
     private fb:FormBuilder,
@@ -26,6 +27,16 @@ export class ConstructionBetramEmpPage implements OnInit {
     }
 
   ngOnInit() {
+    this.setUIChanges();
+  }
+
+  setUIChanges() {
+    if (this.general.constructionType == 'school') {
+      this.formUI = 'Please enter Amalooloo Representative details below';
+
+    } else {
+      this.formUI = 'Please enter Betram employee details below:';
+    }
   }
 
 

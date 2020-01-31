@@ -17,12 +17,9 @@ export class GeneralService {
   customerMode$:Observable<boolean> = this.mode.asObservable();
 
   public customerMode:boolean;
-  public constructionID:number;
-  public constructionNumber:number;
-  public constructionStatus = "Construction";
   public notifications = [];
 
-  public userToken:string = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjg4LCJpc3MiOiJodHRwOi8vNDEuNzYuMTA4LjQ1L2FwaS9sb2dpbiIsImlhdCI6MTU4MDA2MTE4MiwiZXhwIjoxNTgwMDk3MTgyLCJuYmYiOjE1ODAwNjExODIsImp0aSI6IlpXclBqRzhGbU1rVXBwb0wifQ.lava4vRcmR1-3FqrLxaJF88CpUMmL1W2Yn_XNE0Azoc";
+  public userToken:string = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjc3LCJpc3MiOiJodHRwOi8vNDEuNzYuMTA4LjQ1L2FwaS9sb2dpbiIsImlhdCI6MTU4MDQ3MjQxNywiZXhwIjoxNTgwNTA4NDE3LCJuYmYiOjE1ODA0NzI0MTcsImp0aSI6Im5qcExldkhkZ0hkRUZpbTcifQ.QwL_1cHDKpL_yiz3ZwrhDTCP8_nHifs7ROWsi7sHJpc";
   public userObject:any;
 
   constructor(
@@ -58,7 +55,8 @@ export class GeneralService {
   // API Session Data
   public allLoadsheets:any; public isLoadsheetCompleted:boolean;
   public allDeliveries:any; public isDeliveryCompleted:boolean; public detailedDelivery:any;
-  public isNewConstruction:boolean = true;
+  public constructionID:number; public constructionNumber:number; public constructionStatus = "Construction";
+  public isNewConstruction:boolean = true; public constructionType:string;
   public allOrders = [];
 
   // API CLASS FUNCTIONS

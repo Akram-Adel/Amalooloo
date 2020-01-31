@@ -16,6 +16,7 @@ export class BeginConstructionPage implements OnInit {
 
   requestForm:FormGroup;
   GPS:any;
+  formUI:any;
 
   constructor(
     private fb:FormBuilder,
@@ -36,6 +37,7 @@ export class BeginConstructionPage implements OnInit {
   ngOnInit() {
     this.getCurrentPosition();
     this.fillFormData();
+    this.setUIChanges();
   }
 
   async getCurrentPosition() {
@@ -55,6 +57,25 @@ export class BeginConstructionPage implements OnInit {
     if(sheetData.beneficiary_description) requestControls.description.setValue(sheetData.beneficiary_description);
   }
 
+  setUIChanges() {
+    if (this.general.constructionType == 'school') {
+      this.formUI = {
+        name: 'School Name',
+        surname: 'Principal',
+        id_number: 'National EMIS No',
+        stand_number: 'SGB Chairman'
+      }
+
+    } else {
+      this.formUI = {
+        name: 'Beneficiary Name',
+        surname: 'Beneficiary Surname',
+        id_number: 'Beneficiary ID-Number',
+        stand_number: 'Beneficiary Stand No'
+      }
+    }
+  }
+
 
   async SubmitRequest(){
     if(!this.requestForm.valid) {
@@ -62,6 +83,8 @@ export class BeginConstructionPage implements OnInit {
       return;
     }
 
+    this.general.loadsheetData.beneficiary_details.name = this.requestForm.value.firstname;
+    this.general.loadsheetData.beneficiary_details.surname = this.requestForm.value.surname
     this.general.loadsheetData.construction_address = this.requestForm.value.address;
     this.general.loadsheetData.beneficiary_id = +this.requestForm.value.idNo;
     this.general.loadsheetData.beneficiary_stand_no = this.requestForm.value.standNo.toString();

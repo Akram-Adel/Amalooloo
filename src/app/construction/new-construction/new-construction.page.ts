@@ -40,4 +40,16 @@ export class NewConstructionPage implements OnInit {
     if(results.status != 200) this.general.presentAlertMsg(results.message);
   }
 
+  setConstructionData(construction:any) {
+    this.general.constructionType = construction.project_type;
+
+    if(this.status == 'running') {
+      let sheetData = this.general.loadsheetData;
+
+      sheetData.beneficiary_details.name = construction.project_name;
+      sheetData.beneficiary_details.surname = construction.project_manager_name;
+      sheetData.construction_address = construction.project_location;
+    }
+  }
+
 }

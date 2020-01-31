@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class ConstructionBeneficiaryDetailsPage implements OnInit {
 
   beneficiaryForm:FormGroup;
+  formUI:any;
 
   constructor(
     private fb:FormBuilder,
@@ -26,6 +27,33 @@ export class ConstructionBeneficiaryDetailsPage implements OnInit {
     }
 
   ngOnInit() {
+    this.fillFormData();
+    this.setUIChanges();
+  }
+
+  fillFormData() {
+    let requestControls = this.beneficiaryForm.controls,
+      sheetData = this.general.loadsheetData;
+
+    if(sheetData.beneficiary_details.name) requestControls.name.setValue(sheetData.beneficiary_details.name);
+    if(sheetData.beneficiary_details.surname) requestControls.surname.setValue(sheetData.beneficiary_details.surname);
+  }
+
+  setUIChanges() {
+    if (this.general.constructionType == 'school') {
+      this.formUI = {
+        header: 'Please enter School Representative details below:',
+        name: 'School Name',
+        surname: 'Principal',
+      }
+
+    } else {
+      this.formUI = {
+        header: 'Please enter beneficiary details below:',
+        name: 'Beneficiary Name',
+        surname: 'Beneficiary Surname',
+      }
+    }
   }
 
 

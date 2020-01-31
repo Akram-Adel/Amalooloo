@@ -40,8 +40,9 @@
           <img src="../../../assets/imgs/ic_profile_2.png">
         </ion-thumbnail>
         <ion-label>
-          <b>Contractor Name: </b> {{item.contractor_name}} <br>
+          <b>Contractor Name: </b> {{item.contractor_name}}
         </ion-label>
+        <span slot="end" style="margin: 0;">{{item.done}} / {{item.construction_unit}}</span>
       </ion-item>
     </ion-list>
   </div>
