@@ -28,7 +28,7 @@
 
         <ion-item class="ion-margin-bottom" color="light">
           <ion-label position="stacked">Address</ion-label>
-          <ion-input type="text" [placeholder]="Address" formControlName="address" class="icon-home2"></ion-input>
+          <ion-input type="text" placeholder="Address" formControlName="address" class="icon-home2"></ion-input>
         </ion-item>
 
         <ion-item class="ion-margin-bottom" color="light">
@@ -54,6 +54,6 @@
     (click)="SubmitRequest()">Complete Checklist</ion-button>
 
     <ion-button shape="round" class="login-button" color="danger"
-    [routerDirection]="'back'" [routerLink]="['/construction/project-details']">Cancel Request</ion-button>
+    [routerDirection]="'back'" [routerLink]="['/construction/project-details', general.loadsheetData.project_id]">Cancel Request</ion-button>
   </div>
 </ion-content>
