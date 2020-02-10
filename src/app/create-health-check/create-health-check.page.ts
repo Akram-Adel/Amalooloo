@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import {NavController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Plugins, CameraResultType, CameraSource } from '@capacitor/core';
@@ -28,6 +29,7 @@ export class CreateHealthCheckPage implements OnInit {
   constructor(
     private sanitizer: DomSanitizer,
     private route:ActivatedRoute,
+    private navCtrl: NavController,
     private fb:FormBuilder,
     public general:GeneralService) {
 
@@ -90,8 +92,14 @@ export class CreateHealthCheckPage implements OnInit {
       data.construction_id = this.constructionId;
     this.general.submitHealthCheck(data).subscribe((res:any) => {
       this.isConnecting = false;
-      if(res.code != 200) {
+      if(res.id) {
+        this.general.presentAlertHandler(
+          'Health Check has been successfully created!',
+          () => {this.navCtrl.navigateRoot('maintenance-select')}
+          )
 
+      } else {
+        this.general.presentAlertMsg('Something went wrong!!');
       }
 
       console.log(res);

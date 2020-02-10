@@ -47,15 +47,6 @@ export class LoginPage implements OnInit {
     this.menuCtrl.enable(false);
   }
 
-  async presentAlert() {
-    const alert = await this.alertController.create({
-      header: 'Error',
-      message: 'Incorrect username or password ',
-      buttons: ['OK']
-    });
-
-    await alert.present();
-  }
   async getDeviceInfo() {
     const info = await Device.getInfo();
     this.loginForm.controls.device_type.setValue(info.platform);
@@ -75,7 +66,7 @@ export class LoginPage implements OnInit {
         console.log(data.result.token);
 
       } else {
-        this.presentAlert();
+        this.general.presentAlertMsg('Incorrect username or password');
       }
     });
   }

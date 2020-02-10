@@ -8,8 +8,8 @@ import { Subject, Observable } from 'rxjs';
 })
 export class GeneralService {
 
-  API_BASE_URL = 'https://amalooloo/api'
-  Image_BASE_URL = 'https://amalooloo/images'
+  API_BASE_URL = 'https://amalooloo.group/api'
+  Image_BASE_URL = 'https://amalooloo.group/images'
 
   emailPattern:RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -19,7 +19,7 @@ export class GeneralService {
   public customerMode:boolean;
   public notifications = [];
 
-  public userToken:string = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjc3LCJpc3MiOiJodHRwOi8vNDEuNzYuMTA4LjQ1L2FwaS9sb2dpbiIsImlhdCI6MTU4MTM0OTQ0NiwiZXhwIjoxNTgxMzg1NDQ2LCJuYmYiOjE1ODEzNDk0NDYsImp0aSI6IjhsSzd1VUtORGZKSnp3T2UifQ.1U6RdmjtKvYfgH5A37x4kELxixPzQmjM_lI3nco-87c";
+  public userToken:string = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjc3LCJpc3MiOiJodHRwczovL2FtYWxvb2xvby5ncm91cC9hcGkvbG9naW4iLCJpYXQiOjE1ODEzNTE0NzYsImV4cCI6MTU4MTM4NzQ3NiwibmJmIjoxNTgxMzUxNDc2LCJqdGkiOiJHUTVyNDQzWVNPZXBSRnV3In0.UbSntldl3-vNkwPrEFCaDYW15GQtU2XvM6ZdP5vyJ2k";
   public userObject:any;
 
   constructor(
