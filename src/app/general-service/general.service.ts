@@ -19,7 +19,7 @@ export class GeneralService {
   public customerMode:boolean;
   public notifications = [];
 
-  public userToken:string = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjc3LCJpc3MiOiJodHRwOi8vNDEuNzYuMTA4LjQ1L2FwaS9sb2dpbiIsImlhdCI6MTU4MDQ3MjQxNywiZXhwIjoxNTgwNTA4NDE3LCJuYmYiOjE1ODA0NzI0MTcsImp0aSI6Im5qcExldkhkZ0hkRUZpbTcifQ.QwL_1cHDKpL_yiz3ZwrhDTCP8_nHifs7ROWsi7sHJpc";
+  public userToken:string = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjc3LCJpc3MiOiJodHRwOi8vNDEuNzYuMTA4LjQ1L2FwaS9sb2dpbiIsImlhdCI6MTU4MTM0OTQ0NiwiZXhwIjoxNTgxMzg1NDQ2LCJuYmYiOjE1ODEzNDk0NDYsImp0aSI6IjhsSzd1VUtORGZKSnp3T2UifQ.1U6RdmjtKvYfgH5A37x4kELxixPzQmjM_lI3nco-87c";
   public userObject:any;
 
   constructor(
@@ -192,6 +192,15 @@ export class GeneralService {
 
     return this.http.post(this.API_BASE_URL+'/get-construction-list',data,{headers});
   }
+  getUserConstructionList() {
+    const headers = new HttpHeaders()
+      .set("Authorization", "Bearer "+this.userToken),
+    data = {
+      contractor_id: this.userObject.id
+    };
+
+    return this.http.post(this.API_BASE_URL+'/get-construction-contractor-list',data,{headers});
+  }
   getUploadedPdf() {
     const headers = new HttpHeaders()
       .set("Authorization", "Bearer "+this.userToken);
@@ -236,31 +245,6 @@ export class GeneralService {
 
     return this.http.get(this.API_BASE_URL+'/get-my-maintenance-requests',{headers});
   }
-  requestMaintenance(id,gps,image1,image2,image3,firstname,surname,mobile,email) {
-    const headers = new HttpHeaders()
-      .set("Authorization", "Bearer "+this.userToken),
-      data = {
-        construction_id: id,
-        reason_for_request: 'Maintenance Needed',
-        latitude: 12.22,
-        longitude: 12.22,
-        image_1:image1,
-        image_2:image2,
-        image_3:image3,
-        firstname:firstname,
-        surname:surname,
-        mobile:mobile,
-        email:email,
-      }
-
-    return this.http.get(this.API_BASE_URL+'/request-maintenance',{headers});
-  }
-  getQrCode(id:number) {
-    const headers = new HttpHeaders()
-      .set("Authorization", "Bearer "+this.userToken);
-
-    return this.http.get(this.API_BASE_URL+'/get-qrcode?construction_id='+id,{headers});
-  }
   getLoadsheetOrderList(id:number) {
     const headers = new HttpHeaders()
       .set("Authorization", "Bearer "+this.userToken),
@@ -274,6 +258,12 @@ export class GeneralService {
     data = { order_id:id };
 
     return this.http.post(this.API_BASE_URL+'/get-order-detail',data,{headers});
+  }
+  submitHealthCheck(data:any) {
+    const headers = new HttpHeaders()
+      .set("Authorization", "Bearer "+this.userToken);
+
+    return this.http.post(this.API_BASE_URL+'/create-health-check',data,{headers});
   }
 
   public loadsheetData = {

@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Health Check</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <ion-grid>
+    <ion-row>
+      <ion-col [routerDirection]="'forward'" [routerLink]="['/bc-health-check']">
+        <div class="col-inner-conatiner padding">
+          <img src="../../assets/imgs/Amalooloo-App-Maintenance-Icon-20191209@4x.png" height="60px">
+          <div class="text">Via QR-Code Scanning</div>
+        </div>
+      </ion-col>
+
+      <ion-col [routerDirection]="'forward'" [routerLink]="['/user-constructions']">
+        <div class="col-inner-conatiner padding">
+          <img src="../../assets/imgs/Amalooloo-App-Maintenance-Icon-20191209@4x.png" height="60px">
+          <div class="text">Via Construction Selection</div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

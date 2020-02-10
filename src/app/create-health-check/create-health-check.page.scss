@@ -1,0 +1,31 @@
+@import "../../theme/extensions.scss";
+
+ion-grid {
+  background-color: #fff;
+  border-radius: 5px;
+
+  .vertical-center {
+    display: flex;
+    align-items: center;
+
+    img {
+      @extend %block-auto;
+      border: 2px solid #3880ff;
+      border-radius: 100%;
+      width: 80%;
+    }
+  }
+
+  ion-item {
+    width: 100%;
+  }
+}
+
+.login-container {
+  ion-label {
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  ion-input { --padding-start: 15px; }
+}

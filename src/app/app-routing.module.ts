@@ -52,15 +52,15 @@ const routes: Routes = [
     { path: 'construction/view-past-construction',             loadChildren: './construction/view-past-construction/view-past-construction.module#ViewPastConstructionPageModule' },
 
   { path: 'maintenance-select', loadChildren: './maintenance-select/maintenance-select.module#MaintenanceSelectPageModule' },
-  { path: 'maintenance',            loadChildren: './maintenance/maintenance.module#MaintenancePageModule' },
-    { path: 'bc-scanner',           loadChildren: './bc-scanner/bc-scanner.module#BcScannerPageModule' },
-    { path: 'maintenance-activity', loadChildren: './maintenance-activity/maintenance-activity.module#MaintenanceActivityPageModule' },
-      { path: 'maintenance-project-list/:id', loadChildren: './maintenance-project-list/maintenance-project-list.module#MaintenanceProjectListPageModule' },
-      { path: 'maps-marker/:id',              loadChildren: './maps-marker/maps-marker.module#MapsMarkerPageModule' },
-
-
-
-
+    { path: 'maintenance',            loadChildren: './maintenance/maintenance.module#MaintenancePageModule' },
+      { path: 'bc-scanner',           loadChildren: './bc-scanner/bc-scanner.module#BcScannerPageModule' },
+      { path: 'maintenance-activity', loadChildren: './maintenance-activity/maintenance-activity.module#MaintenanceActivityPageModule' },
+        { path: 'maintenance-project-list/:id', loadChildren: './maintenance-project-list/maintenance-project-list.module#MaintenanceProjectListPageModule' },
+        { path: 'maps-marker/:id',              loadChildren: './maps-marker/maps-marker.module#MapsMarkerPageModule' },
+    { path: 'health-check',           loadChildren: './health-check/health-check.module#HealthCheckPageModule' },
+      { path: 'user-constructions',   loadChildren: './user-constructions/user-constructions.module#UserConstructionsPageModule' },
+      { path: 'bc-health-check',      loadChildren: './bc-health-check/bc-health-check.module#BcHealthCheckPageModule' },
+        { path: 'create-health-check/:id',  loadChildren: './create-health-check/create-health-check.module#CreateHealthCheckPageModule' },
 
 ];
 

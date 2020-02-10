@@ -22,7 +22,7 @@ export class QuestionPage implements OnInit {
 
   ngOnInit() {
     let type:number;
-    (this.general.constructionStatus == 'Construction') ? type = 2 : type = 1;
+    (this.general.constructionStatus == 'Construction') ? type = 1 : type = 2;
     this.general.getQuestionList(type).subscribe((res:any) => {
       this.questionList = res.result
 

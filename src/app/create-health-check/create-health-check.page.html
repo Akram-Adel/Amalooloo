@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Create Health Check</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <div class="header">Please fill the below data:</div>
+
+  <ion-grid class="ion-margin">
+    <form [formGroup]="healthForm">
+      <div class="login-container">
+        <ion-item class="ion-margin-bottom">
+          <ion-label position="stacked">Toilet Type</ion-label>
+          <ion-input type="number" placeholder="Toilet Type" formControlName="toilet_type"></ion-input>
+        </ion-item>
+
+        <ion-item class="ion-margin-bottom">
+          <ion-label position="stacked">Toilet Number</ion-label>
+          <ion-input type="text" placeholder="Toilet Number" formControlName="toilet_number"></ion-input>
+        </ion-item>
+
+        <ion-item class="ion-margin-bottom">
+          <ion-label position="stacked">Toilet Grade</ion-label>
+          <ion-input type="text" placeholder="Toilet Grade" formControlName="toilet_grade"></ion-input>
+        </ion-item>
+      </div>
+
+      <ion-row class="header"> Add Photo </ion-row>
+
+      <ion-row class="ion-margin-bottom vertical-center">
+        <ion-col (click)="takePicture(1)">
+          <img [src]="Photo1 ? Photo1_src : '../../../assets/imgs/ic_camera.png'">
+        </ion-col>
+        <ion-col (click)="takePicture(2)">
+          <img [src]="Photo2 ? Photo2_src : '../../../assets/imgs/ic_camera.png'">
+        </ion-col>
+        <ion-col (click)="takePicture(3)">
+          <img [src]="Photo3 ? Photo3_src : '../../../assets/imgs/ic_camera.png'">
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-grid>
+
+  <div class="button-container">
+    <ion-button shape="round" class="login-button extra-margin-top"
+    (click)="submit()">
+      <span *ngIf="!isConnecting">Submit</span>
+      <ion-spinner name="dots" *ngIf="isConnecting"></ion-spinner>
+  </ion-button>
+  </div>
+</ion-content>
