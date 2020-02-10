@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuController } from '@ionic/angular';
 import { GeneralService } from '../general-service/general.service';
 
 @Component({
@@ -8,9 +9,14 @@ import { GeneralService } from '../general-service/general.service';
 })
 export class ModeSelectionPage implements OnInit {
 
-  constructor(private general:GeneralService) { }
+  constructor(
+    public menuCtrl: MenuController,
+    private general:GeneralService) { }
 
   ngOnInit() {
+  }
+  ionViewWillEnter() {
+    this.menuCtrl.enable(false);
   }
 
   selectMode(mode:string) {

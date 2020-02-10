@@ -51,8 +51,8 @@ export class LoadsheetsFeedbackPage implements OnInit {
 
       const image = await Camera.getPhoto({
         quality: 40,
-        allowEditing: true,
-        saveToGallery: true,
+        allowEditing: false,
+        saveToGallery: false,
         resultType: CameraResultType.Base64,
         source: CameraSource.Camera
       });

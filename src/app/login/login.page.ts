@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { MenuController } from '@ionic/angular';
 import { Plugins } from '@capacitor/core';
 const { Device } = Plugins;
-
 import { GeneralService } from '../general-service/general.service';
 
 @Component({
@@ -22,6 +22,7 @@ export class LoginPage implements OnInit {
     private fb:FormBuilder,
     private router: Router,
     private alertController: AlertController,
+    public menuCtrl: MenuController,
     public general:GeneralService) {
 
       this.loginForm = this.fb.group({
@@ -41,6 +42,9 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.getDeviceInfo();
+  }
+  ionViewWillEnter() {
+    this.menuCtrl.enable(false);
   }
 
   async presentAlert() {

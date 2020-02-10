@@ -8,8 +8,8 @@ import { Subject, Observable } from 'rxjs';
 })
 export class GeneralService {
 
-  API_BASE_URL = 'http://41.76.108.45/api'
-  Image_BASE_URL = 'http://41.76.108.45/images'
+  API_BASE_URL = 'https://amalooloo/api'
+  Image_BASE_URL = 'https://amalooloo/images'
 
   emailPattern:RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 

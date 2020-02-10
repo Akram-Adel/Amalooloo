@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
+import { MenuController } from '@ionic/angular';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Plugins, CameraResultType, CameraSource } from '@capacitor/core';
@@ -24,6 +25,7 @@ export class SignupPage implements OnInit {
     private alertController: AlertController,
     private sanitizer: DomSanitizer,
     private router: Router,
+    public menuCtrl: MenuController,
     public general:GeneralService) {
 
     this.signupForm = this.fb.group({
@@ -43,6 +45,9 @@ export class SignupPage implements OnInit {
   ngOnInit() {
     this.isCustomer = this.general.customerMode;
     this.getDeviceInfo();
+  }
+  ionViewWillEnter() {
+    this.menuCtrl.enable(false);
   }
 
 

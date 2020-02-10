@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {NavController, NavParams } from '@ionic/angular';
 import { AnimationItem } from 'lottie-web';
 import { AnimationOptions } from 'ngx-lottie';
-
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-animatedsplash',
@@ -22,14 +22,16 @@ export class AnimatedsplashPage implements OnInit {
 
 
 
-  constructor(public navCtrl: NavController,) {
+  constructor(public navCtrl: NavController,public menuCtrl: MenuController) {
 
 
    }
 
 
 
-
+   ionViewWillEnter() {
+    this.menuCtrl.enable(false);
+  }
 
 
 
@@ -43,7 +45,7 @@ export class AnimatedsplashPage implements OnInit {
     setTimeout(() => {
       this.navCtrl.navigateRoot('mode-selection');
         }, 7500);
- 
+
   }
 
 }
