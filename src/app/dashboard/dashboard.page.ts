@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { TipsPage } from '../tips/tips.page';
 import { GeneralService } from "../general-service/general.service";
-import { Plugins, PushNotification, PushNotificationToken, PushNotificationActionPerformed } from '@capacitor/core';
+import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
+import { Plugins, PushNotification, PushNotificationActionPerformed } from '@capacitor/core';
 const { PushNotifications,Browser,LocalNotifications } = Plugins;
-import { Storage } from '@ionic/storage';
 import { FCM } from "capacitor-fcm";
 const fcm = new FCM();
 
@@ -22,24 +23,43 @@ export class DashboardPage implements OnInit {
 
   constructor(
     private modalController:ModalController,
-    private service:GeneralService,
-    private storage: Storage) { }
+    private router: Router,
+    public menuCtrl: MenuController,
+    private general:GeneralService) { }
 
   ngOnInit() {
+    if( window.localStorage.getItem('KEY_email') ) {
+      let form = {
+        email: window.localStorage.getItem('KEY_email'),
+        password: window.localStorage.getItem('KEY_password'),
+        device_type: 'device_type',
+        device_token: 'device_token'
+      }
 
-    
-    // this.registerPushNotification();
+      this.general.login(form).subscribe((data:any) => {
+        if(data.status == '200') {
+          this.general.userToken = data.result.token;
+          this.general.userObject = data.result;
 
-    //Now gets called manually in the menu
-    // setTimeout(() => {
-    //   this.presentModal();
-    // }, 1000);
+          console.log('AutoLogin Token', data.result.token);
+
+        } else {
+          this.general.presentAlertMsg('Invalid Login Data');
+          window.localStorage.removeItem('KEY_email');
+          this.router.navigate(['/login']);
+        }
+      });
+    }
+
     this.preloadnotifications();
 
-    (this.service.customerMode) ? this.customerview = true : this.employeeview = true;
+    (this.general.customerMode) ? this.customerview = true : this.employeeview = true;
     console.log('CustomerView:',this.customerview);
     console.log('EmployeeView:',this.employeeview);
 
+  }
+  ionViewWillEnter() {
+    this.menuCtrl.enable(true);
   }
 
 
@@ -50,9 +70,9 @@ export class DashboardPage implements OnInit {
     fcm
     .getToken()
     .then(r => {
-      
+
       console.log(`console.log('Push registration success, token:  ${r.token}`);
-    
+
     })
     .catch(err => console.log(err));
 
@@ -116,12 +136,12 @@ export class DashboardPage implements OnInit {
 
   async preloadnotifications (){
 
-    console.log(this.service.userObject);
-    
+    console.log(this.general.userObject);
 
-    this.service.getAllNotifications().subscribe((res:any) =>this.notifications = res.result );
 
-    this.service.notifications = this.notifications;
+    this.general.getAllNotifications().subscribe((res:any) =>this.notifications = res.result );
+
+    this.general.notifications = this.notifications;
 
     this.notifications.forEach(element => {
      this.notificationcount ++;
@@ -145,11 +165,11 @@ export class DashboardPage implements OnInit {
       });
 
      }
-     
+
 
     });
- 
-    
+
+
 
 
 

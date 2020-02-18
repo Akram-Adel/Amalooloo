@@ -44,7 +44,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.general.changeMode(this.customerMode);
     this.general.customerMode$.subscribe(res => {
       this.customerMode = res; this.general.customerMode = res;
@@ -62,6 +61,9 @@ export class AppComponent implements OnInit {
   }
   async openBrowser() {
     await Browser.open({ url: 'https://amalooloo.shop' });
+  }
+  logOut() {
+    window.localStorage.removeItem('KEY_email');
   }
 
 

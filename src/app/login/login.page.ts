@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
 import { MenuController } from '@ionic/angular';
 import { Plugins } from '@capacitor/core';
 const { Device } = Plugins;
@@ -21,7 +20,6 @@ export class LoginPage implements OnInit {
   constructor(
     private fb:FormBuilder,
     private router: Router,
-    private alertController: AlertController,
     public menuCtrl: MenuController,
     public general:GeneralService) {
 
@@ -29,12 +27,12 @@ export class LoginPage implements OnInit {
         // email: ['DumezweniMagugu@amalooloo.co.za', [Validators.required, Validators.pattern(this.general.emailPattern)]],
         // password: ['DumezweniMagugu', Validators.required],
         // email: ['mminelek1992@gmail.com', [Validators.required, Validators.pattern(this.general.emailPattern)]],
-        email: ['hppmoloto@gmail.com', [Validators.required, Validators.pattern(this.general.emailPattern)]],
+        // email: ['hppmoloto@gmail.com', [Validators.required, Validators.pattern(this.general.emailPattern)]],
         // email: ['chontamo@gmail.com', [Validators.required, Validators.pattern(this.general.emailPattern)]],
-        password: ['123qwe', Validators.required],
+        // password: ['123qwe', Validators.required],
 
-        // email: [null, [Validators.required, Validators.pattern(this.general.emailPattern)]],
-        // password: [null, Validators.required],
+        email: [null, [Validators.required, Validators.pattern(this.general.emailPattern)]],
+        password: [null, Validators.required],
         device_token: null,
         device_type: null
       });
@@ -42,6 +40,7 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.getDeviceInfo();
+    if( window.localStorage.getItem('KEY_email') ) this.router.navigate(['/dashboard']);
   }
   ionViewWillEnter() {
     this.menuCtrl.enable(false);
@@ -63,6 +62,9 @@ export class LoginPage implements OnInit {
         this.general.userToken = data.result.token;
         this.general.userObject = data.result;
         this.router.navigate(['/dashboard']);
+
+        window.localStorage.setItem('KEY_email', form.email);
+        window.localStorage.setItem('KEY_password', form.password);
         console.log(data.result.token);
 
       } else {

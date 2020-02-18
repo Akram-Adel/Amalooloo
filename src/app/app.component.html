@@ -33,7 +33,7 @@
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
-    
+
           <ion-menu-toggle auto-hide="false" >
             <ion-item *ngIf="employeeview" [routerDirection]="'forward'" [routerLink]="['/maintenance-select']" >
               <ion-icon slot="start" [name]="'build'"></ion-icon>
@@ -43,7 +43,7 @@
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
-          
+
           <ion-menu-toggle auto-hide="false" >
             <ion-item  *ngIf="customerview" [routerDirection]="'forward'" [routerLink]="['/bc-scanner']" >
               <ion-icon slot="start" [name]="'build'"></ion-icon>
@@ -73,7 +73,7 @@
           </ion-menu-toggle>
 
           <ion-menu-toggle auto-hide="false">
-            <ion-item [routerDirection]="'root'" [routerLink]="['/login']" routerLinkActive="menu-active-item">
+            <ion-item [routerDirection]="'root'" [routerLink]="['/login']" routerLinkActive="menu-active-item" (click)="logOut()">
               <ion-icon slot="start" [name]="'log-out'"></ion-icon>
               <ion-label>
                 Log out
