@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title class="ion-text-center" >Notifications</ion-title>
+    <ion-title>Notifications</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -19,9 +19,6 @@
     <ion-list style="background-color: inherit;">
       <ion-item lines="none" class="col-inner-conatiner margin"
       *ngFor="let item of [1,2,3,4,5,6,7,8]">
-        <ion-thumbnail slot="start">
-          <ion-skeleton-text animated></ion-skeleton-text>
-        </ion-thumbnail>
         <ion-label>
           <h3>
             <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
@@ -40,9 +37,11 @@
   <div *ngIf="!isLoading">
     <ion-list style="background-color: inherit;">
       <ion-item lines="none" class="col-inner-conatiner margin"
-      *ngFor="let item of notifications">
+      *ngFor="let item of notifications"
+      (click)="markRead(item.id)">
         <ion-label >
-          <b>Title: </b> {{item.message}} <br>
+          <b>Date: </b> {{item.created_at.slice(0,16)}} <br>
+          {{item.data.message}} <br>
         </ion-label>
       </ion-item>
     </ion-list>

@@ -19,7 +19,7 @@ export class GeneralService {
   public customerMode:boolean;
   public notifications = [];
 
-  public userToken:string = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjc3LCJpc3MiOiJodHRwczovL2FtYWxvb2xvby5ncm91cC9hcGkvbG9naW4iLCJpYXQiOjE1ODEzNTE0NzYsImV4cCI6MTU4MTM4NzQ3NiwibmJmIjoxNTgxMzUxNDc2LCJqdGkiOiJHUTVyNDQzWVNPZXBSRnV3In0.UbSntldl3-vNkwPrEFCaDYW15GQtU2XvM6ZdP5vyJ2k";
+  public userToken:string;
   public userObject:any;
 
   constructor(
@@ -118,15 +118,13 @@ export class GeneralService {
     const headers = new HttpHeaders()
       .set("Authorization", "Bearer "+this.userToken);
 
-
     return this.http.get(this.API_BASE_URL+`/get-user-notifications/${ this.userObject.id}`,{headers});
   }
-  setAllNotificationsRead() {
+  setAllNotificationsRead(notificationID:string) {
     const headers = new HttpHeaders()
       .set("Authorization", "Bearer "+this.userToken);
 
-
-    return this.http.get(this.API_BASE_URL+`/set-notification-read/${ this.userObject.id}`,{headers});
+    return this.http.get(this.API_BASE_URL+`/set-notification-read/${notificationID}`,{headers});
   }
 
   getLoadsheetList() {
@@ -265,6 +263,22 @@ export class GeneralService {
 
     return this.http.post(this.API_BASE_URL+'/create-health-check',data,{headers});
   }
+  requestMaintenance(GPS:any ,image1:string ,image2:string ,image3:string, reason:string , quote:string) {
+    const headers = new HttpHeaders()
+      .set("Authorization", "Bearer "+this.userToken),
+      data = {
+        construction_id: this.constructionID,
+        latitude: GPS.coords.latitude.toString(),
+        longitude: GPS.coords.longitude.toString(),
+        image_1:image1,
+        image_2:image2,
+        image_3:image3,
+        reason_for_request:reason,
+        quote:quote,
+      }
+
+    return this.http.post(this.API_BASE_URL+'/request-maintenance',data,{headers});
+  }
 
   public loadsheetData = {
     loadsheet_id: null,
@@ -377,7 +391,7 @@ export class GeneralService {
 
     return this.http.post(this.API_BASE_URL+'/submit-maintenance',data,{headers});
   }
-  loadsheetData_CleanUp() {
+  dataCleanup() {
     this.loadsheetData = {
       loadsheet_id: null,
       delivery_id: null,
@@ -445,6 +459,11 @@ export class GeneralService {
       vehicle_reg_no: null,
       timestamp: null
     }
+    this.allLoadsheets = null; this.isLoadsheetCompleted = null;
+    this.allDeliveries = null; this.isDeliveryCompleted = null; this.detailedDelivery = null;
+    this.constructionID = null; this.constructionNumber = null; this.constructionStatus = null;
+    this.isNewConstruction = null; this.constructionType = null;
+    this.allOrders = [];
   }
 
 }

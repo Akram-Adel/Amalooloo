@@ -22,7 +22,7 @@ export class LoadsheetCompletedPage implements OnInit {
         if(res.status != '200') {
           this.general.presentAlertMsg(res.message);
         }
-        this.general.loadsheetData_CleanUp();
+        this.general.dataCleanup();
 
         console.log(res);
       })

@@ -12,9 +12,10 @@ const routes: Routes = [
   { path: 'settings',        loadChildren: './settings/settings.module#SettingsPageModule' },
   { path: 'profile',         loadChildren: './profile/profile.module#ProfilePageModule' },
   { path: 'tips',            loadChildren: './tips/tips.module#TipsPageModule' },
-  { path: 'maintenance-req', loadChildren: './maintenance-req/maintenance-req.module#MaintenanceReqPageModule' },
   { path: 'shop',            loadChildren: './shop/shop.module#ShopPageModule' },
   { path: 'notifications',   loadChildren: './notifications/notifications.module#NotificationsPageModule' },
+  { path: 'customer-maintenance-req', loadChildren: './customer-maintenance-req/customer-maintenance-req.module#CustomerMaintenanceReqPageModule' },
+  { path: 'maintenance-req',          loadChildren: './maintenance-req/maintenance-req.module#MaintenanceReqPageModule' },
 
   { path: 'loadsheets', loadChildren: './loadsheets/loadsheets.module#LoadsheetsPageModule' },
     { path: 'loadsheets/start-new-loadsheets',                loadChildren: './loadsheets/start-new-loadsheets/start-new-loadsheets.module#StartNewLoadsheetsPageModule' },
@@ -61,7 +62,6 @@ const routes: Routes = [
       { path: 'user-constructions',   loadChildren: './user-constructions/user-constructions.module#UserConstructionsPageModule' },
       { path: 'bc-health-check',      loadChildren: './bc-health-check/bc-health-check.module#BcHealthCheckPageModule' },
         { path: 'create-health-check/:id',  loadChildren: './create-health-check/create-health-check.module#CreateHealthCheckPageModule' },
-
 ];
 
 @NgModule({

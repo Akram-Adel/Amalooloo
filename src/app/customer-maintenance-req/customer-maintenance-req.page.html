@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Request Maintenance</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <ion-grid class="ion-margin">
+    <ion-row class="header"> Add Photo </ion-row>
+
+    <ion-row class="ion-margin-bottom vertical-center">
+      <ion-col (click)="takePicture(1)">
+        <img [src]="Photo1 ? Photo1_src : '../../../assets/imgs/ic_camera.png'">
+      </ion-col>
+      <ion-col (click)="takePicture(2)">
+        <img [src]="Photo2 ? Photo2_src : '../../../assets/imgs/ic_camera.png'">
+      </ion-col>
+      <ion-col (click)="takePicture(3)">
+        <img [src]="Photo3 ? Photo3_src : '../../../assets/imgs/ic_camera.png'">
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-item color="light">
+        <ion-textarea rows="6" placeholder="Reason for Request..."
+        [(ngModel)]="reasonForRequest"></ion-textarea>
+      </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-item color="light">
+        <ion-textarea rows="6" placeholder="Quote..."
+        [(ngModel)]="quote"></ion-textarea>
+      </ion-item>
+    </ion-row>
+  </ion-grid>
+
+  <ion-button shape="round" class="login-button"
+  (click)="Submit()">
+    <span *ngIf="!isConnecting">Submit</span>
+    <ion-spinner name="dots" *ngIf="isConnecting"></ion-spinner>
+  </ion-button>
+</ion-content>

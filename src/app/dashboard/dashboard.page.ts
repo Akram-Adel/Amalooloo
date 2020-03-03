@@ -40,6 +40,7 @@ export class DashboardPage implements OnInit {
         if(data.status == '200') {
           this.general.userToken = data.result.token;
           this.general.userObject = data.result;
+          this.preloadnotifications();
 
           console.log('AutoLogin Token', data.result.token);
 
@@ -135,45 +136,34 @@ export class DashboardPage implements OnInit {
   }
 
   async preloadnotifications (){
+    if(!this.general.userObject) return;
+    this.general.getAllNotifications().subscribe((res:any) => {
+      this.notifications = res;
+      this.general.notifications = this.notifications;
 
-    console.log(this.general.userObject);
+      this.notificationcount = 0;
+      this.notifications.forEach(element => {
+       this.notificationcount ++;
 
+       if(element.read_at != null){
+        LocalNotifications.schedule({
+          notifications: [
+            {
+              title: "New Notification",
+              body: element.message,
+              id: Math.floor(Math.random() * 99999),
+              schedule: { at: new Date(Date.now() + 2000 * 5) },
+              sound: null,
+              attachments: null,
+              actionTypeId: "",
+              extra: null
+            }
+          ]
+        });
+       }
 
-    this.general.getAllNotifications().subscribe((res:any) =>this.notifications = res.result );
-
-    this.general.notifications = this.notifications;
-
-    this.notifications.forEach(element => {
-     this.notificationcount ++;
-
-     if(element.read_at != null){
-
-
-      LocalNotifications.schedule({
-        notifications: [
-          {
-            title: "New Notification",
-            body: element.message,
-            id: Math.floor(Math.random() * 99999),
-            schedule: { at: new Date(Date.now() + 2000 * 5) },
-            sound: null,
-            attachments: null,
-            actionTypeId: "",
-            extra: null
-          }
-        ]
       });
-
-     }
-
-
     });
-
-
-
-
-
-
   }
 
   async openBrowser() {

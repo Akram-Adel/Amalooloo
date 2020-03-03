@@ -28,9 +28,9 @@ export class BcScannerPage implements OnInit {
       if(this.customerMode){
 
 
-        this.router.navigate(['/construction/begin-construction']);
+        this.router.navigate(['/customer-maintenance-req']);
         this.general.constructionID = this.constructionID;
-      } 
+      }
 
       if(!this.customerMode){
 
@@ -46,12 +46,12 @@ export class BcScannerPage implements OnInit {
 
   async BCScanner() {
     this.barcodeScanner.scan({
-      preferFrontCamera: false, 
-  
+      preferFrontCamera: false,
 
-      prompt: "Scan the Smart QR Code on the toilet", 
-      resultDisplayDuration: 0, 
-      formats: "QR_CODE", 
+
+      prompt: "Scan the Smart QR Code on the toilet",
+      resultDisplayDuration: 0,
+      formats: "QR_CODE",
     }).then(barcodeData => {
       console.log('Barcode data', barcodeData);
       this.constructionID = Number(barcodeData);
