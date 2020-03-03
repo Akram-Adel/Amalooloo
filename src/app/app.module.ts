@@ -19,7 +19,7 @@ import { Platform } from '@ionic/angular';
 import { GeneralService } from './general-service/general.service';
 import { LottieModule } from 'ngx-lottie';
 import { TipsPageModule } from "../app/tips/tips.module";
-
+import { LaunchNavigator } from '@ionic-native/launch-navigator/ngx';
 
 export function playerFactory() {
   return import('lottie-web');
@@ -46,7 +46,7 @@ export function playerFactory() {
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     BarcodeScanner,
     HTTP,
-  
+    LaunchNavigator,
     GeneralService,
     IonicsignaturepadProvider
   ],

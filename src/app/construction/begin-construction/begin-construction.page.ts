@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Plugins } from '@capacitor/core';
 const { Geolocation } = Plugins;
 import { GeneralService } from '../../general-service/general.service';
-
+import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator/ngx';
 
 
 @Component({
@@ -21,7 +21,8 @@ export class BeginConstructionPage implements OnInit {
   constructor(
     private fb:FormBuilder,
     private router: Router,
-    public general:GeneralService) {
+    public general:GeneralService,
+    public launchNavigator: LaunchNavigator) {
 
       this.requestForm = this.fb.group({
         firstname: [null, Validators.required],
@@ -76,6 +77,25 @@ export class BeginConstructionPage implements OnInit {
     }
   }
 
+
+  Navigate(){
+
+    
+   
+    
+
+    let options: LaunchNavigatorOptions = {
+      start: ""+this.GPS.coords.latitude.toString()+","+this.GPS.coords.longitude.toString()+"",
+    };
+    
+    this.launchNavigator.navigate([ this.general.navLat, this.general.navlong],options)
+    .then(
+      success => console.log('Launched navigator'),
+      error => console.log('Error launching navigator', error)
+    );
+
+
+  }
 
   async SubmitRequest(){
     if(!this.requestForm.valid) {

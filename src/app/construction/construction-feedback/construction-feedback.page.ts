@@ -34,8 +34,9 @@ export class ConstructionFeedbackPage implements OnInit {
       quality: 40,
       allowEditing: true,
       saveToGallery: true,
+      correctOrientation:false,
       resultType: CameraResultType.Base64,
-      source: CameraSource.Camera
+       source: CameraSource.Prompt
     });
     this.photo = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpeg;base64,' + image.base64String);
     console.log('image-Base64 ',image.base64String);

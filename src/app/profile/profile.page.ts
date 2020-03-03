@@ -69,6 +69,7 @@ export class ProfilePage implements OnInit {
     const image = await Camera.getPhoto({
       quality: 100,
       allowEditing: true,
+      correctOrientation:false,
       resultType: CameraResultType.DataUrl,
       source: CameraSource.Camera
     });

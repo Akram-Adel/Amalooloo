@@ -48,6 +48,7 @@ export class CreateHealthCheckPage implements OnInit {
       quality: 40,
       allowEditing: true,
       saveToGallery: true,
+      correctOrientation:false,
       resultType: CameraResultType.Base64,
       source: CameraSource.Camera
     });

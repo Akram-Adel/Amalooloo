@@ -79,6 +79,7 @@ export class SignupPage implements OnInit {
     const image = await Camera.getPhoto({
       quality: 100,
       allowEditing: true,
+            correctOrientation:false,
       resultType: CameraResultType.DataUrl,
       source: CameraSource.Camera
     });
@@ -88,6 +89,15 @@ export class SignupPage implements OnInit {
 
 
   signup(form:any) {
+
+    if(this.photo ==""){
+
+     
+        this.general.presentAlertMsg('Please add a photo')
+  
+    
+
+    }
     this.isConnecting = true;
 
     this.general.register(form).subscribe((data:any) => {

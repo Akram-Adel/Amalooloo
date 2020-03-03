@@ -54,6 +54,7 @@ export class GeneralService {
 
   // API Session Data
   public allLoadsheets:any; public isLoadsheetCompleted:boolean;
+  public navLat:any;public navlong;
   public allDeliveries:any; public isDeliveryCompleted:boolean; public detailedDelivery:any;
   public constructionID:number; public constructionNumber:number; public constructionStatus = "Construction";
   public isNewConstruction:boolean = true; public constructionType:string;

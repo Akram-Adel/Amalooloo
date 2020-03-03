@@ -53,6 +53,7 @@ export class LoadsheetsFeedbackPage implements OnInit {
         quality: 40,
         allowEditing: false,
         saveToGallery: false,
+        correctOrientation:false,
         resultType: CameraResultType.Base64,
         source: CameraSource.Camera
       });

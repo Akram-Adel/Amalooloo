@@ -54,7 +54,15 @@ export class BcScannerPage implements OnInit {
       formats: "QR_CODE",
     }).then(barcodeData => {
       console.log('Barcode data', barcodeData);
-      this.constructionID = Number(barcodeData);
+
+      if(barcodeData.cancelled == true){
+        this.router.navigate(['/dashboard']);
+      }
+
+      if(barcodeData.cancelled != true){
+        this.constructionID = Number(barcodeData.text);
+      }
+
      }).catch(err => {
         console.log('Error', err);
      });

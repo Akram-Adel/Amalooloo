@@ -36,15 +36,18 @@
 
     <ion-item class="ion-margin-bottom" color="light">
       <ion-label position="stacked">Vehicle Registration Number</ion-label>
-      <ion-input type="text" [value]="loadsheet?.vehicle_reg_no"  class="icon-profile"></ion-input>
+      <ion-input  (ionChange)="updatereg()" type="text" [value]="loadsheet?.vehicle_reg_no"  class="icon-profile"></ion-input>
     </ion-item>
   </div>
 
   <div class="button-container">
-    <ion-button shape="round" class="login-button extra-margin-top"
+    <ion-button shape="round" class="login-button ion-margin-top"
+    (click)="Navigate()" *ngIf="fixedReg != false;" >Take me there</ion-button>
+
+    <ion-button  *ngIf=" this.fixedReg != false;" shape="round" class="login-button extra-margin-top"
     [routerDirection]="'forward'" [routerLink]="['/loadsheets/add-quantities-loaded/',this.loadsheet.loadsheet_id]">
       {{buttonText}}
-    </ion-button>
+    </ion-button  >
 
     <ion-button shape="round" class="login-button" color="danger" *ngIf="!general.isDeliveryCompleted"
     [routerDirection]="'back'" [routerLink]="['/loadsheets']">Cancel This Loadsheet</ion-button>

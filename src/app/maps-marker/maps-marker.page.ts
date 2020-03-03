@@ -82,7 +82,7 @@ export class MapsMarkerPage implements OnInit {
         });
 
         marker.addListener('click', function() {
-          $this.markerClick(construction.construction_id);
+          $this.markerClick(construction.construction_id,construction.const_latitude,construction.const_longitude);
         })
         this.constructionMarkers.push(marker);
       }
@@ -100,7 +100,11 @@ export class MapsMarkerPage implements OnInit {
     }
   }
 
-  markerClick(constructionId:number) {
+  markerClick(constructionId:number,lat:any,long:any) {
+
+    this.general.navLat = lat;
+    this.general.navlong = long;
+
     this.router.navigate(['/construction/begin-construction']);
     let construction = _.filter(this.completeConstructionList, ['id', constructionId])[0];
     this.general.constructionID = constructionId;

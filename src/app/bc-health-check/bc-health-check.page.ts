@@ -34,7 +34,18 @@ export class BcHealthCheckPage implements OnInit {
       formats: "QR_CODE",
     }).then(barcodeData => {
       console.log('Barcode data', barcodeData);
-      this.constructionID = Number(barcodeData);
+      if(barcodeData.cancelled == true){
+
+        this.router.navigate(['/dashboard', this.constructionID]);
+
+
+      }
+      if(barcodeData.cancelled != true){
+
+
+        this.constructionID = Number(barcodeData.text);
+      }
+    
      }).catch(err => {
         console.log('Error', err);
      });
