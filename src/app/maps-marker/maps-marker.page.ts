@@ -79,6 +79,7 @@ export class MapsMarkerPage implements OnInit {
           marker = new google.maps.Marker({
             position: markerCenter,
             map: this.maps.map,
+            icon:"../../assets/imgs/NEW-Amalooloo-App-Location-Icon-20200203@4x.png"
         });
 
         marker.addListener('click', function() {

@@ -24,11 +24,11 @@ export class LoginPage implements OnInit {
     public general:GeneralService) {
 
       this.loginForm = this.fb.group({
-        email: ['brianmolele89@webmail.co.za', [Validators.required, Validators.pattern(this.general.emailPattern)]],
-        password: ['brian1989', Validators.required],
+        // email: ['brianmolele89@webmail.co.za', [Validators.required, Validators.pattern(this.general.emailPattern)]],
+        // password: ['brian1989', Validators.required],
 
-        // email: [null, [Validators.required, Validators.pattern(this.general.emailPattern)]],
-        // password: [null, Validators.required],
+        email: [null, [Validators.required, Validators.pattern(this.general.emailPattern)]],
+        password: [null, Validators.required],
         device_token: null,
         device_type: null
       });
