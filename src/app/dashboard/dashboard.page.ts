@@ -52,8 +52,6 @@ export class DashboardPage implements OnInit {
       });
     }
 
-    this.preloadnotifications();
-
     (this.general.customerMode) ? this.customerview = true : this.employeeview = true;
     console.log('CustomerView:',this.customerview);
     console.log('EmployeeView:',this.employeeview);
@@ -61,6 +59,7 @@ export class DashboardPage implements OnInit {
   }
   ionViewWillEnter() {
     this.menuCtrl.enable(true);
+    this.preloadnotifications();
   }
 
 

@@ -23,7 +23,6 @@ export class NotificationsPage implements OnInit {
 
   doRefresh(event:any) {
     this.isLoading = true;
-    this.notifications = [];
     this.notificationsHandler();
   }
 
@@ -32,14 +31,17 @@ export class NotificationsPage implements OnInit {
 
   notificationsHandler() {
 
+    this.notifications = [];
     this.general.getAllNotifications().subscribe((res:any) => {
       console.log('notifications results', res);
-      this.notifications = res;
+
+      for (let i = 0; i < res.length; i++) this.notifications.push( {id:res[i].id, data:JSON.parse(res[i].data)} );
       this.general.notifications = this.notifications;
       this.isLoading = false;
       if(this.notifications.length < 0){
         this.general.presentAlertMsg("No Notifications Found");
       }
+
     });
 
   }
@@ -47,8 +49,12 @@ export class NotificationsPage implements OnInit {
   /**
    * markread
    */
-   markRead(notificationID) {
-    this.general.setAllNotificationsRead(notificationID).subscribe((res:any) => console.log('notification read result',res) );
+   markRead(notificationID:string) {
+    this.isLoading = true;
+    this.general.setAllNotificationsRead(notificationID).subscribe((res:any) => {
+      console.log('notification read result',res)
+      this.notificationsHandler();
+    });
   }
 
 }

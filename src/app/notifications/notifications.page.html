@@ -40,7 +40,7 @@
       *ngFor="let item of notifications"
       (click)="markRead(item.id)">
         <ion-label >
-          <b>Date: </b> {{item.created_at.slice(0,16)}} <br>
+          <b>Date: </b> {{item.data.repliedTime.date.slice(0,16)}} <br>
           {{item.data.message}} <br>
         </ion-label>
       </ion-item>
