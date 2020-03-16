@@ -43,9 +43,15 @@
         <ion-thumbnail slot="start">
           <img src="../../assets/imgs/ic_map.png">
         </ion-thumbnail>
-        <ion-label>
+        <ion-label *ngIf="item.vehicle_reg_no != null">
           <b>Delivery No: </b> {{item.delivery_no}} <br>
           <b>Vehicle Reg. No: </b> {{item.vehicle_reg_no}} <br>
+          <b>Delivery Address: </b> {{item.delivery_address}} <br>
+          <b>Client Name: </b> {{item.client_name}} <br>
+        </ion-label>
+        <ion-label  *ngIf="item.vehicle_reg_no == null" >
+          <b>Delivery No: </b> {{item.delivery_no}} <br>
+          <b>Vehicle Reg. No: </b> No Input Found <br>
           <b>Delivery Address: </b> {{item.delivery_address}} <br>
           <b>Client Name: </b> {{item.client_name}} <br>
         </ion-label>

@@ -28,6 +28,8 @@ export class ConstructionBeneficiaryDetailsPage implements OnInit {
 
   ngOnInit() {
     this.fillFormData();
+    console.log(this.general.constructionType);
+    
     this.setUIChanges();
   }
 
@@ -44,7 +46,7 @@ export class ConstructionBeneficiaryDetailsPage implements OnInit {
       this.formUI = {
         header: 'Please enter School Representative details below:',
         name: 'School Name',
-        surname: 'Principal',
+        surname: 'National Emis no',
       }
 
     } else {

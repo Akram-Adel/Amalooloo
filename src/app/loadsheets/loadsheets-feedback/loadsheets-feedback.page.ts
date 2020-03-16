@@ -109,7 +109,7 @@ export class LoadsheetsFeedbackPage implements OnInit {
         this.general.loadsheetData.verify_loaded.note = this.note;
 
       } else {
-        this.general.loadsheetData.vehicle_reg_no = this.loadsheet.vehicle_reg_no;
+        // this.general.loadsheetData.vehicle_reg_no = this.loadsheet.vehicle_reg_no;
         this.Photo1 ? this.general.loadsheetData.verify_delivered.image_1 = this.Photo1 : 'null';
         this.Photo2 ? this.general.loadsheetData.verify_delivered.image_2 = this.Photo2 : 'null';
         this.Photo3 ? this.general.loadsheetData.verify_delivered.image_3 = this.Photo3 : 'null';

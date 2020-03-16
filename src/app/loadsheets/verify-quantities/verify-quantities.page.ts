@@ -34,27 +34,69 @@ export class VerifyQuantitiesPage implements OnInit {
     }
 
     this.orderId = +this.route.snapshot.paramMap.get('id');
-    this.general.getOrderDetails(this.orderId).subscribe((res:any) => {
-      this.allProducts = res.result.products;
 
-      this.allProducts.forEach(product => {
+    if(this.general.networkstatus != true){
 
-        for (let i = 0; i < product.components.length; i++) {
-          product.components[i].math = 0;
-        }
 
+      this.general.getPreload(`getOrderDetails:${this.orderId}`).then((res:any)=>{
+        console.log(res);
+        
+   
+        this.allProducts = res.products;
+  
+        this.allProducts.forEach(product => {
+  console.log(product);
+  
+          for (let i = 0; i < product.components.length; i++) {
+            product.components[i].math = 0;
+          
+            
+            product.components[i].delivered_quantity=null;
+          }
+  
+        });
+        console.log('order details', this.allProducts);
+  
+        (this.completedStatus) ? this.buttonText = "BACK" : this.buttonText = "SAVE"
+        this.isLoading = false;
+    
+       
+   
+   
+      })
+   
+      
+     }
+
+     if(this.general.networkstatus == true){
+
+
+      this.general.getOrderDetails(this.orderId).subscribe((res:any) => {
+        this.allProducts = res.result.products;
+  
+        this.allProducts.forEach(product => {
+  
+          for (let i = 0; i < product.components.length; i++) {
+            product.components[i].math = 0;
+          }
+  
+        });
+        console.log('order details', this.allProducts);
+  
+        (this.completedStatus) ? this.buttonText = "BACK" : this.buttonText = "SAVE"
+        this.isLoading = false;
       });
-      console.log('order details', this.allProducts);
 
-      (this.completedStatus) ? this.buttonText = "BACK" : this.buttonText = "SAVE"
-      this.isLoading = false;
-    });
+
+     }
+
+
     this.general.loadsheetData.order_details[0].order_id = this.orderId;
   }
 
   actualChange(i:number, item:any, number:number) {
     let index = _.findIndex(this.allProducts[i].components, item);
-    if(this.allProducts[i].components[index].quantity < number) this.general.presentAlertMsg('Actual quantity must be less than loaded quantify')
+    if(this.allProducts[i].components[index].quantity < number) this.general.presentAlertMsg('Actual quantity must be less than loaded quantity')
 
     if(this.general.allLoadsheets  && this.general.allLoadsheets != null) {
       this.allProducts[i].components[index].load_quantity = number;

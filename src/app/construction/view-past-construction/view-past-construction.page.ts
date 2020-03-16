@@ -15,15 +15,16 @@ export class ViewPastConstructionPage implements OnInit {
     public general:GeneralService) { }
 
   ngOnInit() {
-    this.general.getConstructionList('completed').subscribe((res:any) => this.loadConstructions(res));
+    this.general.getConstructionListWEB('completed').subscribe((res:any) => this.loadConstructions(res));
   }
 
   doRefresh(event:any) {
     this.isLoading = true;
     this.pastConstruction = [];
 
-    this.general.getConstructionList('completed').subscribe((res:any) => {
+    this.general.getConstructionListWEB('completed').subscribe((res:any) => {
       this.loadConstructions(res);
+      console.log(res);
       event.target.complete();
     });
   }

@@ -13,25 +13,52 @@ export class ConstructionCompletedPage implements OnInit {
   constructor(public general:GeneralService) { }
 
   ngOnInit() {
+    this.general.networkstatus = true
     if(this.general.isLoadsheetCompleted) {
       this.isConnecting = false;
 
     } else {
       if (this.general.constructionStatus == 'Construction') {
-        this.general.submitConstruction().subscribe(res => {
-          this.isConnecting = false;
+        if(this.general.networkstatus != true){
+          this.general.StoreConstruction();
           this.general.dataCleanup();
+          this.general.presentAlertHandler("Data stored for Sync",{});
 
-          console.log(res);
-        });
+        }
+        if(this.general.networkstatus == true){
+          this.general.submitConstruction().subscribe(res => {
+            this.isConnecting = false;
+            this.general.dataCleanup();
+  
+            console.log(res);
+          });
+        
+        }
+
+
+
+
+ 
 
       } else {
-        this.general.submitMaintenance().subscribe(res => {
-          this.isConnecting = false;
-          this.general.dataCleanup();
 
-          console.log(res);
-        });
+        if(this.general.networkstatus != true){
+          this.general.StoreMaintenance();
+          this.general.dataCleanup();
+          this.general.presentAlertMsg("Data stored for Sync");
+
+        }
+        if(this.general.networkstatus == true){
+          this.general.submitMaintenance().subscribe(res => {
+            this.isConnecting = false;
+            this.general.dataCleanup();
+  
+            console.log(res);
+          });
+        
+        }
+
+     
       };
     }
   }

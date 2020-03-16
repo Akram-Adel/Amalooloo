@@ -5,7 +5,7 @@ import { GeneralService } from "../general-service/general.service";
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { Plugins, PushNotification, PushNotificationActionPerformed } from '@capacitor/core';
-const { PushNotifications,Browser,LocalNotifications } = Plugins;
+const { PushNotifications,Browser,LocalNotifications,CapacitorKeepScreenOn  } = Plugins;
 import { FCM } from "capacitor-fcm";
 const fcm = new FCM();
 
@@ -35,13 +35,13 @@ export class DashboardPage implements OnInit {
         device_type: 'device_type',
         device_token: 'device_token'
       }
-
+      CapacitorKeepScreenOn.enable();
       this.general.login(form).subscribe((data:any) => {
         if(data.status == '200') {
           this.general.userToken = data.result.token;
           this.general.userObject = data.result;
           this.preloadnotifications();
-
+          this.general.preloadData();
           console.log('AutoLogin Token', data.result.token);
 
         } else {
@@ -59,7 +59,8 @@ export class DashboardPage implements OnInit {
   }
   ionViewWillEnter() {
     this.menuCtrl.enable(true);
-    this.preloadnotifications();
+    // this.preloadnotifications();
+   
   }
 
 
@@ -138,28 +139,31 @@ export class DashboardPage implements OnInit {
     if(!this.general.userObject) return;
     this.general.getAllNotifications().subscribe((res:any) => {
       this.notifications = res;
+      console.log(res);
+      
       this.general.notifications = this.notifications;
-
+      LocalNotifications.schedule({
+        notifications: [
+          {
+            title: "New Notification Amalooloo",
+            body: "New Notification on the app, please login",
+            id: Math.floor(Math.random() * 99999),
+            // schedule: { at: new Date(Date.now() + 2000 * 5) },
+            sound: null,
+            smallIcon: "res://public/assets/ionitron.png/ic_launcher-web.png",
+            attachments: null,
+            actionTypeId: "",
+            extra: null
+          }
+        ]
+      });
       this.notificationcount = 0;
       this.notifications.forEach(element => {
        this.notificationcount ++;
 
-       if(element.read_at != null){
-        LocalNotifications.schedule({
-          notifications: [
-            {
-              title: "New Notification",
-              body: element.message,
-              id: Math.floor(Math.random() * 99999),
-              schedule: { at: new Date(Date.now() + 2000 * 5) },
-              sound: null,
-              attachments: null,
-              actionTypeId: "",
-              extra: null
-            }
-          ]
-        });
-       }
+      //  if(element.read_at != null){?
+
+      //  }
 
       });
     });

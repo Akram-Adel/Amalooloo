@@ -13,19 +13,35 @@ export class LoadsheetCompletedPage implements OnInit {
   constructor(public general:GeneralService) { }
 
   ngOnInit() {
+    
     if(this.general.isLoadsheetCompleted) {
       this.isConnecting = false;
 
     } else {
-      this.general.submitLoadsheet().subscribe((res:any) => {
-        this.isConnecting = false;
-        if(res.status != '200') {
-          this.general.presentAlertMsg(res.message);
-        }
-        this.general.dataCleanup();
 
-        console.log(res);
-      })
+
+      if(this.general.networkstatus != true){
+        this.isConnecting = false;
+        this.general.StoreLoadsheet();
+        this.general.dataCleanup();
+        this.general.presentAlertHandler("Data stored for Sync",{});
+
+      }
+      if(this.general.networkstatus == true){
+        this.general.submitLoadsheet().subscribe((res:any) => {
+          this.isConnecting = false;
+          if(res.status != '200') {
+            this.general.presentAlertMsg(res.message);
+          }
+          this.general.dataCleanup();
+  
+          console.log(res);
+        })
+      
+      }
+
+
+
     }
   }
 

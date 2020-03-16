@@ -46,12 +46,17 @@
 
             <ion-col *ngIf="this.general.allLoadsheets  && this.general.allLoadsheets != null">
               <ion-input type="number" class="ion-no-padding"
-                [value]="item.load_quantity"
+              
+                placeholder="0"
+                autofocus="true"
                 [readonly]="completedStatus"
                 (input)="actualChange(index, item, $event.target.value)" required></ion-input></ion-col>
             <ion-col *ngIf="this.general.allDeliveries && this.general.allDeliveries != null">
               <ion-input type="number" class="ion-no-padding"
-                [value]="item.delivered_quantity"
+             
+                placeholder="0"
+                
+                autofocus="true"
                 [readonly]="completedStatus"
                 (input)="actualChange(index, item, $event.target.value)" required></ion-input></ion-col>
 

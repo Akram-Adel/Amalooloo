@@ -16,7 +16,28 @@ export class StartNewDeliveriesPage implements OnInit {
   constructor(private general:GeneralService) { }
 
   ngOnInit() {
-    this.general.getDeliveryList().subscribe((res:any) => this.loadDeliveries(res));
+
+    if(this.general.networkstatus != true){
+
+
+      this.general.getPreload("getDeliveryList").then((res:any)=>{
+   
+       console.log(res);
+       this.loadDeliveriesoffline(res);
+   
+      })
+   
+      
+     }
+       
+       if(this.general.networkstatus == true){
+    
+        this.general.getDeliveryList().subscribe((res:any) => this.loadDeliveries(res));
+     }
+
+  
+
+
   }
 
   doRefresh(event:any) {
@@ -37,6 +58,16 @@ export class StartNewDeliveriesPage implements OnInit {
     this.isLoading = false;
     if(results.status != 200) this.general.presentAlertMsg(results.message);
     if(this.deliveryProjects.length == 0) this.general.presentAlertMsg('No Data Found');
+  }
+
+  loadDeliveriesoffline(results:any) {
+    console.log(results);
+    this.general.allDeliveries = results;
+
+    this.deliveryProjects = _.filter(this.general.allDeliveries, ['delivery_status', "initiated"]);;
+    this.isLoading = false;
+    // if(results.status != 200) this.general.presentAlertMsg(results.message);
+    if(this.deliveryProjects.length == 0) this.general.presentAlertMsg('No Offline Data Found');
   }
 
 }

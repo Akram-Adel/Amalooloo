@@ -34,16 +34,45 @@ export class AddQuantitiesLoadedPage implements OnInit {
 
     if(this.general.allOrders.length == 0) {
       this.loadsheetId = +this.route.snapshot.paramMap.get('id');
-      this.general.getLoadsheetOrderList(this.loadsheetId).subscribe((res:any) => {
 
-        res.result.forEach((el:any) => {
-          (this.completedStatus) ? el.isRigth = true : el.isRigth = false;
-          this.general.allOrders.push(el);
+      if(this.general.networkstatus != true){
+       console.log(this.loadsheetId);
+       
+
+        this.general.getPreload(`getLoadsheetOrderList:${ this.loadsheetId}`).then((res:any)=>{
+          console.log(res);
+          console.log("Add Quantities Loaded Page");
+          
+          res.forEach((el:any) => {
+            (this.completedStatus) ? el.isRigth = true : el.isRigth = false;
+            this.general.allOrders.push(el);
+          });
+  
+          this.loadingDone();
+          console.log(this.general.allOrders);
+     
+     
+        })
+     
+        
+       }
+
+       if(this.general.networkstatus == true){
+
+        this.general.getLoadsheetOrderList(this.loadsheetId).subscribe((res:any) => {
+
+          res.result.forEach((el:any) => {
+            (this.completedStatus) ? el.isRigth = true : el.isRigth = false;
+            this.general.allOrders.push(el);
+          });
+  
+          this.loadingDone();
+          console.log(this.general.allOrders);
         });
 
-        this.loadingDone();
-        console.log(this.general.allOrders);
-      });
+
+       }
+
     } else { this.loadingDone() }
   }
 
