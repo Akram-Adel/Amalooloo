@@ -51,9 +51,16 @@ export class NotificationsPage implements OnInit {
    */
    markRead(notificationID:string) {
     this.isLoading = true;
-    this.general.setAllNotificationsRead(notificationID).subscribe((res:any) => {
-      console.log('notification read result',res)
-      this.notificationsHandler();
+    let _this = this;
+    this.general.setAllNotificationsRead(notificationID).subscribe({
+      next(res:any) {
+        console.log('notification read result',res)
+        _this.notificationsHandler();
+
+      }, error(err) {
+        console.log('error', err);
+        _this.notificationsHandler();
+      }
     });
   }
 
