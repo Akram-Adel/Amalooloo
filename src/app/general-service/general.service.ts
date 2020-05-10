@@ -5,16 +5,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Subject, Observable } from 'rxjs';
 import { Plugins,NetworkStatus, PluginListenerHandle, } from '@capacitor/core';
 const { Storage,Network } = Plugins;
-import { 
-  map, 
-  tap, 
-  shareReplay, 
-  flatMap, 
-  startWith, 
-  timeout, 
-  first, 
-  mergeMap
-  } from 'rxjs/operators';
+import { map, tap, shareReplay, flatMap, startWith, timeout, first, mergeMap } from 'rxjs/operators';
 
 export interface requestobject {
   address:String,
@@ -37,11 +28,10 @@ export class GeneralService {
 
   public customerMode:boolean;
   public notifications = [];
+
   public networkstatus:boolean;
   public networkType:string;
-
   public reqArray:any[];
-
 
   public userToken:string;
   public userObject:any;
@@ -53,54 +43,27 @@ export class GeneralService {
 
 
   // SUPPORT CLASS FUNCTIONS
-
   async storeRequest(req:requestobject) {
-
-  
-    
      this.reqArray = await this.getRequestDB();
 
      this.reqArray.push(req);
-
-       await Storage.set({
-          key: 'Requests',
-          value: JSON.stringify(this.reqArray)
-        });
-    
-    
-
-    
+      await Storage.set({
+        key: 'Requests',
+        value: JSON.stringify(this.reqArray)
+      });
   }
-
   async storePreload(result:any, name:string) {
-
-
-     await Storage.set({
-          key: name,
-          value: JSON.stringify(result.result)
-        });
-    
-
-    
+    await Storage.set({
+      key: name,
+      value: JSON.stringify(result.result)
+    });
   }
-
-
-  
-
-    async  getPreload(name:string) {
-
-  
-   
-    
-   const ret = await Storage.get({ key:name });
-   const user = JSON.parse(ret.value);
+  async  getPreload(name:string) {
+    const ret = await Storage.get({ key:name });
+    const user = JSON.parse(ret.value);
     return user;
   }
-
-
   async sendrequests(requestsarr:any){
-
-
     console.log("Iterating Through Requests Now");
     console.log(requestsarr);
     let form = {
@@ -112,70 +75,48 @@ export class GeneralService {
 
     this.login(form).subscribe((data:any) => {
       if(data.status == '200') {
-       
+
         requestsarr.forEach(async(element) => {
 
           if(element.address =="submitLoadsheet"){
             console.log("Submitting Loadsheet Item");
             let headers = new HttpHeaders().set("Authorization", "Bearer "+ data.result.token);
             let meh =  await this.http.post(this.API_BASE_URL+'/submit-loadsheet',element.data,{headers}).subscribe((res:any) => {
-
-      
-          
               console.log(res);
             });
-            
+
           }
           if(element.address =="submitDelivery"){
             console.log("Submitting Delivery Item");
-            
             let headers = new HttpHeaders().set("Authorization", "Bearer "+ data.result.token);
             let meh = await this.http.post(this.API_BASE_URL+'/submit-delivery',element.data,{headers}).subscribe((res:any) => {
-
-      
-          
               console.log(res);
             });
-          
-     
-          
           }
           if(element.address =="submitMaintenance"){
             console.log("Submitting Maintenance Item");
             let headers = new HttpHeaders().set("Authorization", "Bearer "+ data.result.token);
             let meh =  await this.http.post(this.API_BASE_URL+'/submit-maintenance',element.data,{headers}).subscribe((res:any) => {
-
-      
-          
               console.log(res);
             });
-            
           }
           if(element.address =="submitConstruction"){
             console.log("Submitting Construction Item");
             let headers = new HttpHeaders().set("Authorization", "Bearer "+ data.result.token);
-    
             let meh =  await this.http.post(this.API_BASE_URL+'/submit-construction',element.data,{headers}).subscribe((res:any) => {
-
-      
-          
               console.log(res);
             });
-            
           }
-        })
 
+        })
         console.log('AutoLogin Token', data.result.token);
 
       } else {
-  
+
       }
     });
 
-    
-   
-
-  //   this.dataCleanup();
+    //   this.dataCleanup();
     Storage.set({
       key: 'Requests',
       value: null
@@ -183,146 +124,64 @@ export class GeneralService {
     return "success";
   }
 
-
-
-
   /**
    * preloadData
    */
   public async preloadData() {
-
-
-    // let form = {
-    //   email: window.localStorage.getItem('KEY_email'),
-    //   password: window.localStorage.getItem('KEY_password'),
-    //   device_type: 'device_type',
-    //   device_token: 'device_token'
-    // }
-
-  //   this.login(form).subscribe((data:any)=>{
-  //     if(data.status == '200') {
-       
-  //  // console.log('AutoLogin Token', data.result.token);
-
-  //        this.getLoadsheetList().subscribe((result)=>{
-
-
-  //         this.storePreload(result,"getLoadsheetList");
-  //         console.log(result);
-      
-  //        })
-      
-  //        this.getDeliveryList().subscribe((result)=>{
-      
-      
-  //         this.storePreload(result,"getDeliveryList");
-          
-  //         console.log(result);
-          
-      
-  //        })
-      
-     
-  //     }
-    
-  //   });
-    
-
-       
-
     this.getLoadsheetList().subscribe((result:any)=>{
 
-
       this.storePreload(result,"getLoadsheetList");
-      console.log("Loadsheets Preloaded");
-      console.log(result);
+      console.log("Loadsheets Preloaded", result);
 
       for (let index = 0; index < result.result.length; index++) {
         const element = result.result[index];
-        console.log(element.loadsheet_id);
+        // console.log(element.loadsheet_id);
         this.getLoadsheetOrderList(element.loadsheet_id).subscribe((result:any)=>{
-  
-  
           this.storePreload(result,`getLoadsheetOrderList:${element.loadsheet_id}`);
-          console.log("Testing to see"+result);
-         
-        
-          console.log("Loadsheet Order Data Preloaded");
-          console.log(result);
-          console.log(result.result[0].order_id);
-          
-       
+          // console.log("Testing to see"+result);
+          // console.log("Loadsheet Order Data Preloaded");
+          // console.log(result);
+          // console.log(result.result[0].order_id);
           this.getOrderDetails(result.result[0].order_id).subscribe((ress:any)=>{
             console.log(`Get Order details Saving Result ${ress}`);
-            
-  
             this.storePreload(ress,`getOrderDetails:${result.result[0].order_id}`);
-        
            })
-
          })
       }
 
-  
      })
-  
+
      this.getDeliveryList().subscribe((result:any)=>{
-  
-  
       this.storePreload(result,"getDeliveryList");
-      console.log("Deliveries Preloaded");
-      console.log(result);
-      
+      console.log("Deliveries Preloaded", result);
+
       for (let index = 0; index < result.result.length; index++) {
         const element = result.result[index];
-        console.log(element.loadsheet_id);
+        // console.log(element.loadsheet_id);
         this.getLoadsheetOrderList(element.loadsheet_id).subscribe((result:any)=>{
-  
-  
           this.storePreload(result,`getLoadsheetOrderList:${element.loadsheet_id}`);
-          console.log("Testing to see"+result);
-         
-        
-          console.log("Loadsheet Order Data Preloaded");
-          console.log(result);
-          console.log(result.result[0].order_id);
-          
-       
+          // console.log("Testing to see"+result);
+          // console.log("Loadsheet Order Data Preloaded");
+          // console.log(result);
+          // console.log(result.result[0].order_id);
           this.getOrderDetails(result.result[0].order_id).subscribe((ress:any)=>{
             console.log(`Get Order details Saving Result ${ress}`);
-            
-  
             this.storePreload(ress,`getOrderDetails:${result.result[0].order_id}`);
-        
            })
-
          })
       }
-  
+
      })
 
-
- 
-     
-
-
-  
-    //Preload Constructions getConstructionList  
+    //Preload Constructions getConstructionList
     //Preload getContractorList
-    //Preload OrderDetails  getQuestionList getCompletedConstructionList 
+    //Preload OrderDetails  getQuestionList getCompletedConstructionList
     // getUserConstructionList
     //getAllMaintenance
     //getMaintenanceProjectList
     //getMaintenanceConstructionList
     //getMyMaintenanceReq
-
     //getAllNotifications
-
-
-
-
-
-
   }
 
 
@@ -332,12 +191,10 @@ export class GeneralService {
   public StoreDelivery() {
     let date = new Date()
     let timeStamp = date.getFullYear() +'-'+ (date.getMonth()+1) +'-'+ date.getDate() +' '+ date.getHours() +':'+ date.getMinutes() +':'+ date.getSeconds();
-
     const headers = new HttpHeaders()
       .set("Authorization", "Bearer "+this.userToken),
     data = this.loadsheetData;
     data.timestamp = timeStamp;
-
     let reqtemp:requestobject ={ address:"submitDelivery",data:data,reqheaders:headers,typeofrequest:"post"};
     this.storeRequest(reqtemp);
   }
@@ -391,18 +248,18 @@ export class GeneralService {
 
   async getRequestDB() {
     const { value } = await Storage.get({ key: 'Requests' });
-  
+
     if(value!=null){
 
-  
+
       return JSON.parse(value);
     }
     if(value==null){
 
       return [];
     }
-   
-   
+
+
   }
 
   async presentAlertMsg(msg:string) {
@@ -427,8 +284,8 @@ export class GeneralService {
   }
 
   async CacheData(dataname:string, dataobj:any) {
-    
-    
+
+
     await Storage.set({
       key: dataname,
       value: JSON.stringify(dataobj)
@@ -440,7 +297,7 @@ export class GeneralService {
     });
 
 
-  
+
   }
   changeMode(isCustomer:boolean) {
     this.mode.next(isCustomer);
@@ -530,13 +387,13 @@ getLoadsheetList () {
       .set("Authorization", "Bearer "+this.userToken),
     data = { token: this.userToken };
 
-  
+
 
       return this.http.post(this.API_BASE_URL+'/get-loadsheet',data,{headers});
 
-  
 
-  
+
+
   }
   getDeliveryList() {
     const headers = new HttpHeaders()
@@ -569,7 +426,7 @@ getLoadsheetList () {
     const headers = new HttpHeaders()
       .set("Authorization", "Bearer "+this.userToken),
     data = {
-  
+
     };
 
     return this.http.post(this.API_BASE_URL+'/get-project-list-web',data,{headers});
@@ -702,7 +559,7 @@ getLoadsheetList () {
     if (conn) {
       if (conn.saveData) {
       console.log(conn);
-      
+
       }
       const connectionlist = ["slow-2g", "2g", "3g", "4g"];
       const effectiveType = conn.effectiveType;
