@@ -18,8 +18,8 @@ export interface requestobject {
 })
 export class GeneralService {
 
-  API_BASE_URL = 'https://amalooloo.group/api'
-  Image_BASE_URL = 'https://amalooloo.group/images'
+  API_BASE_URL = ''
+  Image_BASE_URL = ''
 
   emailPattern:RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
